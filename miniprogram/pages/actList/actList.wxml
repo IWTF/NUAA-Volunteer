@@ -1,0 +1,46 @@
+<view>
+  <view class="header">
+    <view catchtap="changeTab" data-index="1" class="{{tab == 1?'selected':''}}">进行中</view>
+    <view catchtap="changeTab" data-index="2" class="{{tab == 2?'selected':''}}">已结束</view>
+  </view>
+  <view class="actList">
+    <view class="listCon hosting" wx:if="{{tab == 1}}">
+      <view
+        wx:for="123" 
+        wx:key="{{index}}"
+        catchtap="navTo"
+        class="actItem animated 1 fadeInRight"
+        style="animation-delay: {{index*0.1}}s;"
+        >
+        <view class="actImg">
+          <image src="../../images/code-cloud-callback-config.png"></image>
+        </view>
+        <view>
+          <view class="acTitle">志愿活动一</view>
+          <view>活动地点</view>
+          <view>活动时间</view>
+        </view>
+      </view>
+    </view>
+    <view class="listCon hosted" wx:else >
+      <view
+        wx:for="123456789" 
+        wx:key="{{index}}"
+        class="actItem animated 1 fadeInRight"
+        style="animation-delay: {{index*0.1}}s;"
+        >
+        <view class="actImg">
+          <image src="../../images/code-cloud-callback-config.png"></image>
+        </view>
+        <view>
+          <view class="acTitle">志愿活动一</view>
+          <view>活动地点</view>
+          <view>活动时间</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='{{publishBtnClass}} {{skin}} publish' catchtap='navToPublishNote'>
+    <text>发表</text>
+  </view>
+</view>

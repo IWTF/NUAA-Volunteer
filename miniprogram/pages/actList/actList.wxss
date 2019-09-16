@@ -1,0 +1,98 @@
+/* miniprogram/pages/actList/actList.wxss */
+page {
+  font-size: 28rpx;
+}
+
+/* 顶部活动状态tab */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fff;
+}
+
+.header view {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 30rpx;
+}
+
+.selected {
+  color: #30c4ff;
+  border-bottom: 8rpx solid #30c4ff;
+}
+
+/* 活动列表 */
+.actList {
+  margin-top: 85rpx;
+  padding: 10rpx 20rpx;
+}
+
+.listCon {
+  background-color: #f8f8f9;
+}
+
+.actItem {
+  background-color: #fff;
+  margin: 15rpx 0;
+}
+
+.actItem>view{
+  display: inline-block;
+  vertical-align: top;
+  padding: 10rpx;
+}
+
+.actImg, .actImg image {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.acTitle {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+/* 发布按钮 */
+.publish {
+  position: fixed;
+  width: 216rpx;
+  height: 64rpx;
+  /* bottom: 32rpx; */
+  left: calc(50% - 108rpx);
+  right: calc(50% - 108rpx);
+  text-align: center;
+  background-color: #30c4ff;
+  font-size: 30rpx;
+  line-height: 2;
+  border-radius: 64rpx;
+  box-shadow: 0 0 4rpx 0rpx rgba(81, 122, 155, 0.8);
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-out;
+}
+
+.publish text {
+  padding: 0 4rpx;
+}
+
+.publishBtnShow {
+  bottom: 32rpx;
+  opacity: 1;
+}
+
+.publishBtnHide {
+  bottom: -64rpx;
+  opacity: 0;
+}
+
+

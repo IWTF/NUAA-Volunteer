@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/actList/actList",
+    "pages/index/index",
+    "pages/userConsole/userConsole",
+    "pages/storageConsole/storageConsole",
+    "pages/databaseGuide/databaseGuide",
+    "pages/addFunction/addFunction",
+    "pages/deployFunctions/deployFunctions",
+    "pages/chooseLib/chooseLib",
+    "pages/openapi/openapi",
+    "pages/openapi/serverapi/serverapi",
+    "pages/openapi/callback/callback",
+    "pages/openapi/cloudid/cloudid",
+    "pages/im/im",
+    "pages/im/room/room",
+    "pages/actDel/actDel",
+    "pages/actPublish/actPublish"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/actList/actList",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "日志"
+      },
+      {
+        "pagePath": "pages/openapi/openapi",
+        "text": "个人页面"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}
