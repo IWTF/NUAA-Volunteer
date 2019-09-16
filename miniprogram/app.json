@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/actDel/actDel",
     "pages/actList/actList",
     "pages/index/index",
     "pages/userConsole/userConsole",
@@ -14,7 +15,6 @@
     "pages/openapi/cloudid/cloudid",
     "pages/im/im",
     "pages/im/room/room",
-    "pages/actDel/actDel",
     "pages/actPublish/actPublish"
   ],
   "window": {

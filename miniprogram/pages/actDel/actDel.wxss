@@ -1,1 +1,78 @@
 /* miniprogram/pages/actDel/actDel.wxss */
+page {
+  background-color: #fff;
+}
+
+/* 顶部 概述栏 样式 */
+.header {
+  color: #fff;
+  background-color: #30c4ff;
+  padding: 25rpx 0rpx;
+}
+
+.acTitle {
+  font-size: 50rpx;
+  text-align: center;
+  letter-spacing: 5rpx;
+}
+
+.actNum {
+  margin: 10rpx 0 50rpx;
+  text-align: center;
+}
+
+.adminBar {
+  position: relative;
+}
+
+.adminTab {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+}
+
+.tabItem {
+  flex: 1;
+  text-align: center;
+  padding: 3rpx 35rpx;
+  border-radius: 25rpx;
+  background-color: rgba(255, 255, 255, .2);
+}
+
+.edit  {
+  position: absolute;
+  top: 6rpx;
+  right: 20rpx;
+}
+
+.selected  {
+  background-color: rgba(3, 44, 228, 0.3);
+}
+
+/* 成员列表样式 */
+.members {
+  padding: 20rpx 60rpx;
+  border-bottom: 4rpx solid #e2e2e2;
+}
+
+.members view{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.avatar, .avatar image {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+/* 悬浮报名按钮 样式 */
+.join {
+  position: absolute;
+  right: 30rpx;
+  bottom: 30rpx;
+  padding: 30rpx;
+  border-radius: 50%;
+  background-color: #30c4ff;
+}

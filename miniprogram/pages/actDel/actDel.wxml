@@ -1,4 +1,43 @@
 <!--miniprogram/pages/actDel/actDel.wxml-->
 <view>
-  活动详情
+  <view class="header">
+    <view class="acTitle">石榴园迎新</view>
+    <view class="actNum">12人</view>
+
+    <!-- 活动内容/报名情况 切换tab，仅管理员可见 -->
+    <view class="adminBar">
+      <!-- 这里后期要换为原生组件swiper!!!!!!!! -->
+      <view class="adminTab">
+        <view style="flex: 2;"></view>
+        <view
+          class="tabItem {{tab == 1?'selected':''}}"
+          data-index="1"
+          catchtap="changeTab">活动</view>
+        <view
+          class="tabItem {{tab == 2?'selected':''}}"
+          data-index="2"
+          catchtap="changeTab"
+          style="margin-left: 30rpx;">成员</view>
+        <view style="flex: 2;"></view>
+      </view>
+      <view class="edit">编</view>
+    </view>
+  </view>
+  <view class="content">
+    <!-- 活动内容，都可见 -->
+    <view hidden="{{tab != 1}}">
+      活动内容
+    </view>
+    <!-- 活动内容 end -->
+
+    <!-- 参与成员列表 -->
+    <view style="{{tab == 2 ? '':'display:none'}}">
+      <view wx:for="123" wx:key="{{inex}}" class="members">
+        <view class="avatar"><image src="../../images/code-cloud-callback-config.png"></image></view>
+        <view>161731009</view>
+      </view>
+    </view>
+    <!-- 参与成员列表 end -->
+  </view>
+  <view class="join">-</view>
 </view>

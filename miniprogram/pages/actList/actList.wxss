@@ -1,6 +1,7 @@
 /* miniprogram/pages/actList/actList.wxss */
 page {
   font-size: 28rpx;
+  color: #80848f;
 }
 
 /* 顶部活动状态tab */
@@ -40,23 +41,31 @@ page {
 
 .actItem {
   background-color: #fff;
-  margin: 15rpx 0;
+  margin: 18rpx 0;
 }
 
 .actItem>view{
   display: inline-block;
   vertical-align: top;
-  padding: 10rpx;
+  padding: 20rpx;
 }
 
 .actImg, .actImg image {
-  width: 120rpx;
-  height: 120rpx;
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 10rpx;
 }
 
 .acTitle {
-  font-size: 30rpx;
-  font-weight: bold;
+  /* font-size: 30rpx;
+  font-weight: bold; */
+  color: #1c2438;
+}
+
+.num {
+  float: right;
+  margin-right: 20rpx;
+  line-height: 118rpx;
 }
 
 /* 发布按钮 */
