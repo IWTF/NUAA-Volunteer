@@ -42,7 +42,7 @@ page {
 .edit  {
   position: absolute;
   top: 6rpx;
-  right: 20rpx;
+  right: 25rpx;
 }
 
 .selected  {
@@ -74,5 +74,7 @@ page {
   bottom: 30rpx;
   padding: 30rpx;
   border-radius: 50%;
+  color: #fff;
+  font-size: 40rpx;
   background-color: #30c4ff;
 }
