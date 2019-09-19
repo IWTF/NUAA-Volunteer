@@ -10,7 +10,7 @@
         <view style="flex: 2;"></view>
         <view
           class="tabItem {{currentItemId == 0?'selected':''}}"
-          data-index="0"c0
+          data-index="0"
           catchtap="changeTab">活动</view>
         <view
           class="tabItem {{currentItemId == 1?'selected':''}}"
@@ -26,12 +26,32 @@
   <!-- 中间主要内容 -->
   <view>
     <swiper
+      style="height: 78vh;"
       current='{{currentItemId}}'
       bindchange='scrollChange'>
       <!-- 活动内容，都可见 -->
       <swiper-item class="fb_con">
-        <view>
-          活动内容
+        <view class="content">
+          <view class="contentRow">
+            <view class="iconfont icon-zhuangtai contentIcon"></view>
+            <view>状态：</view>
+            <view>招募中</view>
+          </view>
+          <view class="contentRow">
+            <view class="iconfont icon-riqi contentIcon"></view>
+            <view>开始时间：</view>
+            <view>2019-9-12 12：00</view>
+          </view>
+          <view class="contentRow">
+            <view class="iconfont icon-riqi contentIcon"></view>
+            <view>截止时间：</view>
+            <view>2019-9-12 14：00</view>
+          </view>
+          <view class="contentRow">
+            <view class="iconfont icon-neirong contentIcon"></view>
+            <view>描述</view>
+            <view>2019-9-12 14：00</view>
+          </view>
         </view>
       </swiper-item>
       <!-- 活动内容 end -->
@@ -41,6 +61,8 @@
         <view wx:for="123" wx:key="{{inex}}" class="members">
           <view class="avatar"><image src="../../images/code-cloud-callback-config.png"></image></view>
           <view>161731009</view>
+          <view data-index="{{index}}" catchtap="delMem" class="memBtn addBtn">认证</view>
+          <view data-index="{{index}}" catchtap="AddMem" class="memBtn delBtn">删除</view>
         </view>
       </swiper-item>
       <!-- 参与成员列表 end -->

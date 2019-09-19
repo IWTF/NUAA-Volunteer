@@ -37,7 +37,6 @@ Page({
    * 监听页面滑动
    */
   onPageScroll(res) {
-    console.log('onPageScroll :', res.scrollTop, this.data.currentScrollTop)
     var top = res.scrollTop
     if (top >= this.data.currentScrollTop + 5) {
       this.setData({

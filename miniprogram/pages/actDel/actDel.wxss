@@ -1,6 +1,7 @@
 /* miniprogram/pages/actDel/actDel.wxss */
 page {
   background-color: #fff;
+  color: #515a6e;
 }
 
 /* 顶部 概述栏 样式 */
@@ -51,8 +52,8 @@ page {
 
 /* 成员列表样式 */
 .members {
-  padding: 20rpx 60rpx;
-  border-bottom: 4rpx solid #e2e2e2;
+  padding: 20rpx 40rpx;
+  border-bottom: 3rpx solid #e2e2e2ee;
 }
 
 .members view{
@@ -77,4 +78,41 @@ page {
   color: #fff;
   font-size: 40rpx;
   background-color: #30c4ff;
+}
+
+/* 删除/认证按钮 style */
+.memBtn {
+  float: right;
+  color: #fff;
+  padding: 4rpx 20rpx;
+  margin-top: 10rpx;
+  border-radius: 4rpx;
+  background-color: #e2e2e2;
+}
+
+.delBtn {
+  margin-right: 20rpx;
+  background-color: rgb(253, 56, 56);
+}
+
+.addBtn {
+  background-color: #30c4ff;
+}
+
+/* 活动详情展示 style */
+.content {
+  padding: 60rpx 0;
+}
+
+.contentRow{
+  display: flex;
+  flex-direction: row;
+  padding: 20rpx 0 30rpx;
+  border-bottom: 3rpx solid #e2e2e2ee;
+}
+
+.contentIcon {
+  margin: 0 60rpx;
+  color: #30c4ff;
+  font-size: 36rpx;
 }

@@ -51,6 +51,7 @@
   </swiper>
 
   <view class='{{publishBtnClass}} {{skin}} publish' catchtap='navToPublishNote'>
+    <text class="iconfont icon-pen" style="font-size: 36rpx;"></text>
     <text>发表</text>
   </view>
 </view>

@@ -73,18 +73,7 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         var tempFilePaths = res.tempFilePaths;
-        if (tempFilePaths.length > 0) {
-          var name = "1.jpg";//上传的图片的别名，建议可以用日期命名
-          var file = new Bmob.File(name, tempFilePaths);
-          file.save().then(function (res) {
-            that.setData({
-              imgUrl: res.url()
-            })
-            console.log(that.data.imgUrl)
-          }, function (error) {
-            console.log(error);
-          })
-        }
+        console.log(tempFilePaths)
       }
     })
   },
