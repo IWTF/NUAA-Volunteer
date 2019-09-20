@@ -1,7 +1,12 @@
 //app.js
 App({
   onLaunch: function () {
-    
+    const designWidth = 375
+    const { windowWidth } = wx.getSystemInfoSync()
+
+    let scale = windowWidth / designWidth
+    wx.setStorageSync("scale", scale)
+
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
@@ -15,6 +20,7 @@ App({
       })
     }
 
-    this.globalData = {}
+    this.globalData = {
+    }
   }
 })

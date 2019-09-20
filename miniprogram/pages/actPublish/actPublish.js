@@ -4,6 +4,7 @@ var app = getApp();
 
 Page({
   data: {
+    scale: wx.getStorageSync("scale"),
     index: 0,
     kind: [   // 发布类型
       "志愿活动","培训报名"
@@ -21,6 +22,7 @@ Page({
     begTime: "09:00",
     endTime: "10:00",
     timeBarNum: "",
+    timeBarLoction: ""
   },
 
   onLoad: function (options) {
@@ -36,12 +38,14 @@ Page({
     })
   },
 
+  // 改变活动类型的 func
   kind_change: function (e) {
     this.setData({
       index: e.detail.value
     })
   },
 
+  // 事件选择器 的集成函数
   time_change: function (e) {
     let { sort } = e.target.dataset;
     console.log(e.detail.value)
@@ -65,25 +69,7 @@ Page({
     }
   },
 
-  upload: function () {
-    var that = this;
-    wx.chooseImage({
-      count: 1, // 默认9
-      sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
-        var tempFilePaths = res.tempFilePaths;
-        console.log(tempFilePaths)
-      }
-    })
-  },
-
-  cancel: function () {
-    this.setData({
-      imgUrl: ""
-    })
-  },
-
+  // 表单提交函数
   formSubmit: function (e) {
     var that = this;
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
@@ -117,30 +103,12 @@ Page({
     }
   },
 
+  // 时间段 设置 对应的一系列函数
   showTimeBar() {
     this.setData({ showTimeBar: true })
   },
 
-  delTimeDot (e) {
-    let { index } = e.target.dataset
-    let { timeDots } = this.data
-
-    timeDots.splice(index, 1)
-    this.setData({ timeDots })
-  },
-
-  hideTimeBar() {
-    this.setData({ showTimeBar: false })
-  },
-
-  myCatchTouch() {
-    return ;
-  },
-
-  timeBarNumChange(e) {
-    this.setData({ timeBarNum: e.detail.value })
-  },
-
+  // 添加一个新的 时间段
   addTimeDot() {
     let { begYear, endYear, begTime, endTime, timeBarNum, timeDots } = this.data
     let begT = begYear.split('-')[1] + '-' + begYear.split('-')[2] + ' ' + begTime
@@ -164,5 +132,33 @@ Page({
       showTimeBar: false,
       timeBarNum: ''
     })
+  },
+
+  // 删除选中的 时间段
+  delTimeDot (e) {
+    let { index } = e.target.dataset
+    let { timeDots } = this.data
+
+    timeDots.splice(index, 1)
+    this.setData({ timeDots })
+  },
+
+  hideTimeBar() {
+    this.setData({ showTimeBar: false })
+  },
+
+  // 遮罩层 禁止点击事件 ====================================
+  myCatchTouch() {
+    return ;
+  },
+
+  // 限制人数 输入框 监听函数
+  timeBarNumChange(e) {
+    this.setData({ timeBarNum: e.detail.value })
+  },
+
+  // 活动地点 输入框 监听函数
+  timeBarLoctionChange(e) {
+    this.setData({ timeBarLoction: e.detail.value })
   },
 })

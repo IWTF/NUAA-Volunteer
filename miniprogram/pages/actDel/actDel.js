@@ -1,10 +1,14 @@
 // miniprogram/pages/actDel/actDel.js
+const util = require('../../utils/utils.js');
+const app = 
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    scale: wx.getStorageSync("scale"),
     currentItemId: 0,
     showEdit: false,
     delArr: [],
@@ -19,11 +23,20 @@ Page({
       {
         id: '161730129'
       },
-    ]
+    ],
+    isOver: '',
+    join: false
   },
 
   onLoad: function (options) {
+    console.log(options)
+    var params = JSON.parse(options.params)
+    let { deadline, join } = params
+    let date = util.formatDate(new Date())
+    // deadline = '0'
+    let isOver = date>deadline ? true:false
 
+    this.setData({ isOver, join })
   },
 
   // 更改 tab 选项

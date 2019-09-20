@@ -1,6 +1,8 @@
 <!--miniprogram/pages/actDel/actDel.wxml-->
 <view>
-  <view class="header">
+  <navBar my-class="navClass" barTil="" backIcon/>
+
+  <view class="header" style="margin-top: {{120*scale}}rpx">
     <view class="acTitle">石榴园迎新</view>
     <view class="actNum">12人</view>
 
@@ -19,7 +21,8 @@
           style="margin-left: 40rpx;">成员</view>
         <view style="flex: 2;"></view>
       </view>
-      <span class="edit icon iconfont icon-xiugai" catchtap="edit" wx:if="{{!showEdit || currentItemId == 0}}"></span>
+      <span class="edit icon iconfont icon-xiugai" catchtap="edit" 
+        wx:if="{{!showEdit || currentItemId == 0}}"></span>
       <span class="edit" wx:else catchtap="eidtDone">完成</span>
     </view>
   </view>
@@ -87,5 +90,8 @@
   </view>
 
   <!-- 底部报名按钮 -->
-  <span class="join icon iconfont icon-baoming animated 1 fadeIn" wx:if="{{!showEdit}}"></span>
+  <span class="join animated 1 fadeIn" wx:if="{{isOver && !join}}" style="background-color: #bbbec4;">终</span>
+  <span class="join animated 1 fadeIn" wx:if="{{isOver && join}}" style="background-color: #bbbec4;">退</span>
+  <span class="join animated 1 fadeIn" wx:if="{{!isOver && join}}">退</span>
+  <span class="join animated 1 fadeIn" wx:if="{{!showEdit && !isOver && !join}}">报</span>
 </view>

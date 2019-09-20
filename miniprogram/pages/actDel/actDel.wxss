@@ -5,10 +5,16 @@ page {
   font-size: 26rpx;
 }
 
+.navClass {
+  background-color: #6bb9fe !important;
+}
+
 /* 顶部 概述栏 样式 */
 .header {
   color: #fff;
+  margin-top: 120rpx;
   background-color: #6bb9fe;
+  /* background-color: #bbbec4; */
   padding: 25rpx 0rpx;
 }
 
@@ -72,12 +78,13 @@ page {
 /* 悬浮报名按钮 样式 */
 .join {
   position: absolute;
-  right: 30rpx;
-  bottom: 30rpx;
+  right: 40rpx;
+  bottom: 40rpx;
   padding: 30rpx;
   border-radius: 50%;
   color: #fff;
   font-size: 40rpx;
+  line-height: 40rpx;
   background-color: #6bb9fe;
 }
 

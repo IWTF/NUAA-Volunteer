@@ -55,42 +55,7 @@ page {
   height: 200rpx;
 }
 
-.add{
-  display: flex;
-  flex-direction: row;
-  border-bottom: 2rpx solid #e9e9e9;
-  margin-bottom: 20rpx;
-}
-
-.add image{
-  width: 150rpx;
-  height: 120rpx;
-  margin: 40rpx 30rpx 40rpx 40rpx;
-}
-
-.add view{
-  width: 100%;
-  height: 40rpx;
-  font-size: 31rpx;
-  color: #9c9c9c;
-  margin: auto;
-}
-
-.cancel{
-  font-weight: bold;
-  width: 38rpx;
-  height: 38rpx;
-  border-radius: 50%;
-  color: #fff;
-  position: absolute;
-  top: 10rpx;
-  right: 200rpx;
-  line-height: 34rpx;
-  background-color: #000;
-  margin: 0;
-  transform: rotate(45deg);
-}
-
+/* 发布按钮 stype */
 .btn_container{
   padding: 30rpx 0;
   border-top: 1rpx solid #e9e9e9;
@@ -107,6 +72,7 @@ page {
   margin: auto;
 }
 
+/* 时间段 样式 */
 .timeDot {
   flex: 4;
 }

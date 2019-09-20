@@ -1,11 +1,13 @@
 <view>
-  <view class="header">
+  <navBar/>
+
+  <view class="header" style="top: {{120*scale}}rpx;">
     <view catchtap="changeTab" data-index="0" class="{{currentItemId == 0?'selected':''}}">待参与</view>
     <view catchtap="changeTab" data-index="1" class="{{currentItemId == 1?'selected':''}}">已参与</view>
   </view>
-
   <swiper 
     class="actList"
+    style="margin-top: {{205*scale}}rpx;"
     current='{{currentItemId}}'
     bindchange='scrollChange'>
     <swiper-item>

@@ -1,0 +1,5 @@
+<!--components/navBar/navBar.wxml-->
+<view class="navBar my-class" style="height: {{60*scale}}rpx;padding: {{50*scale}}rpx 0 {{10*scale}}rpx;">
+  {{barTil}}
+  <span class="backIcon" wx:if="{{backIcon}}" catchtap="navBack">返</span>
+</view>

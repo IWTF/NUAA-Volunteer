@@ -7,7 +7,7 @@ page {
 /* 顶部活动状态tab */
 .header {
   position: fixed;
-  top: 0;
+  top: 120rpx;
   left: 0;
   width: 100%;
   display: flex;
@@ -32,7 +32,7 @@ page {
 
 /* 活动列表 */
 .actList {
-  margin-top: 85rpx;
+  margin-top: 205rpx;
   padding: 10rpx 20rpx;
   height: 100vh;
 }

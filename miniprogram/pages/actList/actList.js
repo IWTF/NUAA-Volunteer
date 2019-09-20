@@ -1,6 +1,7 @@
 // miniprogram/pages/actList/actList.js
 Page({
   data: {
+    scale: wx.getStorageSync("scale"),
     currentItemId: 0,
     publishBtnClass: 'publishBtnShow', // 发表按钮的显示样式类
     currentScrollTop: 0,
@@ -22,8 +23,15 @@ Page({
 
   // 跳转传参，进入相应del
   navToDel () {
+    let tmParams = {
+      id: 0,
+      deadline: '2021-09-01',
+      join: false
+    }
+    let params = JSON.stringify(tmParams)
+
     wx.navigateTo({
-      url: '../actDel/actDel',
+      url: '../actDel/actDel?params=' + params,
     })
   },
 
