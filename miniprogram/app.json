@@ -1,8 +1,9 @@
 {
   "pages": [
     "pages/actList/actList",
-    "pages/actPublish/actPublish",
+    "pages/joinList/joinList",
     "pages/actDel/actDel",
+    "pages/actPublish/actPublish",
     "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
@@ -15,28 +16,35 @@
     "pages/openapi/callback/callback",
     "pages/openapi/cloudid/cloudid",
     "pages/im/im",
-    "pages/im/room/room"
+    "pages/im/room/room",
+    "pages/user/user"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "list": [
       {
         "pagePath": "pages/actList/actList",
-        "text": "首页"
+        "text": "活动列表",
+        "iconPath": "images/actList.png",
+        "selectedIconPath": "./images/actList_hover.png"
       },
       {
-        "pagePath": "pages/index/index",
-        "text": "日志"
+        "pagePath": "pages/joinList/joinList",
+        "text": "我的参与",
+        "iconPath": "./images/remind.png",
+        "selectedIconPath": "./images/remind_hover.png"
       },
       {
-        "pagePath": "pages/openapi/openapi",
-        "text": "个人页面"
+        "pagePath": "pages/user/user",
+        "text": "登陆认证",
+        "iconPath": "./images/user.png",
+        "selectedIconPath": "./images/user_hover.png"
       }
     ]
   },

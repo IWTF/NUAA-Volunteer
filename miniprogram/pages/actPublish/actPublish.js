@@ -15,7 +15,7 @@ Page({
     content: "",
     timeDots: [],   // 时间段 数组，元素为对象{begT, endT, num}
     // 选择时间段 Bar 的数据
-    showTimeBar: true,
+    showTimeBar: false,
     begYear: "",
     endYear: "",
     begTime: "09:00",

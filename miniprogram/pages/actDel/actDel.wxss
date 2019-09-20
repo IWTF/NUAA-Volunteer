@@ -2,17 +2,18 @@
 page {
   background-color: #fff;
   color: #515a6e;
+  font-size: 26rpx;
 }
 
 /* 顶部 概述栏 样式 */
 .header {
   color: #fff;
-  background-color: #30c4ff;
+  background-color: #6bb9fe;
   padding: 25rpx 0rpx;
 }
 
 .acTitle {
-  font-size: 50rpx;
+  font-size: 60rpx;
   text-align: center;
   letter-spacing: 5rpx;
 }
@@ -35,19 +36,19 @@ page {
 .tabItem {
   flex: 1;
   text-align: center;
-  padding: 3rpx 35rpx;
+  padding: 3rpx 25rpx;
   border-radius: 25rpx;
   background-color: rgba(255, 255, 255, .2);
 }
 
-.edit  {
+.edit {
   position: absolute;
   top: 6rpx;
   right: 25rpx;
 }
 
 .selected  {
-  background-color: rgba(3, 44, 228, 0.3);
+  background-color: #44a2f5;
 }
 
 /* 成员列表样式 */
@@ -56,7 +57,7 @@ page {
   border-bottom: 3rpx solid #e2e2e2ee;
 }
 
-.members view{
+.members>view{
   display: inline-block;
   vertical-align: middle;
 }
@@ -77,26 +78,44 @@ page {
   border-radius: 50%;
   color: #fff;
   font-size: 40rpx;
-  background-color: #30c4ff;
+  background-color: #6bb9fe;
 }
 
 /* 删除/认证按钮 style */
-.memBtn {
+.editShowCon {
   float: right;
-  color: #fff;
-  padding: 4rpx 20rpx;
-  margin-top: 10rpx;
-  border-radius: 4rpx;
-  background-color: #e2e2e2;
 }
 
-.delBtn {
-  margin-right: 20rpx;
-  background-color: rgb(253, 56, 56);
+.memBtnCon {
+  float: right;
+  font-size: 22rpx;
+}
+
+.memCheck {
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
 }
 
 .addBtn {
-  background-color: #30c4ff;
+  background-color: rgba(112, 150, 255, .2);
+  border: 6rpx solid #73beff;
+}
+
+.delBtn {
+  background-color: rgba(255, 41, 41, 0.2);
+  border: 6rpx solid #ff9f73;
+  margin-right: 20rpx;
+}
+
+.addChecked {
+  background-color: rgba(37, 95, 255, 0.8);
+  box-shadow: 0 0 10rpx rgba(37, 95, 255, 0.6);
+}
+
+.delChecked {
+  background-color: rgba(255, 41, 41, 0.8);
+  box-shadow: 0 0 10rpx rgba(255, 41, 41, 0.6);
 }
 
 /* 活动详情展示 style */
@@ -113,6 +132,16 @@ page {
 
 .contentIcon {
   margin: 0 60rpx;
-  color: #30c4ff;
+  color: #6bb9fe;
   font-size: 36rpx;
+}
+
+.actContent {
+  padding: 20rpx 60rpx 30rpx;
+  border-bottom: 3rpx solid #e2e2e2ee;
+}
+
+.actContent>view {
+  padding: 15rpx 25rpx;
+  background-color: #f8f8f8;
 }

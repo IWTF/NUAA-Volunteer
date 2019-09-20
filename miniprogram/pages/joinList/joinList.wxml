@@ -1,0 +1,70 @@
+<view>
+  <view class="header">
+    <view catchtap="changeTab" data-index="0" class="{{currentItemId == 0?'selected':''}}">待参与</view>
+    <view catchtap="changeTab" data-index="1" class="{{currentItemId == 1?'selected':''}}">已参与</view>
+  </view>
+
+  <swiper 
+    class="actList"
+    current='{{currentItemId}}'
+    bindchange='scrollChange'>
+    <swiper-item>
+      <view class="listCon hosting" wx:if="{{currentItemId == 0}}">
+        <view
+          wx:for="123" 
+          wx:key="{{index}}"
+          catchtap="navToDel"
+          class="actItem animated 1 fadeInRight delay-2s"
+          style="animation-delay: {{index*0.1}}s;"
+          >
+          <!-- 标号修饰 -->
+          <view class="number" style="font-weight: bold;"><span style="margin-left: 10rpx;">{{index}}</span></view>
+
+          <view class="actImg">
+            <image src="../../images/code-cloud-callback-config.png"></image>
+          </view>
+          <view>
+            <view class="acTitle">志愿活动一</view>
+            <view>活动地点</view>
+            <view>活动时间</view>
+          </view>
+          <view class="num">
+            <span class="iconfont icon-tixing1" style="font-size: 32rpx;"></span>
+            设置提醒
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <view class="listCon hosted" wx:if="{{currentItemId == 1}}">
+        <view
+          wx:for="123456789" 
+          wx:key="{{index}}"
+          class="actItem animated 1 fadeInRight"
+          style="animation-delay: {{index*0.1}}s;"
+          >
+          <!-- 标号修饰 -->
+          <view wx:if="{{index%2==0}}" class="number" style="background-color: #19be6b;">
+            <span style="margin-left: -10rpx;font-size: 20rpx;">已认证</span>
+          </view>
+          <view wx:else class="number" style="background-color: #ff9900;">
+            <span style="margin-left: -10rpx;font-size: 20rpx;">未认证</span>
+          </view>
+
+          <view class="actImg">
+            <image src="../../images/code-cloud-callback-config.png"></image>
+          </view>
+          <view>
+            <view class="acTitle">志愿活动一</view>
+            <view>活动地点</view>
+            <view>活动时间</view>
+          </view>
+          <view class="num">
+            {{index%2==0 ? '2019-8-12':''}}
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+
+</view>

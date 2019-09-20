@@ -1,6 +1,6 @@
 /* miniprogram/pages/actList/actList.wxss */
 page {
-  font-size: 28rpx;
+  font-size: 26rpx;
   color: #80848f;
 }
 
@@ -44,18 +44,32 @@ page {
 .actItem {
   background-color: #fff;
   margin: 18rpx 0;
+  padding: 0 100rpx;
+  position: relative;
+}
+
+.number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60rpx;
+  height: 20rpx;
+  line-height: 20rpx;
+  color: #fff;
+  background-color: #7ec3ff;
+  border-radius: 5rpx 0 60rpx 0;
 }
 
 .actItem>view{
   display: inline-block;
-  vertical-align: top;
+  vertical-align: middle;
   padding: 20rpx;
 }
 
 .actImg, .actImg image {
-  width: 110rpx;
-  height: 110rpx;
-  border-radius: 10rpx;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 8rpx;
 }
 
 .acTitle {
@@ -66,44 +80,7 @@ page {
 
 .num {
   float: right;
-  margin-right: 20rpx;
+  margin-right: -20rpx;
   line-height: 118rpx;
 }
-
-/* 发布按钮 */
-.publish {
-  position: fixed;
-  width: 216rpx;
-  height: 64rpx;
-  /* bottom: 32rpx; */
-  left: calc(50% - 108rpx);
-  right: calc(50% - 108rpx);
-  text-align: center;
-  background-color: #6bb9fe;
-  font-size: 30rpx;
-  line-height: 2;
-  border-radius: 64rpx;
-  box-shadow: 0 0 4rpx 0rpx rgba(81, 122, 155, 0.8);
-  color: white;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.3s ease-out;
-}
-
-.publish text {
-  padding: 0 4rpx;
-}
-
-.publishBtnShow {
-  bottom: 32rpx;
-  opacity: 1;
-}
-
-.publishBtnHide {
-  bottom: -64rpx;
-  opacity: 0;
-}
-
 

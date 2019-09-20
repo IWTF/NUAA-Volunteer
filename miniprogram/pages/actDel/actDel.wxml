@@ -19,7 +19,8 @@
           style="margin-left: 40rpx;">成员</view>
         <view style="flex: 2;"></view>
       </view>
-      <span class="edit icon iconfont icon-xiugai"></span>
+      <span class="edit icon iconfont icon-xiugai" catchtap="edit" wx:if="{{!showEdit || currentItemId == 0}}"></span>
+      <span class="edit" wx:else catchtap="eidtDone">完成</span>
     </view>
   </view>
   
@@ -38,31 +39,47 @@
             <view>招募中</view>
           </view>
           <view class="contentRow">
-            <view class="iconfont icon-riqi contentIcon"></view>
+            <view class="iconfont icon-riqi2 contentIcon"></view>
             <view>开始时间：</view>
             <view>2019-9-12 12：00</view>
           </view>
           <view class="contentRow">
-            <view class="iconfont icon-riqi contentIcon"></view>
+            <view class="iconfont icon-riqi2 contentIcon"></view>
             <view>截止时间：</view>
             <view>2019-9-12 14：00</view>
           </view>
-          <view class="contentRow">
+          <view class="contentRow" style="border-bottom: 3rpx dashed #e2e2e2ee;">
             <view class="iconfont icon-neirong contentIcon"></view>
             <view>描述</view>
-            <view>2019-9-12 14：00</view>
+          </view>
+          <view class="actContent">
+            <view>
+              如果小程序是一个多 tab 应用（客户端窗口的底部或顶部有 tab 栏可以切换页面），可以通过 tabBar 配置项指定 tab 栏的表现，以及 tab 切换时显示的对应页面。
+            </view>
           </view>
         </view>
       </swiper-item>
       <!-- 活动内容 end -->
 
+
       <!-- 参与成员列表 -->
       <swiper-item>
-        <view wx:for="123" wx:key="{{inex}}" class="members">
+        <view wx:for="{{users}}" wx:key="{{index}}" class="members">
           <view class="avatar"><image src="../../images/code-cloud-callback-config.png"></image></view>
-          <view>161731009</view>
-          <view data-index="{{index}}" catchtap="delMem" class="memBtn addBtn">认证</view>
-          <view data-index="{{index}}" catchtap="AddMem" class="memBtn delBtn">删除</view>
+          <view>{{item.id}}</view>
+          
+          <!-- 编辑状态下 删除/认证按钮 -->
+          <view class="editShowCon animated 1 fadeIn" wx:if="{{showEdit}}">
+            <view class="memBtnCon" data-index="{{index}}" catchtap="addItem">
+              <view class="memCheck addBtn {{item.addSelect?'addChecked':''}}"></view>
+              <view class="btnDesc">认证</view>
+            </view>
+            <view class="memBtnCon" data-index="{{index}}" catchtap="delItem">
+              <view class="memCheck delBtn {{item.delSelect?'delChecked':''}}"></view>
+              <view class="btnDesc">删除</view>
+            </view>
+          </view>
+          
         </view>
       </swiper-item>
       <!-- 参与成员列表 end -->
@@ -70,5 +87,5 @@
   </view>
 
   <!-- 底部报名按钮 -->
-  <span class="join icon iconfont icon-baoming"></span>
+  <span class="join icon iconfont icon-baoming animated 1 fadeIn" wx:if="{{!showEdit}}"></span>
 </view>

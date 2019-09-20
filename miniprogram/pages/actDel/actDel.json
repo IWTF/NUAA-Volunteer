@@ -1,8 +1,6 @@
 {
   "usingComponents": {},
-  "navigationBarBackgroundColor": "#30c4ff",
+  "navigationBarBackgroundColor": "#6bb9fe",
   "navigationBarTextStyle": "black",
-  "navigationBarTitleText": "活动详情",
-  "backgroundColor": "#30c4ff",
-  "backgroundTextStyle": "light"
+  "backgroundColor": "#30c4ff"
 }
