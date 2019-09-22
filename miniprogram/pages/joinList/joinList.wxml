@@ -1,13 +1,13 @@
 <view>
   <navBar/>
 
-  <view class="header" style="top: {{120*scale}}rpx;">
+  <view class="header" style="top: {{barHeight-1}}px;">
     <view catchtap="changeTab" data-index="0" class="{{currentItemId == 0?'selected':''}}">待参与</view>
     <view catchtap="changeTab" data-index="1" class="{{currentItemId == 1?'selected':''}}">已参与</view>
   </view>
   <swiper 
     class="actList"
-    style="margin-top: {{205*scale}}rpx;"
+    style="margin-top: {{38 + barHeight}}px;"
     current='{{currentItemId}}'
     bindchange='scrollChange'>
     <swiper-item>
@@ -16,7 +16,7 @@
           wx:for="123" 
           wx:key="{{index}}"
           catchtap="navToDel"
-          class="actItem animated 1 fadeInRight delay-2s"
+          class="actItem animated 1 fadeInRight"
           style="animation-delay: {{index*0.1}}s;"
           >
           <!-- 标号修饰 -->

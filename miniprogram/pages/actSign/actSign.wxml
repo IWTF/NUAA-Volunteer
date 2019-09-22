@@ -1,2 +1,40 @@
-<!--miniprogram/pages/actSign/actSign.wxml-->
-<text>miniprogram/pages/actSign/actSign.wxml</text>
+<view class="{{ showTimeBar ? 'noScroll':''}}">
+  <navBar barTil="活动报名" backUrl="../actDel/actDel" backIcon/>
+
+  <form bindsubmit="formSubmit">
+    <!-- 名称 -->
+    <view class='container' style='margin: {{barHeight-1}}px 0 0;border-top: 1rpx solid #e9e9e9;'>
+      <view class='name' style='margin-left: 20rpx;'>姓名</view>
+      <input class='form' name="name" placeholder='你的姓名' placeholder-style='text-align:right;font-size: 30rpx;' value='{{name}}'></input>
+      <view class='tri'></view>
+    </view>
+
+    <!-- 学号 -->
+    <view class='container' style="margin: 0;">
+      <view class='name' style='margin-left: 20rpx;'>学号</view>
+      <input class='form' name="stuId" placeholder='你的学号' placeholder-style='text-align:right;font-size: 30rpx;' value='{{stuId}}'></input>
+      <view class='tri'></view>
+    </view>
+
+    <view class="container">时间段选择</view>
+    <view class="timeDotCon">
+      <view
+        class="timeDotItem {{item.addSelect?'selected':''}}"
+        wx:for="{{timeDots}}" wx:key="{{index}}"
+        data-index="{{index}}" catchtap="chooseItem">
+        {{item.location}}
+        <span style="float: right; margin-right: 20rpx;">{{item.begT}} to {{item.endT}}</span> 
+      </view>
+    </view>
+
+    <!-- 详情 -->
+    <view style='border-top: 1rpx solid #e9e9e9;border-bottom: 1rpx solid #e9e9e9;margin:20rpx 0 0 0;'>
+      <textarea name="content" placeholder='备注' class='content' value='{{content}}'></textarea>
+    </view>
+
+    <view class='btn_container'>
+      <button class='btn' form-type='submit'>报名</button>
+    </view>
+  </form>
+
+</view>

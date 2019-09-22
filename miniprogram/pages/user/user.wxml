@@ -1,2 +1,45 @@
 <!--miniprogram/pages/user/user.wxml-->
-<text>miniprogram/pages/user/user.wxml</text>
+<view>
+  <navBar barTil="个人中心"/>
+
+  <view class="bg"></view>
+  <view class="UserInfo">
+    <view class="userName">仙人球</view>
+    <view>
+      <span style="font-size: 70rpx;">20</span> H
+      <span style="margin-left: 20rpx;font-size: 24rpx;color: #2b85e4;"> 详情 > </span>
+    </view>
+  </view>
+  <view class="avatar">
+    <image src="../../images/code-cloud-callback-config.png"></image>
+  </view>
+  <view class="avatarBg"></view>
+  <view class="avatarBg" style="animation-delay: 1.5s;"></view>
+  <view class="avatarBg" style="animation-delay: 3s;"></view>
+
+  <view class="content">
+    <view catchtap="navToInfo">
+      <view class="colIcon iconfont icon-gerenxinxi1"></view>
+      个人信息
+    </view>
+    <view catchtap="navToVerify">
+      <view class="colIcon iconfont icon-renzheng"></view>
+      我的认证
+    </view>
+    <view catchtap="navToJoin">
+      <view class="colIcon iconfont icon-tianzhiyuan_weixuanzhong"></view>
+      我的参与
+    </view>
+  </view>
+
+  <view class="rowCon" style="margin-top: 40rpx;">
+    <span class="rowIcon iconfont icon-feiji"></span>纸飞机志愿时长认证
+  </view>
+  <view class="rowCon">
+    <span class="rowIcon iconfont icon-xiangmu"></span>项目信息
+  </view>
+  <view class="rowCon">
+    <span class="rowIcon iconfont icon-kaifazhe"></span>开发者
+  </view>
+</view>
+  

@@ -2,6 +2,7 @@
 Page({
   data: {
     scale: wx.getStorageSync("scale"),
+    barHeight: wx.getStorageSync("barHight"),
     currentItemId: 0,
     publishBtnClass: 'publishBtnShow', // 发表按钮的显示样式类
     currentScrollTop: 0,

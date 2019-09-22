@@ -17,6 +17,7 @@ Component({
   externalClasses: ['my-class'],
   data: {
     scale: wx.getStorageSync("scale"),
+    barHight: wx.getStorageSync("barHight")
   },
   lifetimes: {
     ready() {
@@ -24,12 +25,12 @@ Component({
   },
   methods: {
     navBack () {
-      if (this.properties.backUrl == "") {
-        wx.switchTab({
-          url: '/pages/actList/actList',
-        })
+      let { backUrl } = this.properties
+      
+      if (backUrl == "") {
+        wx.switchTab({ url: '/pages/actList/actList', })
       } else {
-        // redict
+        wx.navigateBack({ delta: 1 })
       }
     }
   }

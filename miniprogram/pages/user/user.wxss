@@ -1,1 +1,98 @@
 /* miniprogram/pages/user/user.wxss */
+page {
+  font-size: 26rpx;
+  color: #525252;
+  background-color: #f4f4f4;
+}
+
+.bg {
+  position: absolute;
+  top: -30rpx;
+  left: -50rpx;
+  width: 120%;
+  height: 370rpx;
+  background-color: #6bb9fe;
+  transform: rotate(-10deg);
+}
+
+.UserInfo {
+  position: absolute;
+  top: 170rpx;
+  left: 75rpx;
+  color: #fff;
+  font-size: 34rpx;
+  font-weight: bold;
+}
+
+.userName {
+  margin-bottom: 20rpx;
+}
+
+.avatar {
+  position: absolute;
+  top: 220rpx;
+  right: 70rpx;
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  border: 5rpx solid rgba(240, 240, 240, .6);
+  box-shadow: 0 0 5rpx #afafaf;
+  z-index: 1;
+}
+
+.avatar>image {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+}
+
+.avatarBg {
+  position: absolute;
+  top: 38rpx;
+  right: -118rpx;
+  width: 540rpx;
+  height: 540rpx;
+  border-radius: 50%;
+  opacity: 0;
+  background-color: #f4f4f4;
+  animation: myFadeOut 6s linear infinite;
+}
+
+@keyframes myFadeOut {
+  0% {
+    transform: scale(0);
+    opacity: .7;
+  }
+  100% {
+    transform: scale(100%);
+    opacity: 0.1;
+  }
+}
+
+.content {
+  margin-top: 430rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.content>view {
+  flex: 1;
+  text-align: center;
+  z-index: 1;
+}
+
+.colIcon {
+  font-size: 54rpx;
+  padding: 14rpx 0;
+}
+
+.rowCon {
+  margin: 20rpx 40rpx;
+  padding: 20rpx 10rpx;
+  border-bottom: 2rpx solid #ececec;
+}
+
+.rowIcon {
+  margin-right: 40rpx;
+  opacity: .8;
+}

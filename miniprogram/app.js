@@ -1,8 +1,26 @@
 //app.js
 App({
   onLaunch: function () {
+    /* 导航栏 高度适配 */
+    const vm = this
+    wx.getSystemInfo({
+      success: function (res) {
+        let totalTopHeight = 68
+        if (res.model.indexOf('iPhone X') !== -1) {
+          totalTopHeight = 88
+        } else if (res.model.indexOf('iPhone') !== -1) {
+          totalTopHeight = 64
+        }
+        wx.setStorageSync("barHight", totalTopHeight)
+      },
+      failure() {
+        wx.setStorageSync("barHight", 68)
+      }
+    })
+
     const designWidth = 375
-    const { windowWidth } = wx.getSystemInfoSync()
+    const { windowWidth, statusBarHeight, safeArea  } = wx.getSystemInfoSync()
+    console.log("statusBarHeight", statusBarHeight, safeArea )
 
     let scale = windowWidth / designWidth
     wx.setStorageSync("scale", scale)

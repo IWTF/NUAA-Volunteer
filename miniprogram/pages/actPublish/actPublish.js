@@ -4,17 +4,18 @@ var app = getApp();
 
 Page({
   data: {
-    scale: wx.getStorageSync("scale"),
+    barHeight: wx.getStorageSync("barHight"),
     index: 0,
     kind: [   // 发布类型
       "志愿活动","培训报名"
     ],
     deadline: "2018-07-08",
+    deadlineTime: "",
     imgUrl: "",
     name: "",
     place: "",
     content: "",
-    timeDots: [],   // 时间段 数组，元素为对象{begT, endT, num}
+    timeDots: [],   // 时间段 数组，元素为对象{begT, endT, num, location}
     // 选择时间段 Bar 的数据
     showTimeBar: false,
     begYear: "",
@@ -30,7 +31,8 @@ Page({
     let time = util.formatTime(new Date())
 
     this.setData({
-      date: date,
+      deadline: date,
+      deadlineTime: time,
       begYear: date,
       endYear: date,
       begTime: time,
@@ -53,6 +55,9 @@ Page({
       case 'deadline':
         this.setData({ deadline: e.detail.value })
         break
+      case 'deadlineTime':
+        this.setData({ deadlineTime: e.detail.value })
+        break
       case 'begYear':
         this.setData({ begYear: e.detail.value })
         break
@@ -73,33 +78,20 @@ Page({
   formSubmit: function (e) {
     var that = this;
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
-    let { name, typ, place, dates, limit, num, content } = e.detail.value;
-    if (name == "" || place == "" || (limit == true && num == "") || content == "") {
+    let { name, typ, deadline, deadlineTime, content } = e.detail.value;
+    if (name == "" || content == "") {
       wx.showToast({
         title: '请把表单填写完整',
         icon: 'none',
         duration: 2000
       })
     } else {
-      if (!limit) { num = '500'; }
       typ = this.data.kind[typ];
-      if (dates == null) { dates = util.formatTime(new Date()); }
-      var user = app.globalData.userInfo;
+      let { timeDots } = this.data
+      let deadline = deadline + " " + deadlineTime
 
-      this.setData({
-        imgUrl: '',
-        name: '',
-        place: '',
-        index: 0,
-        dates: util.formatTime(new Date()),
-        content: ''
-      })
-
-      if (limit) {
-        this.setData({
-          check: false
-        })
-      }
+      let act = { name, typ, deadline, timeDots, content }
+      console.log("提交表单成功", act)
     }
   },
 
@@ -110,12 +102,13 @@ Page({
 
   // 添加一个新的 时间段
   addTimeDot() {
-    let { begYear, endYear, begTime, endTime, timeBarNum, timeDots } = this.data
+    let { begYear, endYear, begTime, endTime, timeBarNum, timeDots, timeBarLoction } = this.data
     let begT = begYear.split('-')[1] + '-' + begYear.split('-')[2] + ' ' + begTime
     let endT = endYear.split('-')[1] + '-' + endYear.split('-')[2] + ' ' + endTime
     let num = timeBarNum
+    let location = timeBarLoction
 
-    if (num == '') {
+    if (num == '' || location == '') {
       wx.showToast({
         title: '请把表单填写完整',
         icon: 'none',
@@ -124,21 +117,24 @@ Page({
       return
     }
 
-    let timeDot = { begT, endT, num }
+    let timeDot = { begT, endT, num, location }
 
     timeDots.push(timeDot)
     this.setData({
       timeDots,
       showTimeBar: false,
-      timeBarNum: ''
+      timeBarNum: "",
+      timeBarLoction: ""
     })
+    console.log(this.data.timeBarLoction)
   },
 
   // 删除选中的 时间段
   delTimeDot (e) {
-    let { index } = e.target.dataset
+    let { index } = e.currentTarget.dataset
     let { timeDots } = this.data
 
+    console.log("del index is: ", index)
     timeDots.splice(index, 1)
     this.setData({ timeDots })
   },

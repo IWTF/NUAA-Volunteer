@@ -12,7 +12,7 @@ page {
 /* 顶部 概述栏 样式 */
 .header {
   color: #fff;
-  margin-top: 120rpx;
+  margin-top: 117rpx;
   background-color: #6bb9fe;
   /* background-color: #bbbec4; */
   padding: 25rpx 0rpx;
@@ -151,4 +151,60 @@ page {
 .actContent>view {
   padding: 15rpx 25rpx;
   background-color: #f8f8f8;
+}
+
+/**********  活动结束  改变页面整体UI  ************/
+.over .navClass {
+  background-color: #e4f2f0 !important;
+}
+
+.over .header {
+  color: #70416d;
+  background-color: #e4f2f0;
+}
+
+.over .tabItem {
+  background-color: rgba(255, 255, 255, .5);
+}
+
+
+.over .selected  {
+  background-color: #99d8d0;
+}
+
+.over .join {
+  color: #70416d;
+  background-color: #e4f2f0;
+}
+
+.over .contentIcon {
+  color: #99d8d0;
+}
+
+/*************  活动未结束，已报名  style **************/
+.joinStatus .navClass {
+  background-color: #fdef96 !important;
+}
+
+.joinStatus .header {
+  color: #2b580c;
+  background-color: #fdef96;
+}
+
+.joinStatus .tabItem {
+  background-color: rgba(255, 255, 255, .5);
+}
+
+
+.joinStatus .selected  {
+  background-color: #f7b71d;
+}
+
+.joinStatus .join {
+  color: #f7b71d;
+  background-color: #fdef96;
+}
+
+.joinStatus .contentIcon {
+  color: #f7b71d;
 }

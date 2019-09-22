@@ -5,10 +5,14 @@
   left: 0;
   width: 100vw;
   height: 60rpx;
+  font-size: 34rpx;
+  font-weight: bold;
   padding: 50rpx 0 10rpx;
   text-align: center;
   line-height: 60rpx;
-  background-color: rgb(255, 129, 129);
+  box-sizing: border-box;
+  /* background-color: rgb(255, 129, 129); */
+  background-color: #6bb9fe;
   z-index: 100;
 }
 

@@ -4,7 +4,7 @@
 
   <form bindsubmit="formSubmit">
     <!-- 名称 -->
-    <view class='container' style='margin: {{125*scale}}rpx 0;border-top: 1rpx solid #e9e9e9;'>
+    <view class='container' style='margin: {{barHeight-1}}px 0 0;border-top: 1rpx solid #e9e9e9;'>
       <view class='name' style='margin-left: 20rpx;'>活动名称</view>
       <input class='form' name="name" placeholder='请填写活动名称' placeholder-style='text-align:right;font-size: 30rpx;' value='{{name}}'></input>
       <view class='tri'></view>
@@ -22,41 +22,44 @@
 
       <view class='container'>
         <view class='name'>截止时间</view>
-        <picker name="dates" mode="date" value="{{deadline}}" data-sort="deadline" bindchange='time_change'>
-          <view class='kind' style='margin-left:360rpx;'>{{deadline}}</view>
+        <picker mode="date"
+          name="deadline"
+          value="{{deadline}}"
+          data-sort="deadline" bindchange='time_change'>
+          <view class='kind'>{{deadline}}</view>
         </picker>
-        <view class='tri'></view>
+        <span style="flex: .3"></span>
+        <picker mode="time"
+          name="deadlineTime"
+          value="{{deadlineTime}}"
+          data-sort="deadlineTime" bindchange='time_change'>
+          <view class="kind">{{deadlineTime}}</view>
+        </picker>
+        <view class='tri' style="flex: .4"></view>
       </view>
 
       <!-- 志愿时间段选择 -->
-      <view class="container">活动时间</view>
-      <view
-        class="container"
-        style="text-align: center;align-items: flex-start;color:#868686;border: none;">
-        <view class="timeDot">
-          <view style="margin-top: 0;">时间段</view>
-          <view wx:for="{{timeDots}}" wx:key="{{index}}">
-            <span class="timeCon">{{item.begT}}</span>
-            <span> to </span>
-            <span class="timeCon">{{item.endT}}</span> 
+      <view class="container">
+        <view class="name">活动时间</view>
+        <view style="flex-grow: 1;"></view>
+        <view class='add' catchtap="showTimeBar">+</view>
+      </view>
+
+      <view class="timeDotCon" wx:for="{{timeDots}}" wx:key="{{index}}">
+        <view 
+          class="add" 
+          style="background-color: rgba(255, 41, 41, 0.6)"
+          data-index="{{index}}" catchtap="delTimeDot">-</view>
+        <view class="dotContent">
+          <view>
+            活动时间：
+            <span class="time">{{item.begT}}</span> to 
+            <span class="time">{{item.endT}}</span>
           </view>
-        </view>
-        <view class="numDot">
-          <view style="margin-top: 0;">限制人数</view>
-          <view wx:for="{{timeDots}}" wx:key="{{index}}"><span class="numCon">{{item.num}}</span></view>
-        </view>
-        <view style="flex: .6;margin-top: 0;">
-          <view class="addTime" catchtap="showTimeBar">+</view>
-          <view
-            wx:for="{{timeDots}}"
-            wx:key="{{index}}"
-            data-index="{{index}}"
-            catchtap="delTimeDot"
-            style="margin: 12rpx 0;background-color: rgba(248, 66, 20, 0.6);"
-            class="delTime">-</view>
+          <view>限制人数：{{item.num}}</view>
+          <view>活动地点：{{item.location}}</view>
         </view>
       </view>
-    
     </view>
 
     <!-- 详情 -->
@@ -110,6 +113,7 @@
       placeholder='限制人数'
       placeholder-style='font-size: 30rpx;'
       value='{{timeBarNum}}'></input>
+      
     <!-- 活动地点设置 -->
     <view class="timeBarTil" style="margin-top: 30rpx;">活动地点</view>
     <input
@@ -118,8 +122,7 @@
       style="margin-top: 15rpx;width: 400rpx;"
       placeholder='活动地点'
       placeholder-style='font-size: 30rpx;'
-      value='{{timeBarLocation}}'></input>
-    <!-- 人数限制设置 -->
+      value='{{timeBarLoction}}'></input>
   </view>
 
   <!-- 遮罩层 -->

@@ -1,8 +1,10 @@
 {
   "pages": [
-    "pages/actPublish/actPublish",
+    "pages/user/user",
     "pages/actList/actList",
+    "pages/actSign/actSign",
     "pages/actDel/actDel",
+    "pages/actPublish/actPublish",
     "pages/joinList/joinList",
     "pages/index/index",
     "pages/userConsole/userConsole",
@@ -17,8 +19,8 @@
     "pages/openapi/cloudid/cloudid",
     "pages/im/im",
     "pages/im/room/room",
-    "pages/user/user",
-    "pages/actSign/actSign"
+    "pages/myVerify/myVerify",
+    "pages/userInfo/userInfo"
   ],
   "window": {
     "navigationStyle": "custom"

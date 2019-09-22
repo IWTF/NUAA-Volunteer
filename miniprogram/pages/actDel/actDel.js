@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    scale: wx.getStorageSync("scale"),
+    barHeight: wx.getStorageSync("barHight"),
     currentItemId: 0,
     showEdit: false,
     delArr: [],
@@ -24,12 +24,11 @@ Page({
         id: '161730129'
       },
     ],
-    isOver: '',
+    isOver: false,
     join: false
   },
 
   onLoad: function (options) {
-    console.log(options)
     var params = JSON.parse(options.params)
     let { deadline, join } = params
     let date = util.formatDate(new Date())
@@ -119,5 +118,13 @@ Page({
       users
     })
   },
-  
+
+  /* 报名/取消报名 */
+  signUp () {
+    wx.navigateTo({ url: '../actSign/actSign'})
+  },
+
+  signOut () {
+    
+  }
 })

@@ -1,8 +1,8 @@
 <!--miniprogram/pages/actDel/actDel.wxml-->
-<view>
+<view class="{{isOver?'over':''}} {{(!isOver&&join) ? 'joinStatus':''}}">
   <navBar my-class="navClass" barTil="" backIcon/>
 
-  <view class="header" style="margin-top: {{120*scale}}rpx">
+  <view class="header" style="margin-top: {{barHeight-1}}px">
     <view class="acTitle">石榴园迎新</view>
     <view class="actNum">12人</view>
 
@@ -92,6 +92,6 @@
   <!-- 底部报名按钮 -->
   <span class="join animated 1 fadeIn" wx:if="{{isOver && !join}}" style="background-color: #bbbec4;">终</span>
   <span class="join animated 1 fadeIn" wx:if="{{isOver && join}}" style="background-color: #bbbec4;">退</span>
-  <span class="join animated 1 fadeIn" wx:if="{{!isOver && join}}">退</span>
-  <span class="join animated 1 fadeIn" wx:if="{{!showEdit && !isOver && !join}}">报</span>
+  <span class="join animated 1 fadeIn" wx:if="{{!isOver && join}}" catchtap="signOut">退</span>
+  <span class="join animated 1 fadeIn" wx:if="{{!showEdit && !isOver && !join}}" catchtap="signUp">报</span>
 </view>
