@@ -1,2 +1,18 @@
 <!--miniprogram/pages/myVerify/myVerify.wxml-->
-<text>miniprogram/pages/myVerify/myVerify.wxml</text>
+<view>
+  <navBar backIcon/>
+
+  <view class="tilCon" style="margin-top: {{barHeight}}px">
+    <span class="title">我的认证</span>
+    <span class="tilBtn">认证时间</span>
+  </view>
+
+  <view class="listCon">
+    <view wx:for="123" wx:key="{{index}}" class="listItem">
+      <span class="number">{{index+1}}. </span>
+      <span>志愿活动</span>
+      <span class="floatItem">2019-8-12 12:12</span>
+      <span class="floatItem" style="margin-right: 60rpx;">5h</span>
+    </view>
+  </view>
+</view>

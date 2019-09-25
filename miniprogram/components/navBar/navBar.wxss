@@ -1,4 +1,6 @@
 /* components/navBar/navBar.wxss */
+@import '../../style/icon.wxss';
+
 .navBar {
   position: fixed;
   top: 0;

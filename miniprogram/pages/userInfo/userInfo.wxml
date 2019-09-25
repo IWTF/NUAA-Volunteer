@@ -1,2 +1,8 @@
 <!--miniprogram/pages/userInfo/userInfo.wxml-->
-<text>miniprogram/pages/userInfo/userInfo.wxml</text>
+<view>
+  <navBar backIcon/>
+
+  <view style="margin-top: {{barHeight-1}}px">
+    好烦啊，写点什么。。。
+  </view>
+</view>

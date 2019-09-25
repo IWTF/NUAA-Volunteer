@@ -1,1 +1,64 @@
 /* miniprogram/pages/myVerify/myVerify.wxss */
+page {
+  font-size: 26rpx;
+  color: #495060;
+}
+
+.tilCon {
+  padding: 10rpx 25rpx;
+}
+
+.title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #6bb9fe;
+}
+
+.tilBtn {
+  float: right;
+  margin: 4rpx 15rpx 0 0;
+  position: relative;
+}
+
+.tilBtn::before {
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: 0;
+  right: -5rpx;
+  transform: translate(100%, 2rpx);
+  border: 8rpx solid transparent;
+  border-top-color: #495060;
+}
+
+.tilBtn::after {
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0;
+  right: -5rpx;
+  transform: translateX(100%);
+  border: 8rpx solid transparent;
+  border-bottom-color: #495060;
+}
+
+.listCon {
+  margin: 20rpx 25rpx 0;
+}
+
+.listItem {
+  padding: 15rpx 0;
+  border-bottom: 2rpx dashed #e2e2e2;
+}
+
+.number {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #6bb9fe;
+}
+
+.floatItem {
+  float: right;
+}

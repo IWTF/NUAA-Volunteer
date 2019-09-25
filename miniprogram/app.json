@@ -1,26 +1,26 @@
 {
   "pages": [
-    "pages/user/user",
-    "pages/actList/actList",
-    "pages/actSign/actSign",
-    "pages/actDel/actDel",
-    "pages/actPublish/actPublish",
-    "pages/joinList/joinList",
     "pages/index/index",
-    "pages/userConsole/userConsole",
-    "pages/storageConsole/storageConsole",
-    "pages/databaseGuide/databaseGuide",
-    "pages/addFunction/addFunction",
-    "pages/deployFunctions/deployFunctions",
     "pages/chooseLib/chooseLib",
+    "pages/deployFunctions/deployFunctions",
+    "pages/addFunction/addFunction",
+    "pages/storageConsole/storageConsole",
+    "pages/userConsole/userConsole",
+    "pages/databaseGuide/databaseGuide",
     "pages/openapi/openapi",
     "pages/openapi/serverapi/serverapi",
     "pages/openapi/callback/callback",
     "pages/openapi/cloudid/cloudid",
     "pages/im/im",
     "pages/im/room/room",
+    "pages/actList/actList",
+    "pages/userInfo/userInfo",
     "pages/myVerify/myVerify",
-    "pages/userInfo/userInfo"
+    "pages/user/user",
+    "pages/actSign/actSign",
+    "pages/actDel/actDel",
+    "pages/actPublish/actPublish",
+    "pages/joinList/joinList"
   ],
   "window": {
     "navigationStyle": "custom"

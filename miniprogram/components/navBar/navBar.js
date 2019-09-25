@@ -10,8 +10,8 @@ Component({
       value: false
     },
     backUrl: {
-      type: String,
-      value: ""
+      type: Number,
+      value: 1
     }
   },
   externalClasses: ['my-class'],
@@ -27,11 +27,7 @@ Component({
     navBack () {
       let { backUrl } = this.properties
       
-      if (backUrl == "") {
-        wx.switchTab({ url: '/pages/actList/actList', })
-      } else {
-        wx.navigateBack({ delta: 1 })
-      }
+      wx.navigateBack({ delta: backUrl })
     }
   }
 })
