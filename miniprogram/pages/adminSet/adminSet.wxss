@@ -1,0 +1,178 @@
+/* miniprogram/pages/adminSet/adminSet.wxss */
+page {
+  font-size: 28rpx;
+  color: #80848f;
+}
+
+/* 顶部活动状态tab */
+.header {
+  position: fixed;
+  top: 117rpx;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.header view {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 30rpx;
+}
+
+.selected {
+  color: #6bb9fe;
+  border-bottom: 8rpx solid #6bb9fe;
+}
+
+/* 活动列表 */
+.actList {
+  margin-top: 205rpx;
+  padding: 10rpx 20rpx;
+  height: 82vh;
+}
+
+.listCon {
+  background-color: #f8f8f9;
+}
+
+.actItem {
+  background-color: #fff;
+  margin: 18rpx 0;
+}
+
+.actItem>view{
+  display: inline-block;
+  vertical-align: top;
+  padding: 20rpx;
+}
+
+.actImg, .actImg image {
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 10rpx;
+}
+
+.acTitle {
+  /* font-size: 30rpx;
+  font-weight: bold; */
+  color: #1c2438;
+}
+
+.num {
+  float: right;
+  margin-right: 20rpx;
+  line-height: 118rpx;
+}
+
+
+/****  表单样式  *********/
+.formTil {
+  margin: 140rpx 0 100rpx;
+  color: #6bb9fe;
+  font-size: 36rpx;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 8rpx;
+}
+
+.container{
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1rpx solid #e9e9e9;
+  background-color: #fff;
+  padding: 20rpx;
+}
+
+.name{
+  margin: 0 50rpx 0 30rpx;
+}
+
+.form{
+  color: #868686;
+  font-size: 30rpx;
+}
+
+.btn_container{
+  padding: 30rpx 0;
+  margin-top: 50rpx;
+  margin-bottom: 30rpx;
+}
+
+/********   管理员列表样式  *************/
+.listTil {
+  margin: 20rpx 40rpx 0;
+  padding-bottom: 20rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #6bb9fe;
+  border-bottom: 3rpx solid #e9e9e9;
+}
+
+.members {
+  padding: 20rpx 40rpx;
+  border-bottom: 3rpx solid #e2e2e2ee;
+}
+
+.members>view{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.avatar, .avatar image {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.btn{
+  border-radius: 50rpx;
+  background-color: #1190fe;
+  color: #fff;
+  font-size: 33rpx;
+  width: 400rpx;
+  margin: auto;
+}
+
+/* 删除/认证按钮 style */
+.editShowCon {
+  float: right;
+}
+
+.memBtnCon {
+  float: right;
+  font-size: 22rpx;
+}
+
+.memCheck {
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+}
+
+.addBtn {
+  background-color: rgba(112, 150, 255, .2);
+  border: 6rpx solid #73beff;
+}
+
+.delBtn {
+  background-color: rgba(255, 41, 41, 0.2);
+  border: 6rpx solid #ff9f73;
+  margin-right: 20rpx;
+}
+
+.addChecked {
+  background-color: rgba(37, 95, 255, 0.8);
+  box-shadow: 0 0 10rpx rgba(37, 95, 255, 0.6);
+}
+
+.delChecked {
+  background-color: rgba(255, 41, 41, 0.8);
+  box-shadow: 0 0 10rpx rgba(255, 41, 41, 0.6);
+}

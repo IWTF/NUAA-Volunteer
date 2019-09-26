@@ -3,6 +3,54 @@
   <navBar backIcon/>
 
   <view style="margin-top: {{barHeight-1}}px">
-    好烦啊，写点什么。。。
+    <view class="headerCon">
+       <view class="avatar">
+        <image src="../../images/code-cloud-callback-config.png"></image>
+      </view>
+      <view class="desc">绑定个人信息</view>
+    </view>
+   
+    <form bindsubmit="formSubmit">
+      <view class='container' style='border-top: 1rpx solid #e9e9e9;'>
+        <view class='name' style='margin-left: 20rpx;'>姓名</view>
+        <view class="form" wx:if='{{login}}'>{{userInfo.username}}</view>
+        <input
+          wx:else
+          class="form"
+          name="username"
+          placeholder='请输入姓名'
+          placeholder-style='font-size: 30rpx;'
+          value='{{username}}'></input>
+        <view class='tri'></view>
+      </view>
+
+      <view class='container' style='border-top: 1rpx solid #e9e9e9;'>
+        <view class='name' style='margin-left: 20rpx;'>学号</view>
+        <view class="form" wx:if='{{login}}'>{{userInfo.stuId}}</view>
+        <input
+          wx:else
+          class="form"
+          name="stuId"
+          placeholder='请输入学号'
+          placeholder-style='font-size: 30rpx;'
+          value='{{stuId}}'></input>
+        <view class='tri'></view>
+      </view>
+      
+      
+      <view class='btn_container'>
+        <button
+          disabled="{{login}}"
+          form-type='submit' 
+          class='btn'
+          style="background-color: {{login?'#19be6b':'#1190fe'}}">
+          {{login?'已绑定':'绑定'}}
+        </button>
+        <view
+          wx:if="{{login}}"
+          catchtap="cancelBanding"
+          style="margin-top: 20rpx;color: #d2d2d2;text-align: center;font-size: 26rpx;">取消绑定</view>
+      </view>
+    </form>
   </view>
 </view>

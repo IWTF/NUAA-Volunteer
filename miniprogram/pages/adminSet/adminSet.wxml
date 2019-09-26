@@ -1,0 +1,68 @@
+<!--miniprogram/pages/adminSet/adminSet.wxml-->
+<view>
+  <navBar backIcon barTil="管理员设置"/>
+
+  <view class="header" style="top: {{barHeight}}px;">
+    <view catchtap="changeTab" data-index="0" class="{{currentItemId == 0?'selected':''}}">添加</view>
+    <view catchtap="changeTab" data-index="1" class="{{currentItemId == 1?'selected':''}}">管理</view>
+  </view>
+
+  <swiper 
+    class="actList"
+    style="margin-top: {{40 + barHeight}}px;"
+    current='{{currentItemId}}'
+    bindchange='scrollChange'>
+    <swiper-item>
+      <view class="listCon" wx:if="{{currentItemId == 0}}">
+        <view class="formTil">添加管理员</view>
+
+        <form bindsubmit="formSubmit">
+          <view class='container' style='border-top: 1rpx solid #e9e9e9;'>
+            <view class='name' style='margin-left: 20rpx;'>姓名</view>
+            <input class="form" name="username" placeholder='请输入姓名' placeholder-style='font-size: 30rpx;' 
+              value='{{username}}'></input>
+            <view class='tri'></view>
+          </view>
+
+          <view class='container' style='border-top: 1rpx solid #e9e9e9;margin-top: 20rpx;'>
+            <view class='name' style='margin-left: 20rpx;'>学号</view>
+            <input class="form" name="stuId" placeholder='请输入学号' placeholder-style='font-size: 30rpx;'
+              value='{{stuId}}'></input>
+            <view class='tri'></view>
+          </view>
+
+          <view class='btn_container'>
+            <button form-type='submit' class='btn'>添加</button>
+          </view>
+        </form>
+        <!-- 添加管理员表单结束 -->
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <view class="listCon" wx:if="{{currentItemId == 1}}">
+        <view class="listTil">
+          <span>管理员</span>
+          <span class="iconfont icon-xiugai" style="float: right;"  catchtap="edit"
+            wx:if="{{!showEdit}}"></span>
+          <span style="float:right;font-weight: 100;" wx:else catchtap="eidtDone">完成</span>
+        </view>
+        <view wx:for="{{adminList}}" wx:key="{{index}}" class="members">
+          <view class="avatar"><image src="../../images/code-cloud-callback-config.png"></image></view>
+          <view>
+            <view>{{item.username}}</view>
+            <view>{{item.stuId}}</view>
+          </view>
+          
+          <!-- 编辑状态下 删除/认证按钮 -->
+          <view class="editShowCon animated 1 fadeIn" wx:if="{{showEdit}}">
+            <view class="memBtnCon" data-index="{{index}}" catchtap="delItem">
+              <view class="memCheck delBtn {{item.delSelect?'delChecked':''}}"></view>
+              <view class="btnDesc">删除</view>
+            </view>
+          </view>
+          
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+</view>

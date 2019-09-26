@@ -13,16 +13,16 @@ Page({
   },
 
   onLoad: function() {
-    let uuid = ""
-    loginFunc.getUuid()
-      .then(res => {
-        uuid = res
-        let userInfo = {
-          username: '161720227',
-          password: 'asd2658177.'
-        }
-        loginFunc.loginPost(uuid, JSON.stringify(userInfo))
-      })
+    // let uuid = ""
+    // loginFunc.getUuid()
+    //   .then(res => {
+    //     uuid = res
+    //     let userInfo = {
+    //       username: '161720227',
+    //       password: 'asd2658177.'
+    //     }
+    //     loginFunc.loginPost(uuid, JSON.stringify(userInfo))
+    //   })
 
     
 

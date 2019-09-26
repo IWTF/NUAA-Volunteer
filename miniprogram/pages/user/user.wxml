@@ -20,7 +20,7 @@
   <view class="content">
     <view catchtap="navToInfo">
       <view class="colIcon iconfont icon-gerenxinxi"></view>
-      个人信息
+      信息绑定
     </view>
     <view catchtap="navToVerify">
       <view class="colIcon iconfont icon-renzheng"></view>
@@ -32,6 +32,9 @@
     </view>
   </view>
 
+  <view class="rowCon" style="margin-top: 40rpx;">
+    <span class="rowIcon iconfont icon-feiji"></span>管理员设置
+  </view>
   <view class="rowCon" style="margin-top: 40rpx;">
     <span class="rowIcon iconfont icon-feiji"></span>纸飞机志愿时长认证
   </view>

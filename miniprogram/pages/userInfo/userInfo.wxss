@@ -1,1 +1,52 @@
 /* miniprogram/pages/userInfo/userInfo.wxss */
+.headerCon {
+  text-align: center;
+  padding: 100rpx 0 0;
+}
+
+.avatar, .avatar image {
+  width: 140rpx;
+  height: 140rpx;
+  margin: auto;
+  border-radius: 50%;
+}
+
+.desc {
+  font-weight: bold;
+  margin: 30rpx 0 50rpx;
+  color: #1190fe;
+}
+
+.container{
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1rpx solid #e9e9e9;
+  background-color: #fff;
+  padding: 20rpx;
+}
+
+.name{
+  margin: 0 50rpx 0 30rpx;
+}
+
+.form{
+  color: #868686;
+  font-size: 30rpx;
+}
+
+.btn_container{
+  padding: 30rpx 0;
+  border-top: 1rpx solid #e9e9e9;
+  border-bottom: 1rpx solid #e9e9e9;
+  margin-bottom: 30rpx;
+}
+
+.btn{
+  border-radius: 50rpx;
+  background-color: #1190fe;
+  color: #fff;
+  font-size: 33rpx;
+  width: 400rpx;
+  margin: auto;
+}
+
