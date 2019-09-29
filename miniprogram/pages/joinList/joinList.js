@@ -1,4 +1,6 @@
 // miniprogram/pages/actList/actList.js
+const util = require('../../utils/utils.js');
+
 Page({
   data: {
     scale: wx.getStorageSync("scale"),
@@ -9,12 +11,40 @@ Page({
   },
 
   onLoad: function (options) {
+    let openid = wx.getStorageSync('openid')
 
+    this.initData(openid)
+  },
+
+  initData (openid) {
+    const db = wx.cloud.database()
+    let now = util.formatDate(new Date()) + " " + util.formatTime(new Date())
+    let nowArr = now.split('-')
+    now = nowArr[1]+"-"+nowArr[2]
+
+    db.collection('registerInfo').where({
+      _openid: openid
+    }).get({
+      success: res => {
+        let ret = res.data
+        let doingArr = [] 
+        let doneArr = []
+        for (let i=0; i<ret.length; i++) {
+          let { beg, end } = util.getBETime([ret[i].actInfo, ])
+          if (now < end) {
+            doingArr.push(ret[i])
+          } else {
+            doneArr.push(ret[i])
+          }
+        }
+        this.setData({ doingArr, doneArr })
+      }
+    })
   },
 
   // 更改 tab 选项
   changeTab(e) {
-    let tab = e.target.dataset.index
+    let tab = e.currentTarget.dataset.index
     this.setData({ currentItemId: tab })
   },
   // 滚动swiper触发事件，改变tab样式

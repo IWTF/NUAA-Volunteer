@@ -18,11 +18,11 @@
   <view class="avatarBg" style="animation-delay: 3s;"></view>
 
   <view class="content">
-    <view catchtap="navToInfo">
+    <view catchtap="navFunc" data-url="userInfo">
       <view class="colIcon iconfont icon-gerenxinxi"></view>
       信息绑定
     </view>
-    <view catchtap="navToVerify">
+    <view catchtap="navFunc" data-url="myVerify">
       <view class="colIcon iconfont icon-renzheng"></view>
       我的认证
     </view>
@@ -32,10 +32,12 @@
     </view>
   </view>
 
-  <view class="rowCon" style="margin-top: 40rpx;">
+  <view wx:if="{{login && userInfo.authority == 'superAdmin'}}"
+    class="rowCon" style="margin-top: 40rpx;">
     <span class="rowIcon iconfont icon-feiji"></span>管理员设置
   </view>
-  <view class="rowCon" style="margin-top: 40rpx;">
+  <view wx:if="{{login}}"
+    class="rowCon" style="margin-top: 40rpx;">
     <span class="rowIcon iconfont icon-feiji"></span>纸飞机志愿时长认证
   </view>
   <view class="rowCon">

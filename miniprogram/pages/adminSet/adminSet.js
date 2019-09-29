@@ -4,25 +4,13 @@ Page({
     scale: wx.getStorageSync("scale"),
     barHeight: wx.getStorageSync("barHight"),
     currentItemId: 0,
-    publishBtnClass: 'publishBtnShow', // 发表按钮的显示样式类
-    currentScrollTop: 0,
     adminList: [],
-    delArr: []
+    delArr: [],
+    updateData: false   // 切换至管理页面时，是否请求数据
   },
 
   onLoad: function (options) {
-    const db = wx.cloud.database()
-
-    db.collection('users').where({
-      authority: 'admin'
-    }).get({
-      success: res => {
-        this.setData({ adminList: res.data })
-      },
-      fail: err => {
-        wx.showToast({ icon: 'none', title: '加载数据失败' })
-      }
-    })
+    this.updateAdminList()
   },
 
   // 更改 tab 选项
@@ -33,26 +21,50 @@ Page({
   // 滚动swiper触发事件，改变tab样式
   scrollChange(e) {
     this.setData({ currentItemId: e.detail.current })
+    
+    let { currentItemId, updateData } = this.data
+    if (currentItemId == 1 && updateData) {
+      this.updateAdminList()
+      this.setData({ updateData: false })
+    }
   },
 
   // 管理员 编辑页面
   edit() {
     this.setData({ showEdit: true })
   },
+  // 编辑完成，将更新数据提交至服务器
   eidtDone() {
     let { delArr, adminList } = this.data
 
+    // 获取要删除的管理员的 用户id
     let delItemId = []
     adminList.map((item, index) => {
       if (delArr.indexOf(index) >= 0) {
         delItemId.push(item._id)
       }
     })
-    console.log("del item is: ", delItemId)
+    // console.log("del item is: ", delItemId)
+
+    if (delItemId.length === 0) {
+      return
+    }
+    wx.cloud.callFunction({
+      name: 'updateAdmin',
+      data: {
+        action: 'delAdmin',
+        delItemId
+      },
+      success: res => {
+        if (res.result.stats.updated === 0) {
+          wx.showToast({ icon: 'none', title: 'Error 请稍后重试' })
+        }
+      }
+    })
 
     adminList = adminList.filter((item, index) => delArr.indexOf(index) < 0)
 
-    // 后期肯定要加提示，以免误删 ==============================
+    // 更新本地数据
     this.setData({
       showEdit: false,
       adminList
@@ -80,40 +92,49 @@ Page({
 
   formSubmit: function (e) {
     var that = this;
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    // console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    // 获取表单数据
     let { username, stuId } = e.detail.value;
-    console.log
+   
+    // 表单检验
     if (username == "" || stuId == "") {
       wx.showToast({ title: '请把表单填写完整', icon: 'none' })
     } else {
-      const db = wx.cloud.database()
-      
-      db.collection('users').where({
-        stuId: stuId,
-        username: username
-      }).get({
-        success: res => {
-          console.log('[数据库] [查询记录] 成功: ', res)
-          let newAdmin = res.data[0]
-
-          db.collection('users').doc(newAdmin._id).update({
-            data: {
-              authority: 'admin'
-            },
-            success: res => {
-              // 清空表单 ； 提示状态
-              let { adminList } = that.data
-              adminList.push(newAdmin)
-            
-              that.setData({ username: '', stuId: '', adminList })
-              wx.showToast({ title: '添加成功', })
-            }
-          })
+      // 调用更新用户权限的云函数
+      wx.cloud.callFunction({
+        name: 'updateAdmin',
+        data: {
+          action: 'addAdmin',
+          authority: 'admin',
+          username,
+          stuId
         },
-        fail: err => {
-          wx.showToast({ icon: 'none', title: '该用户不存在' })
+        success: res => {
+          console.log("update Admin 云函数调用成功", res)
+          if (res.result.stats.updated === 0) {
+            wx.showToast({ icon: 'none', title: '账号未注册' })
+          } else {
+            wx.showToast({ title: '添加成功' })
+
+            that.setData({ username: '', stuId: '', updateData: true })
+          }
         }
       })
     }
   },
+
+  updateAdminList () {
+    const db = wx.cloud.database()
+
+    db.collection('users').where({
+      authority: 'admin'
+    }).get({
+      success: res => {
+        this.setData({ adminList: res.data })
+      },
+      fail: err => {
+        wx.showToast({ icon: 'none', title: '加载数据失败' })
+      }
+    })
+  }
 })

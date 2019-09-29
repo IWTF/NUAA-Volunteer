@@ -13,6 +13,22 @@ const formatTime = data => {
   return [hour, minute].map(formatNumber).join(':')
 }
 
+const getBETime = data => {
+  let beg = data[0].begT
+  let end = data[0].endT
+
+  for (let i=1; i<data.length; i++) {
+    if (beg > data[i].begT) {
+      beg = data[i].begT
+    }
+    if (end < data[i].endT) {
+      end = data[i].endT
+    }
+  }
+
+  return { beg, end }
+}
+
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
@@ -20,5 +36,6 @@ const formatNumber = n => {
 
 module.exports = {
   formatDate,
-  formatTime
+  formatTime,
+  getBETime
 }

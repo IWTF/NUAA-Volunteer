@@ -1,6 +1,11 @@
 // miniprogram/pages/actDel/actDel.js
 const util = require('../../utils/utils.js');
-const app = 
+
+/*
+* 活动内容通过跳转 传值
+* 
+* 成员信息需要请求数据库
+*/
 
 Page({
 
@@ -13,39 +18,52 @@ Page({
     showEdit: false,
     delArr: [],
     addArr: [],
-    users: [
-      {
-        id: '161720229'
-      },
-      {
-        id: '161720201'
-      },
-      {
-        id: '161730129'
-      },
-    ],
+    users: [],
     isOver: false,
-    join: false
+    join: false,
+    actInfo: {},
+    first: true
   },
 
+  // 传参是一个对象，actInfo，和join字段
   onLoad: function (options) {
-    var params = JSON.parse(options.params)
-    let { deadline, join } = params
-    let date = util.formatDate(new Date())
-    // deadline = '0'
-    let isOver = date>deadline ? true:false
+    let userInfo = wx.getStorageSync('userInfo')
+    if (userInfo == '') { // 未设置缓存
+      this.setData({ login: false, userInfo })
+    } else {
+      this.setData({ login: true, userInfo })
+    }
 
-    this.setData({ isOver, join })
+    var params = JSON.parse(options.params)
+    let { actInfo, join } = params
+    let date = util.formatDate(new Date()) + " " + util.formatTime(new Date())
+    
+    let isOver = date>actInfo.deadline ? true:false
+
+    let acTime = util.getBETime(actInfo.timeDots)
+    this.setData({ acTime })
+
+    this.setData({ isOver, join, actInfo })
   },
 
   // 更改 tab 选项
   changeTab(e) {
     let tab = e.target.dataset.index
     this.setData({ currentItemId: tab })
+
+    if (this.data.first && tab == 1) {
+      this.getParterList()
+      this.setData({ first: false })
+    }
   },
   // 滚动swiper触发事件，改变tab样式
   scrollChange(e) {
     this.setData({ currentItemId: e.detail.current })
+
+    if (this.data.first && e.detail.current == 1) {
+      this.getParterList()
+      this.setData({ first: false })
+    }
   },
 
   // 管理员 编辑页面
@@ -56,13 +74,34 @@ Page({
         break
       case 1:
         this.setData({ showEdit: true })
-        console.log("管理报名成员")
         break
       default: break
     }
   },
   eidtDone () {
     let { addArr, delArr, users } = this.data
+
+    // 更改报名人员列表，若有删除，则执行下面代码
+    if (delArr.length > 0) {
+      let newDel = []
+      users.map((item, index) => {
+        if (delArr.indexOf(index) >= 0) {
+          newDel.push(item._id)
+        }
+      })
+      this.delParterList(newDel)
+    }
+
+    // 更改报名人员列表，若有认证，则执行下面代码
+    if (addArr.length > 0) {
+      let newAdd = []
+      users.map((item, index) => {
+        if (addArr.indexOf(index) >= 0) {
+          newAdd.push(item._id)
+        }
+      })
+      this.updateParterList(newAdd)
+    }
 
     let arr = addArr.concat(delArr)
     users = users.filter((item, index) => arr.indexOf(index)<0);
@@ -121,10 +160,67 @@ Page({
 
   /* 报名/取消报名 */
   signUp () {
-    wx.navigateTo({ url: '../actSign/actSign'})
+    let { actInfo } = this.data
+
+    wx.navigateTo({ url: '../actSign/actSign?params=' + JSON.stringify(actInfo) })
   },
 
   signOut () {
     
-  }
+  },
+
+  // 提示用户绑定个人信息
+  bindInfo () {
+    wx.showToast({ title: '请先绑定个人信息', icon: 'none', })
+  },
+
+  // 提示活动已结束
+  bindEnd () {
+    wx.showToast({ title: '活动已结束', icon: 'none', })
+  },
+
+  // 请求数据库，获得该活动参与人员情况
+  getParterList() {
+    let { actInfo } = this.data
+
+    wx.cloud.callFunction({
+      name: 'parterFunc',
+      data: {
+        action: 'getParterList',
+        actId: actInfo._id
+      },
+      success: res => {
+        let users = res.result.data
+        this.setData({ users })
+      }
+    })
+  },
+
+  delParterList (data) {
+    console.log("delParterList", data)
+    wx.cloud.callFunction({
+      name: 'parterFunc',
+      data: {
+        action: 'delParterList',
+        delArr: data
+      },
+      success: res => {
+        console.log('delParterList', res)
+      }
+    })
+  },
+
+  updateParterList (data) {
+    console.log("updateParterList", data)
+    wx.cloud.callFunction({
+      name: 'parterFunc',
+      data: {
+        action: 'updateParterList',
+        addArr: data
+      },
+      success: res => {
+        console.log('updateParterList', res)
+      }
+    })
+  },
 })

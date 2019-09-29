@@ -23,7 +23,10 @@
         wx:for="{{timeDots}}" wx:key="{{index}}"
         data-index="{{index}}" catchtap="chooseItem">
         {{item.location}}
-        <span style="float: right; margin-right: 20rpx;">{{item.begT}} to {{item.endT}}</span> 
+        <span style="float: right; margin-right: 20rpx;">
+          {{item.begT}} <span style="font-weight: bold;">To</span> {{item.endT}}
+        </span>
+        <span style="float: right; margin-right: 30rpx;">剩{{item.num - item.joinNum}}人</span>
       </view>
     </view>
 

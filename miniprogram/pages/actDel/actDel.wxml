@@ -3,11 +3,11 @@
   <navBar my-class="navClass" barTil="" backIcon/>
 
   <view class="header" style="margin-top: {{barHeight-1}}px">
-    <view class="acTitle">石榴园迎新</view>
-    <view class="actNum">12人</view>
+    <view class="acTitle">{{actInfo.name}}</view>
+    <view class="actNum">{{actInfo.tolNum}} 人</view>
 
     <!-- 活动内容/报名情况 切换tab，仅管理员可见 -->
-    <view class="adminBar">
+    <view class="adminBar" wx:if="{{userInfo.authority == 'superAdmin' || userInfo.authority === 'admin'}}">
       <view class="adminTab">
         <view style="flex: 2;"></view>
         <view
@@ -30,7 +30,7 @@
   <!-- 中间主要内容 -->
   <view>
     <swiper
-      style="height: 78vh;"
+      style="height: 70vh;"
       current='{{currentItemId}}'
       bindchange='scrollChange'>
       <!-- 活动内容，都可见 -->
@@ -39,26 +39,24 @@
           <view class="contentRow">
             <view class="iconfont icon-zhuangtai contentIcon"></view>
             <view>状态：</view>
-            <view>招募中</view>
+            <view>{{isOver ? '已结束':'招募中'}}</view>
           </view>
           <view class="contentRow">
             <view class="iconfont icon-riqi2 contentIcon"></view>
             <view>开始时间：</view>
-            <view>2019-9-12 12：00</view>
+            <view>{{acTime.beg}}</view>
           </view>
           <view class="contentRow">
             <view class="iconfont icon-riqi2 contentIcon"></view>
             <view>截止时间：</view>
-            <view>2019-9-12 14：00</view>
+            <view>{{acTime.end}}</view>
           </view>
           <view class="contentRow" style="border-bottom: 3rpx dashed #e2e2e2ee;">
             <view class="iconfont icon-neirong contentIcon"></view>
             <view>描述</view>
           </view>
           <view class="actContent">
-            <view>
-              如果小程序是一个多 tab 应用（客户端窗口的底部或顶部有 tab 栏可以切换页面），可以通过 tabBar 配置项指定 tab 栏的表现，以及 tab 切换时显示的对应页面。
-            </view>
+            <view>{{actInfo.content}}</view>
           </view>
         </view>
       </swiper-item>
@@ -66,10 +64,10 @@
 
 
       <!-- 参与成员列表 -->
-      <swiper-item>
+      <swiper-item wx:if="{{userInfo.authority === 'admin'}}">
         <view wx:for="{{users}}" wx:key="{{index}}" class="members">
           <view class="avatar"><image src="../../images/code-cloud-callback-config.png"></image></view>
-          <view>{{item.id}}</view>
+          <view>{{item.stuId}}</view>
           
           <!-- 编辑状态下 删除/认证按钮 -->
           <view class="editShowCon animated 1 fadeIn" wx:if="{{showEdit}}">
@@ -90,8 +88,16 @@
   </view>
 
   <!-- 底部报名按钮 -->
-  <span class="join animated 1 fadeIn" wx:if="{{isOver && !join}}" style="background-color: #bbbec4;">终</span>
-  <span class="join animated 1 fadeIn" wx:if="{{isOver && join}}" style="background-color: #bbbec4;">退</span>
-  <span class="join animated 1 fadeIn" wx:if="{{!isOver && join}}" catchtap="signOut">退</span>
-  <span class="join animated 1 fadeIn" wx:if="{{!showEdit && !isOver && !join}}" catchtap="signUp">报</span>
+  <!-- 未登录 -->
+  <span class="join animated 1 fadeIn" wx:if="{{!login}}" catchtap="bindInfo" style="background-color: #bbbec4;">报</span>
+  <!-- 已结束，未报名 -->
+  <span catchtap="bindEnd"
+    class="join animated 1 fadeIn" wx:if="{{login && isOver && !join}}" style="background-color: #bbbec4;">终</span>
+  <!-- 已结束，已报名 -->
+  <span catchtap="bindEnd"
+    class="join animated 1 fadeIn" wx:if="{{login && isOver && join}}" style="background-color: #bbbec4;">退</span>
+  <!-- 未结束，已报名 -->
+  <span class="join animated 1 fadeIn" wx:if="{{login && !isOver && join}}" catchtap="signOut">退</span>
+  <!-- 未结束，未报名 -->
+  <span class="join animated 1 fadeIn" wx:if="{{login && !showEdit && !isOver && !join}}" catchtap="signUp">报</span>
 </view>

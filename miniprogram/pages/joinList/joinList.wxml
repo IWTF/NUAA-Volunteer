@@ -13,10 +13,10 @@
     <swiper-item>
       <view class="listCon hosting" wx:if="{{currentItemId == 0}}">
         <view
-          wx:for="123" 
+          wx:for="{{doingArr}}" 
           wx:key="{{index}}"
           catchtap="navToDel"
-          class="actItem animated 1 fadeInRight"
+          class="actItem"
           style="animation-delay: {{index*0.1}}s;"
           >
           <!-- 标号修饰 -->
@@ -26,9 +26,9 @@
             <image src="../../images/code-cloud-callback-config.png"></image>
           </view>
           <view>
-            <view class="acTitle">志愿活动一</view>
-            <view>活动地点</view>
-            <view>活动时间</view>
+            <view class="acTitle">{{item.actName}}</view>
+            <view>{{item.actInfo.location}}</view>
+            <view>{{item.actInfo.endT}}</view>
           </view>
           <view class="num">
             <span class="iconfont icon-tixing1" style="font-size: 32rpx;"></span>
@@ -40,13 +40,13 @@
     <swiper-item>
       <view class="listCon hosted" wx:if="{{currentItemId == 1}}">
         <view
-          wx:for="123456789" 
+          wx:for="{{doneArr}}" 
           wx:key="{{index}}"
           class="actItem animated 1 fadeInRight"
           style="animation-delay: {{index*0.1}}s;"
           >
           <!-- 标号修饰 -->
-          <view wx:if="{{index%2==0}}" class="number" style="background-color: #19be6b;">
+          <view wx:if="{{item.certified}}" class="number" style="background-color: #19be6b;">
             <span style="margin-left: -10rpx;font-size: 20rpx;">已认证</span>
           </view>
           <view wx:else class="number" style="background-color: #ff9900;">
@@ -57,9 +57,9 @@
             <image src="../../images/code-cloud-callback-config.png"></image>
           </view>
           <view>
-            <view class="acTitle">志愿活动一</view>
-            <view>活动地点</view>
-            <view>活动时间</view>
+            <view class="acTitle">{{item.actName}}</view>
+            <view>{{item.actInfo.location}}</view>
+            <view>{{item.actInfo.endT}}</view>
           </view>
           <view class="num">
             {{index%2==0 ? '2019-8-12':''}}

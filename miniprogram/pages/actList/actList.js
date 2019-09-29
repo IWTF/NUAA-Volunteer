@@ -1,4 +1,6 @@
 // miniprogram/pages/actList/actList.js
+const util = require('../../utils/utils.js');
+
 Page({
   data: {
     scale: wx.getStorageSync("scale"),
@@ -6,10 +8,30 @@ Page({
     currentItemId: 0,
     publishBtnClass: 'publishBtnShow', // 发表按钮的显示样式类
     currentScrollTop: 0,
+    loadTime: 0,
+    aitivities: [],
+    doingAct: [],
+    doneAct: []
   },
 
   onLoad: function (options) {
+    
+    this.loadAct()
+    // 均存入缓存，避免造成卡顿
+    // onload加载限定数量数据
+    // 下拉刷新加载更新
+    // 上滑加载更多
 
+    // 实现一个全局函数，用于活动参与人数的 增加
+  },
+
+  onShow() {
+    let userInfo = wx.getStorageSync('userInfo')
+    if (userInfo == '') { // 未设置缓存
+      this.setData({ login: false, userInfo })
+    } else {
+      this.setData({ login: true, userInfo })
+    }
   },
 
   // 更改 tab 选项
@@ -23,11 +45,24 @@ Page({
   },
 
   // 跳转传参，进入相应del
-  navToDel () {
+  navToDel (e) {
+    let { doingAct, doneAct } = this.data
+
+    // 获取用户是否已报名，在报名后添加缓存！！
+    let { index, state } = e.currentTarget.dataset
+
+    let actInfo, join
+    if (state == 'doing') {
+      join = wx.getStorageSync(doingAct[index]._id) ? true:false
+      actInfo = doingAct[index]
+    } else {
+      join = wx.getStorageSync(doneAct[index]._id) ? true : false
+      actInfo = doneAct[index]
+    }
+    
     let tmParams = {
-      id: 0,
-      deadline: '2021-09-01',
-      join: false
+      actInfo,
+      join
     }
     let params = JSON.stringify(tmParams)
 
@@ -58,5 +93,36 @@ Page({
         currentScrollTop: top
       })
     }
+  },
+
+  formatData (res) {
+    let { nowTime } = this.data
+    let doingAct = []
+    let doneAct = []
+
+    for (let i=0; i<res.length; i++) {
+      if (res[i].deadline > nowTime) {
+        doingAct.push(res[i])
+      } else {
+        doneAct.push(res[i])
+      }
+    }
+    this.setData({ doingAct, doneAct })
+    // console.log('get data is: ', res)
+  },
+
+  loadAct () {
+    let { loadTime } = this.data
+    let date = util.formatDate(new Date())
+    let time = util.formatTime(new Date())
+
+    this.setData({ nowTime: date + ' ' + time })
+
+    const db = wx.cloud.database()
+    db.collection('activities').get({
+      success: res => {
+        this.formatData(res.data)
+      }
+    })
   }
 })

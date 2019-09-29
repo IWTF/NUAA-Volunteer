@@ -23,7 +23,8 @@ Page({
     begTime: "09:00",
     endTime: "10:00",
     timeBarNum: "",
-    timeBarLoction: ""
+    timeBarLoction: "",
+    tolNum: 0
   },
 
   onLoad: function (options) {
@@ -76,22 +77,39 @@ Page({
 
   // 表单提交函数
   formSubmit: function (e) {
+    // console.log('form发生了submit事件，携带数据为：', e.detail.value)
+
     var that = this;
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    let { timeDots, tolNum } = this.data
     let { name, typ, deadline, deadlineTime, content } = e.detail.value;
-    if (name == "" || content == "") {
-      wx.showToast({
-        title: '请把表单填写完整',
-        icon: 'none',
-        duration: 2000
-      })
+
+    if (name == "" || content == "" || timeDots.length === 0) {
+      wx.showToast({ title: '请把表单填写完整', icon: 'none' })
     } else {
       typ = this.data.kind[typ];
-      let { timeDots } = this.data
-      let deadline = deadline + " " + deadlineTime
+      deadline = deadline + " " + deadlineTime
 
-      let act = { name, typ, deadline, timeDots, content }
-      console.log("提交表单成功", act)
+      // 还需要再加两个字段： 报名人数，活动状态
+      let act = { name, typ, deadline, timeDots, content, tolNum }
+      wx.cloud.callFunction({
+        name: 'publishAct',
+        data: {
+          action: 'publishAct',
+          formData: act
+        },
+        success: res => {
+          wx.showToast({ title: '发布成功' })
+          that.setData({
+            name: '',
+            content: '',
+            timeDots: [],
+            index: 0,
+          })
+        },
+        fail: err => {
+          wx.showToast({ icon: 'none', title: '加载数据失败' })
+        }
+      })
     }
   },
 
@@ -102,7 +120,7 @@ Page({
 
   // 添加一个新的 时间段
   addTimeDot() {
-    let { begYear, endYear, begTime, endTime, timeBarNum, timeDots, timeBarLoction } = this.data
+    let { begYear, endYear, begTime, endTime, timeBarNum, timeDots, timeBarLoction, tolNum } = this.data
     let begT = begYear.split('-')[1] + '-' + begYear.split('-')[2] + ' ' + begTime
     let endT = endYear.split('-')[1] + '-' + endYear.split('-')[2] + ' ' + endTime
     let num = timeBarNum
@@ -117,10 +135,14 @@ Page({
       return
     }
 
-    let timeDot = { begT, endT, num, location }
+    // 记录活动可以报名的总人数，方便ActList页面展示
+    tolNum = tolNum + num
+
+    let timeDot = { begT, endT, num, location, joinNum: 0 }
 
     timeDots.push(timeDot)
     this.setData({
+      tolNum,
       timeDots,
       showTimeBar: false,
       timeBarNum: "",

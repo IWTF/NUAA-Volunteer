@@ -4,20 +4,29 @@ Page({
 
   },
 
-  navToInfo() {
+  onLoad() {
+    
+  },
+
+  onShow () {
+    let userInfo = wx.getStorageSync('userInfo')
+    if (userInfo == '') { // 未设置缓存
+      this.setData({ login: false, userInfo })
+    } else {
+      this.setData({ login: true, userInfo })
+    }
+  },
+
+  navFunc (e) {
+    console.log(e)
+    let { url } = e.currentTarget.dataset
     wx.navigateTo({
-      url: '../userInfo/userInfo',
+      url: '../' + url + '/' + url,
     })
   },
 
-  navToVerify() {
-    wx.navigateTo({
-      url: '../myVerify/myVerify',
-    })
-  },
 
   navToJoin() {
-    console.log("====================")
     wx.switchTab({
       url: '/pages/joinList/joinList',
     })
