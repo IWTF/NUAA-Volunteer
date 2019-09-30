@@ -15,6 +15,7 @@
         <view
           wx:for="{{doingArr}}" 
           wx:key="{{index}}"
+          data-index="{{index}}"
           catchtap="navToDel"
           class="actItem"
           style="animation-delay: {{index*0.1}}s;"

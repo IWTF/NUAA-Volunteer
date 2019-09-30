@@ -41,7 +41,7 @@ Page({
         stuId: stuId
       }).get({ // 已绑定，报错提示，请联系管理员
         success: res => {
-          console.log("查询结果为: ", res.data.length)
+          console.log("查询结果为: ", res)
 
           // 未绑定，则绑定新用户，连系openid与学号
           if (res.data.length === 0) {
@@ -49,6 +49,7 @@ Page({
             if (username == '石榴团委' && stuId == '2019100116') {
               authoirty = 'superAdmin'
             }
+
             let data = {
               username,
               stuId,
@@ -64,7 +65,7 @@ Page({
                   authority: data.authority
                 }
 
-                console.log("create a new user", userInfo)
+                // console.log("create a new user", userInfo)
                 that.setData({ userInfo, login: true })
                 wx.setStorageSync('userInfo', userInfo)
 
@@ -75,7 +76,7 @@ Page({
               }
             })
           } else {
-            console.log("重复数据为：", res)
+            // console.log("重复数据为：", res)
             let userInfo = res.data[0]
 
             if (userInfo._openid == openid) {

@@ -35,12 +35,18 @@ Page({
     }
 
     var params = JSON.parse(options.params)
+
     let { actInfo, join } = params
     let date = util.formatDate(new Date()) + " " + util.formatTime(new Date())
-    
     let isOver = date>actInfo.deadline ? true:false
 
-    let acTime = util.getBETime(actInfo.timeDots)
+    // 数据结构设计的坑...要分情况（从不同页面跳转进来）赋值
+    let acTime = {}
+    if (actInfo.actInfo) {
+      acTime = util.getBETime([actInfo.actInfo])
+    } else {
+      acTime = util.getBETime(actInfo.timeDots)
+    }
     this.setData({ acTime })
 
     this.setData({ isOver, join, actInfo })
@@ -166,12 +172,36 @@ Page({
   },
 
   signOut () {
+    let { actInfo } = this.data
+    if (!actInfo.actInfo) {
+      wx.showToast({ icon: 'none', title: '请到“我参与的”页面取消报名' })
+      return
+    }
+
+    let id = actInfo._id
     
+    wx.cloud.callFunction({
+      name: 'parterFunc',
+      data: {
+        action: 'delParterList',
+        delArr: [id]
+      },
+      success: res => {
+        console.log("=======", res)
+        wx.showToast({ title: '已取消报名' })
+      },
+      fail: err => {
+        wx.showToast({ icon: 'none', title: 'Error 请稍后重试' })
+      }
+    })
+
+    // 设置缓存，提醒joinList页面跟新数据
+    wx.setStorageSync('updateJoinList', true)
   },
 
   // 提示用户绑定个人信息
   bindInfo () {
-    wx.showToast({ title: '请先绑定个人信息', icon: 'none', })
+    wx.showToast({ icon: 'none', title: '请先绑定个人信息' })
   },
 
   // 提示活动已结束

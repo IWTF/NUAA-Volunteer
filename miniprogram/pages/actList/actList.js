@@ -36,6 +36,7 @@ Page({
 
   // 更改 tab 选项
   changeTab(e) {
+    // 这里不是 data- 传参，所以用target
     let tab = e.target.dataset.index
     this.setData({ currentItemId: tab })
   },
@@ -51,18 +52,16 @@ Page({
     // 获取用户是否已报名，在报名后添加缓存！！
     let { index, state } = e.currentTarget.dataset
 
-    let actInfo, join
+    let actInfo
     if (state == 'doing') {
-      join = wx.getStorageSync(doingAct[index]._id) ? true:false
       actInfo = doingAct[index]
     } else {
-      join = wx.getStorageSync(doneAct[index]._id) ? true : false
       actInfo = doneAct[index]
     }
     
     let tmParams = {
       actInfo,
-      join
+      join: false
     }
     let params = JSON.stringify(tmParams)
 

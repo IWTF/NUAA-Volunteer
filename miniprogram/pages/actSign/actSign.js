@@ -51,7 +51,6 @@ Page({
       let formData = { name, stuId, content, selectTimes }
       let promise = this.signFunc(formData)
       promise.then(res => {
-        wx.setStorageSync(params._id, true)
         wx.navigateBack({ delta: 2 })
         wx.showToast({ title: '报名成功', duration: 2500 })
       }).catch(err => {
@@ -75,7 +74,8 @@ Page({
           actInfo: timeDots[e.selectTimes[i]],
           actId: params._id,
           actName: params.name,
-          certified: false
+          certified: false,
+          deadline: params.deadline
         }
         
         db.collection('registerInfo').where({

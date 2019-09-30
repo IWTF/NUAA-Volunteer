@@ -4,7 +4,7 @@
 
   <view class="header" style="margin-top: {{barHeight-1}}px">
     <view class="acTitle">{{actInfo.name}}</view>
-    <view class="actNum">{{actInfo.tolNum}} 人</view>
+    <view class="actNum">{{actInfo.tolNum | actInfo.actInfo.num}} 人</view>
 
     <!-- 活动内容/报名情况 切换tab，仅管理员可见 -->
     <view class="adminBar" wx:if="{{userInfo.authority == 'superAdmin' || userInfo.authority === 'admin'}}">

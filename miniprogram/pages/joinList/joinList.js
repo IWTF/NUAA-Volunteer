@@ -11,9 +11,26 @@ Page({
   },
 
   onLoad: function (options) {
-    let openid = wx.getStorageSync('openid')
+    wx.setStorageSync('updateJoinList', true)
+  },
 
-    this.initData(openid)
+  onShow () {
+    let openid = wx.getStorageSync('openid')
+    
+    let userInfo = wx.getStorageSync('userInfo')
+    if (userInfo == '') { // 未设置缓存
+      this.setData({ login: false, userInfo })
+      this.setData({ doingArr: [], doneArr: [] })
+      return
+    } else {
+      this.setData({ login: true, userInfo })
+    }
+
+    let update = wx.getStorageSync('updateJoinList')
+    if (update) {
+      wx.setStorageSync('updateJoinList', false)
+      this.initData(openid)
+    }
   },
 
   initData (openid) {
@@ -44,7 +61,8 @@ Page({
 
   // 更改 tab 选项
   changeTab(e) {
-    let tab = e.currentTarget.dataset.index
+    // 这里不是 data- 传参，所以用target
+    let tab = e.target.dataset.index
     this.setData({ currentItemId: tab })
   },
   // 滚动swiper触发事件，改变tab样式
@@ -53,11 +71,12 @@ Page({
   },
 
   // 跳转传参，进入相应del
-  navToDel() {
+  navToDel(e) {
+    let index = e.currentTarget.dataset.index
+    let { doingArr } = this.data
     // 活动结束时间、参与情况、活动唯一id
     let tmParams = {
-      id: 0,
-      deadline: '2021-09-01',
+      actInfo: doingArr[index],
       join: true
     }
     let params = JSON.stringify(tmParams)
