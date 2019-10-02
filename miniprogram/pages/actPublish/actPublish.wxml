@@ -127,7 +127,7 @@
 
   <!-- 遮罩层 -->
   <view
-    catchtouchmove="myCatchTouch"
+    catchtouchmove="preventTouchMove"
     class="bg {{showTimeBar ? 'bgShow':''}}"
     catchtap="hideTimeBar"
     wx:if="{{showTimeBar}}"></view>

@@ -107,7 +107,6 @@ Page({
       }
     }
     this.setData({ doingAct, doneAct })
-    // console.log('get data is: ', res)
   },
 
   loadAct () {

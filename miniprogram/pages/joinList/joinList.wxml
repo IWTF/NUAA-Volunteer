@@ -12,6 +12,7 @@
     bindchange='scrollChange'>
     <swiper-item>
       <view class="listCon hosting" wx:if="{{currentItemId == 0}}">
+        <nullPage wx:if="{{doingArr.length == 0}}"/>
         <view
           wx:for="{{doingArr}}" 
           wx:key="{{index}}"
@@ -40,6 +41,7 @@
     </swiper-item>
     <swiper-item>
       <view class="listCon hosted" wx:if="{{currentItemId == 1}}">
+        <nullPage wx:if="{{doneArr.length == 0}}"/>
         <view
           wx:for="{{doneArr}}" 
           wx:key="{{index}}"

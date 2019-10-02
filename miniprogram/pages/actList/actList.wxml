@@ -1,6 +1,7 @@
 <view>
   <navBar/>
   
+  
   <view class="header" style="top: {{barHeight}}px;">
     <view catchtap="changeTab" data-index="0" class="{{currentItemId == 0?'selected':''}}">进行中</view>
     <view catchtap="changeTab" data-index="1" class="{{currentItemId == 1?'selected':''}}">已结束</view>
@@ -13,6 +14,7 @@
     bindchange='scrollChange'>
     <swiper-item>
       <view class="listCon hosting" wx:if="{{currentItemId == 0}}">
+        <nullPage wx:if="{{doingAct.length == 0}}"/>
         <view
           data-state="doing"
           data-index="{{index}}"
@@ -36,6 +38,7 @@
     </swiper-item>
     <swiper-item>
       <view class="listCon hosted" wx:if="{{currentItemId == 1}}">
+        <nullPage wx:if="{{doneAct.length == 0}}"/>
         <view
           data-state="done"
           data-index="{{index}}"

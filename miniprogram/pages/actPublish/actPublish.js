@@ -165,11 +165,6 @@ Page({
     this.setData({ showTimeBar: false })
   },
 
-  // 遮罩层 禁止点击事件 ====================================
-  myCatchTouch() {
-    return ;
-  },
-
   // 限制人数 输入框 监听函数
   timeBarNumChange(e) {
     this.setData({ timeBarNum: e.detail.value })

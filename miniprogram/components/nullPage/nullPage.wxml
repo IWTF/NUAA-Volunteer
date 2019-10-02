@@ -1,0 +1,4 @@
+<!--components/nullPage/nullPage.wxml-->
+<view class="nullPage">
+  <image src="../../images/none.png"></image>
+</view>
