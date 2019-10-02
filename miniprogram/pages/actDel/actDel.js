@@ -84,7 +84,21 @@ Page({
       default: break
     }
   },
-  eidtDone () {
+  async eidtDone () {
+    await new Promise((resolve, reject) => {
+      wx.showModal({
+        title: '提示',
+        content: '请确定认证信息无误，一经提交无法修改！',
+        success(res) {
+          if (res.confirm) {
+            wx.setStorageSync('updateJoinList', true)
+          } else if (res.cancel) {
+          }
+        }
+      })
+      resolve()
+    })
+   
     let { addArr, delArr, users } = this.data
 
     // 更改报名人员列表，若有删除，则执行下面代码
@@ -112,7 +126,6 @@ Page({
     let arr = addArr.concat(delArr)
     users = users.filter((item, index) => arr.indexOf(index)<0);
 
-    // 后期肯定要加提示，以免误删 ==============================
     this.setData({
       showEdit: false,
       users
@@ -171,7 +184,21 @@ Page({
     wx.navigateTo({ url: '../actSign/actSign?params=' + JSON.stringify(actInfo) })
   },
 
-  signOut () {
+  async signOut () {
+    await new Promise((resolve, reject) => {
+      wx.showModal({
+        title: '提示',
+        content: '是否要取消报名',
+        success(res) {
+          if (res.confirm) {
+            resolve()
+          } else if (res.cancel) {
+            return
+          }
+        }
+      })
+    })
+    
     let { actInfo } = this.data
     if (!actInfo.actInfo) {
       wx.showToast({ icon: 'none', title: '请到“我参与的”页面取消报名' })
@@ -187,7 +214,9 @@ Page({
         delArr: [id]
       },
       success: res => {
-        console.log("=======", res)
+        wx.setStorageSync('updateJoinList', true)
+
+        wx.navigateBack({ delta: 1 })
         wx.showToast({ title: '已取消报名' })
       },
       fail: err => {

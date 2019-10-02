@@ -98,6 +98,8 @@ Page({
           formData: act
         },
         success: res => {
+          wx.setStorageSync('updateJoinList', true)
+          
           wx.showToast({ title: '发布成功' })
           that.setData({
             name: '',

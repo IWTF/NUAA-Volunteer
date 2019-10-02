@@ -28,7 +28,7 @@
             <image src="../../images/code-cloud-callback-config.png"></image>
           </view>
           <view>
-            <view class="acTitle">{{item.actName}}</view>
+            <view class="acTitle">{{item.name}}</view>
             <view>{{item.actInfo.location}}</view>
             <view>{{item.actInfo.endT}}</view>
           </view>
@@ -60,7 +60,7 @@
             <image src="../../images/code-cloud-callback-config.png"></image>
           </view>
           <view>
-            <view class="acTitle">{{item.actName}}</view>
+            <view class="acTitle">{{item.name}}</view>
             <view>{{item.actInfo.location}}</view>
             <view>{{item.actInfo.endT}}</view>
           </view>

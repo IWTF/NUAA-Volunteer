@@ -34,6 +34,15 @@ Page({
     }
   },
 
+  onPullDownRefresh() {
+    wx.showNavigationBarLoading()
+
+    setTimeout(function () {
+      wx.hideNavigationBarLoading() 
+      wx.stopPullDownRefresh()
+    }, 1500);
+  },
+
   // 更改 tab 选项
   changeTab(e) {
     // 这里不是 data- 传参，所以用target

@@ -13,9 +13,12 @@ Page({
   },
 
   onLoad: function (options) {
+    // 获取用户信息，方便自动设置 用户 信息
+    let userInfo = wx.getStorageSync('userInfo')
+
     let params = JSON.parse(options.params)
     console.log("params is: ", params)
-    this.setData({ params })
+    this.setData({ params, userInfo })
 
     this.getActData(params._id)
   },
@@ -39,43 +42,54 @@ Page({
     var that = this;
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     let { selectTimes, params } = this.data
-    let { name, stuId, content } = e.detail.value;
+    let { content } = e.detail.value;
 
-    if (name == "" || stuId == "" || content == "") {
-      wx.showToast({
-        title: '请把表单填写完整',
-        icon: 'none',
-        duration: 2000
-      })
-    } else {
-      let formData = { name, stuId, content, selectTimes }
-      let promise = this.signFunc(formData)
-      promise.then(res => {
-        wx.navigateBack({ delta: 2 })
-        wx.showToast({ title: '报名成功', duration: 2500 })
-      }).catch(err => {
-        this.updateData()
-        wx.showToast({ icon: 'none', title: '已报满' })
-      })
+    if (selectTimes.length === 0) {
+      wx.showToast({ title: '请选择要参加的时间段', icon: 'none' })
+      return
     }
+    if (content == "") {
+      wx.showToast({ title: '请把表单填写完整', icon: 'none', })
+      return 
+    }
+
+    let formData = { content, selectTimes }
+    let promise = this.signFunc(formData)
+    promise.then(res => {
+      wx.setStorageSync('updateJoinList', true)
+      
+      wx.navigateBack({ delta: 2 })
+      wx.showToast({ title: '报名成功', duration: 2500 })
+    }).catch(err => {
+      this.updateData()
+      wx.showToast({ icon: 'none', title: '已报满' })
+    })
   },
 
   signFunc (e) {
-    let { timeDots, params } = this.data
+    let { timeDots, params, userInfo } = this.data
     const db = wx.cloud.database()
     let isFull = false
 
     return new Promise(function(resolve, reject) {
       for (let i=0; i<e.selectTimes.length; i++) {
+        let timeDot = timeDots[e.selectTimes[i]]
+        let category = timeDot.location + " " + timeDot.begT + " " + timeDot.endT
+
         let formInfo = {
-          name: e.name,
-          stuId: e.stuId,
+          // 参加者基本信息
+          username: userInfo.username,
+          stuId: userInfo.stuId,
           content: e.content,
-          actInfo: timeDots[e.selectTimes[i]],
+          // 报名时间段的信息
+          actInfo: timeDot,
+          category,   // timeDot的简写，方便之后对报名者分类
+          // 常用活动信息的抽取，方便其他页面渲染/渲染页面的数据形式统一！
           actId: params._id,
-          actName: params.name,
-          certified: false,
-          deadline: params.deadline
+          name: params.name,
+          deadline: params.deadline,
+          // 是否认证标识
+          certified: false
         }
         
         db.collection('registerInfo').where({
@@ -86,20 +100,16 @@ Page({
             console.log("compare: ", res.total, timeDots[e.selectTimes[i]].num, isFull)
           }
         })
-        console.log("1234567890", isFull)
+        
         if (isFull) {
-          console.log("已经饱满")
           break
         }
           
-
-        // console.log("++++++", formInfo)
         db.collection('registerInfo').add({
           data: formInfo
         })
       }
       if (isFull) {
-        console.log("已经饱满")
         reject()
       }
       resolve()
@@ -119,7 +129,6 @@ Page({
         _id: id
       },
       success: res => {
-        console.log("重新刷新页面")
         this.setData({ timeDots: res.result.data[0].timeDots })
       }
     })
