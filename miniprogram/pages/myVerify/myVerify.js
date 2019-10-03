@@ -15,11 +15,17 @@ Page({
     db.collection('registerInfo').where({
       _openid: openid,
       certified: true
-    }).get({
+    }).orderBy('verifyTime', 'asc').get({
       success: res => {
         that.setData({ datalist: res.data })
       }
     })
   },
+
+  changeOrder () {
+    let { datalist } = this.data
+    datalist.reverse()
+    this.setData({ datalist })
+  }
 
 })

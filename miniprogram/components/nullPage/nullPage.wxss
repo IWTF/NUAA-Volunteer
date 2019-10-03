@@ -7,6 +7,6 @@
 }
 
 .nullPage image{
-  width: 230rpx;
+  width: 240rpx;
   height: 150rpx;
 }
