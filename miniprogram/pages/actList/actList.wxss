@@ -59,9 +59,10 @@ page {
 }
 
 .acTitle {
-  /* font-size: 30rpx;
-  font-weight: bold; */
+  font-size: 30rpx;
+  font-weight: bold;
   color: #1c2438;
+  margin-bottom: 15rpx;
 }
 
 .num {

@@ -29,8 +29,9 @@
           </view>
           <view>
             <view class="acTitle">{{item.name}}</view>
-            <view>{{item.timeDots.length == 1 ? item.timeDots[0].location:'见详情' }}</view>
-            <view>{{item.timeDots.length == 1 ? item.timeDots[0].begT:'见详情' }}</view>
+            <!-- <view>{{item.timeDots.length == 1 ? item.timeDots[0].location:'见详情' }}</view>
+            <view>{{item.timeDots.length == 1 ? item.timeDots[0].begT:'见详情' }}</view> -->
+            <view>报名截止：{{item.deadline}}</view>
           </view>
           <view class="num">{{item.tolNum}}人</view>
         </view>
@@ -53,8 +54,9 @@
           </view>
           <view>
             <view class="acTitle">{{item.name}}</view>
-            <view>{{item.timeDots.length == 1 ? item.timeDots[0].location:'见详情' }}</view>
-            <view>{{item.timeDots.length == 1 ? item.timeDots[0].begT:'见详情' }}</view>
+            <!-- <view>{{item.timeDots.length == 1 ? item.timeDots[0].location:'见详情' }}</view>
+            <view>{{item.timeDots.length == 1 ? item.timeDots[0].begT:'见详情' }}</view> -->
+            <view>报名截止：{{item.deadline}}</view>
           </view>
         </view>
       </view>

@@ -29,8 +29,8 @@
           </view>
           <view>
             <view class="acTitle">{{item.name}}</view>
-            <view>{{item.actInfo.location}}</view>
-            <view>{{item.actInfo.endT}}</view>
+            <view>活动地点：{{item.actInfo.location}}</view>
+            <view>活动时间：{{item.actInfo.begT}}</view>
           </view>
           <view class="num">
             <span class="iconfont icon-tixing1" style="font-size: 32rpx;"></span>
@@ -61,8 +61,8 @@
           </view>
           <view>
             <view class="acTitle">{{item.name}}</view>
-            <view>{{item.actInfo.location}}</view>
-            <view>{{item.actInfo.endT}}</view>
+            <view>活动地点：{{item.actInfo.location}}</view>
+            <view>活动时间：{{item.actInfo.endT}}</view>
           </view>
           <view class="num">
             {{index%2==0 ? '2019-8-12':''}}
