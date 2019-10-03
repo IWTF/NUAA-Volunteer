@@ -17,7 +17,7 @@ Page({
     let userInfo = wx.getStorageSync('userInfo')
 
     let params = JSON.parse(options.params)
-    console.log("params is: ", params)
+    // console.log("params is: ", params)
     this.setData({ params, userInfo })
 
     this.getActData(params._id)
@@ -40,7 +40,7 @@ Page({
   // 表单提交函数
   formSubmit: function (e) {
     var that = this;
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    // console.log('form发生了submit事件，携带数据为：', e.detail.value)
     let { selectTimes, params } = this.data
     let { content } = e.detail.value;
 
@@ -61,8 +61,10 @@ Page({
       wx.navigateBack({ delta: 2 })
       wx.showToast({ title: '报名成功', duration: 2500 })
     }).catch(err => {
+      let tmp = err.split(" ")
+      let info = tmp[1] + " " + tmp[2] + " TO " + tmp[3] + " " + tmp[4]
       this.updateData()
-      wx.showToast({ icon: 'none', title: '已报满' })
+      wx.showToast({ icon: 'none', title: info+' 已报满', duration: 2 })
     })
   },
 
@@ -93,28 +95,21 @@ Page({
           verifyTime: ''
         }
         
-        // ====================================== 有问题 ================================
         db.collection('registerInfo').where({
-          actId: e.actId
+          category: category
         }).count({
-          success: res => {
-            isFull = res.total >= timeDots[e.selectTimes[i]].num
-            console.log("compare: ", res.total, timeDots[e.selectTimes[i]].num, isFull)
+          success: function (res) {
+            if (res.total >= timeDot.num) {
+              reject(category)
+            } else {
+              db.collection('registerInfo').add({
+                data: formInfo
+              })
+              resolve()
+            }
           }
         })
-        
-        if (isFull) {
-          break
-        }
-          
-        db.collection('registerInfo').add({
-          data: formInfo
-        })
       }
-      if (isFull) {
-        reject()
-      }
-      resolve()
     })
   },
 
