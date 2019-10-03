@@ -8,11 +8,12 @@
   </view>
 
   <view class="listCon">
-    <view wx:for="123" wx:key="{{index}}" class="listItem">
+    <nullPage wx:if="{{datalist.length == 0}}"/>
+    <view wx:for="{{datalist}}" wx:key="{{index}}" class="listItem">
       <span class="number">{{index+1}}. </span>
-      <span>志愿活动</span>
-      <span class="floatItem">2019-8-12 12:12</span>
-      <span class="floatItem" style="margin-right: 60rpx;">5h</span>
+      <span>{{item.name}}</span>
+      <span class="floatItem">{{item.verifyTime}}</span>
+      <span class="floatItem" style="margin-right: 60rpx;">{{item.actInfo.duration}}h</span>
     </view>
   </view>
 </view>

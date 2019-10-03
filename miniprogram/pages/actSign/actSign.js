@@ -89,9 +89,11 @@ Page({
           name: params.name,
           deadline: params.deadline,
           // 是否认证标识
-          certified: false
+          certified: false,
+          verifyTime: ''
         }
         
+        // ====================================== 有问题 ================================
         db.collection('registerInfo').where({
           actId: e.actId
         }).count({

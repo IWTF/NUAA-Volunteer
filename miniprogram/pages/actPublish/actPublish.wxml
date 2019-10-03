@@ -103,6 +103,16 @@
     </view>
     <!-- 起始时间段选择 end -->
 
+    <!-- 志愿时长确定 -->
+    <view class="timeBarTil" style="margin-top: 30rpx;">志愿时长</view>
+    <input
+      class="timeBarNum"
+      bindinput="timeBarDurationChange"
+      style="margin-top: 15rpx;width: 400rpx;"
+      placeholder='志愿时长'
+      placeholder-style='font-size: 30rpx;'
+      value='{{timeBarDuration}}'></input>
+
     <!-- 人数限制设置 -->
     <view class="timeBarTil" style="margin-top: 30rpx;">限制人数</view>
     <input

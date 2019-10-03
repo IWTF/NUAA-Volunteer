@@ -85,6 +85,8 @@ Page({
     }
   },
   async eidtDone () {
+    let cancel = false
+
     await new Promise((resolve, reject) => {
       wx.showModal({
         title: '提示',
@@ -92,12 +94,19 @@ Page({
         success(res) {
           if (res.confirm) {
             wx.setStorageSync('updateJoinList', true)
+            resolve()
           } else if (res.cancel) {
+            cancel = true
+            resolve()
           }
         }
       })
-      resolve()
     })
+
+    if(cancel) {
+      this.setData({ showEdit: false })
+      return 
+    }
    
     let { addArr, delArr, users } = this.data
 
@@ -177,7 +186,11 @@ Page({
     })
   },
 
-  /* 报名/取消报名 */
+  /* 报名/取消报名 
+
+    这两个函数中，actInfo不需要做可以区分
+    因为，活动列表页面不会触发这两个函数  
+  */
   signUp () {
     let { actInfo } = this.data
 
@@ -185,6 +198,8 @@ Page({
   },
 
   async signOut () {
+    let cancel = false
+
     await new Promise((resolve, reject) => {
       wx.showModal({
         title: '提示',
@@ -193,12 +208,17 @@ Page({
           if (res.confirm) {
             resolve()
           } else if (res.cancel) {
-            return
+            cancel = true
+            resolve()
           }
         }
       })
     })
     
+    if(cancel) {
+      return
+    }
+
     let { actInfo } = this.data
     if (!actInfo.actInfo) {
       wx.showToast({ icon: 'none', title: '请到“我参与的”页面取消报名' })
@@ -242,14 +262,17 @@ Page({
   getParterList() {
     let { actInfo } = this.data
 
+    let actId = actInfo.num ? actInfo._id : actInfo.actId
+
     wx.cloud.callFunction({
       name: 'parterFunc',
       data: {
         action: 'getParterList',
-        actId: actInfo._id
+        actId,
       },
       success: res => {
         let users = res.result.data
+        console.log("cloud function: ", users)
         this.setData({ users })
       }
     })
@@ -264,18 +287,20 @@ Page({
         delArr: data
       },
       success: res => {
-        console.log('delParterList', res)
+        // console.log('delParterList', res)
       }
     })
   },
 
   updateParterList (data) {
-    console.log("updateParterList", data)
+    let currentDate = util.formatDate(new Date()) + " " + util.formatTime(new Date())
+
     wx.cloud.callFunction({
       name: 'parterFunc',
       data: {
         action: 'updateParterList',
-        addArr: data
+        addArr: data,
+        currentDate,
       },
       success: res => {
         console.log('updateParterList', res)

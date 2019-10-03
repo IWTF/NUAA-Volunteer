@@ -122,13 +122,14 @@ Page({
 
   // 添加一个新的 时间段
   addTimeDot() {
-    let { begYear, endYear, begTime, endTime, timeBarNum, timeDots, timeBarLoction, tolNum } = this.data
+    let { begYear, endYear, begTime, endTime, timeBarNum, timeDots, timeBarLoction, tolNum, timeBarDuration } = this.data
     let begT = begYear.split('-')[1] + '-' + begYear.split('-')[2] + ' ' + begTime
     let endT = endYear.split('-')[1] + '-' + endYear.split('-')[2] + ' ' + endTime
     let num = timeBarNum
     let location = timeBarLoction
+    let duration = timeBarDuration
 
-    if (num == '' || location == '') {
+    if (num == '' || location == '' || duration == '') {
       wx.showToast({
         title: '请把表单填写完整',
         icon: 'none',
@@ -140,7 +141,7 @@ Page({
     // 记录活动可以报名的总人数，方便ActList页面展示
     tolNum = tolNum + num
 
-    let timeDot = { begT, endT, num, location, joinNum: 0 }
+    let timeDot = { begT, endT, num, location, joinNum: 0, duration }
 
     timeDots.push(timeDot)
     this.setData({
@@ -148,9 +149,9 @@ Page({
       timeDots,
       showTimeBar: false,
       timeBarNum: "",
-      timeBarLoction: ""
+      timeBarLoction: "",
+      timeBarDuration: ""
     })
-    console.log(this.data.timeBarLoction)
   },
 
   // 删除选中的 时间段
@@ -170,6 +171,10 @@ Page({
   // 限制人数 输入框 监听函数
   timeBarNumChange(e) {
     this.setData({ timeBarNum: e.detail.value })
+  },
+
+  timeBarDurationChange(e) {
+    this.setData({ timeBarDuration: e.detail.value })
   },
 
   // 活动地点 输入框 监听函数

@@ -44,7 +44,8 @@ async function updateParterList(event) {
       _id: _.in(event.addArr)
     }).update({
       data: {
-        certified: true
+        certified: true,
+        verifyTime: event.currentDate
       }
     })
   } catch (e) {
