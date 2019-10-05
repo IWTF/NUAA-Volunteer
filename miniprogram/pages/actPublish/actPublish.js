@@ -28,6 +28,34 @@ Page({
   },
 
   onLoad: function (options) {
+    if (options.actId) {
+      wx.cloud.callFunction({
+        name: 'publishAct',
+        data: {
+          action: 'getAct',
+          _id: options.actId
+        },
+        success: res => {
+          let preData = res.result.data[0]
+
+          let time = preData.deadline.split(" ")
+
+          this.setData({
+            name: preData.name,
+            typ: preData.typ,
+            deadline: time[0],
+            deadlineTime: time[1],
+            timeDots: preData.timeDots,
+            content: preData.content,
+            actId: options.actId      // 用于在提交时判断是否是更新数据库
+          })
+        },
+        fail: err => {
+          console.log("==========", err)
+        }
+      })
+    }
+
     let date = util.formatDate(new Date())
     let time = util.formatTime(new Date())
 
@@ -80,7 +108,7 @@ Page({
     // console.log('form发生了submit事件，携带数据为：', e.detail.value)
 
     var that = this;
-    let { timeDots, tolNum } = this.data
+    let { timeDots, tolNum, actId } = this.data
     let { name, typ, deadline, deadlineTime, content } = e.detail.value;
 
     if (name == "" || content == "" || timeDots.length === 0) {
@@ -89,13 +117,19 @@ Page({
       typ = this.data.kind[typ];
       deadline = deadline + " " + deadlineTime
 
+      let action = "publishAct"
+      if (actId) {  // 用于在提交时判断是否是更新数据库
+        action = "updateAct"
+      }
+
       // 还需要再加两个字段： 报名人数，活动状态
       let act = { name, typ, deadline, timeDots, content, tolNum }
       wx.cloud.callFunction({
         name: 'publishAct',
         data: {
-          action: 'publishAct',
-          formData: act
+          action,
+          actId,
+          formData: act,
         },
         success: res => {
           wx.setStorageSync('updateJoinList', true)

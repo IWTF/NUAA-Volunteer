@@ -33,29 +33,43 @@ Page({
     }
   },
 
-  initData (openid) {
-    const db = wx.cloud.database()
-    let now = util.formatDate(new Date()) + " " + util.formatTime(new Date())
-    let nowArr = now.split('-')
-    now = nowArr[1]+"-"+nowArr[2]
+  onPullDownRefresh() {
+    wx.showNavigationBarLoading()
 
-    db.collection('registerInfo').where({
-      _openid: openid
-    }).get({
-      success: res => {
-        let ret = res.data
-        let doingArr = [] 
-        let doneArr = []
-        for (let i=0; i<ret.length; i++) {
-          let { beg, end } = util.getBETime([ret[i].actInfo, ])
-          if (now < end) {
-            doingArr.push(ret[i])
-          } else {
-            doneArr.push(ret[i])
+    let { openid } = this.data
+    let promise = this.initData(openid)
+    promise.then(res => {
+      wx.hideNavigationBarLoading()
+      wx.stopPullDownRefresh()
+    })
+  },
+
+  initData (openid) {
+    return new Promise((resolve, reject) => {
+      const db = wx.cloud.database()
+      let now = util.formatDate(new Date()) + " " + util.formatTime(new Date())
+      let nowArr = now.split('-')
+      now = nowArr[1] + "-" + nowArr[2]
+
+      db.collection('registerInfo').where({
+        _openid: openid
+      }).get({
+        success: res => {
+          let ret = res.data
+          let doingArr = []
+          let doneArr = []
+          for (let i = 0; i < ret.length; i++) {
+            let { beg, end } = util.getBETime([ret[i].actInfo,])
+            if (now < end) {
+              doingArr.push(ret[i])
+            } else {
+              doneArr.push(ret[i])
+            }
           }
+          this.setData({ doingArr, doneArr })
+          resolve()
         }
-        this.setData({ doingArr, doneArr })
-      }
+      })
     })
   },
 

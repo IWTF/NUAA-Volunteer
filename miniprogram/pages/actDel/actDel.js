@@ -156,7 +156,12 @@ Page({
   edit () {
     switch (this.data.currentItemId) {
       case 0:
-        console.log("跳转活动发布页面")
+        let actId = this.data.actInfo.actId
+        if (!actId)
+          actId = this.data.actInfo._id
+        wx.navigateTo({
+          url: '../actPublish/actPublish?actId=' + actId,
+        })
         break
       case 1:
         this.setData({ showEdit: true })

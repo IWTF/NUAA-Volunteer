@@ -44,7 +44,7 @@ page {
 .actItem {
   background-color: #fff;
   margin: 18rpx 0;
-  padding: 0 100rpx;
+  padding: 0 0 0 90rpx;
   position: relative;
 }
 
@@ -63,7 +63,7 @@ page {
 .actItem>view{
   display: inline-block;
   vertical-align: middle;
-  padding: 20rpx;
+  padding: 15rpx;
 }
 
 .actImg, .actImg image {
@@ -73,14 +73,12 @@ page {
 }
 
 .acTitle {
-  /* font-size: 30rpx;
-  font-weight: bold; */
   color: #1c2438;
 }
 
 .num {
   float: right;
-  margin-right: -60rpx;
+  margin-right: 10rpx;
   line-height: 105rpx;
 }
 

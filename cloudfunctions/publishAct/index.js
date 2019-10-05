@@ -13,6 +13,7 @@ exports.main = async (event, context) => {
   switch (event.action) {
     case 'publishAct': return publishAct(event)
     case 'getAct': return getAct(event)
+    case 'updateAct': return updateAct(event)
   }
 }
 
@@ -32,6 +33,16 @@ async function getAct(event) {
     return await db.collection('activities').where({
       _id: event._id
     }).get()
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+async function updateAct(event) {
+  try {
+    return await db.collection('activities').doc(event.actId).set({
+      data: event.formData
+    })
   } catch (e) {
     console.log(e)
   }

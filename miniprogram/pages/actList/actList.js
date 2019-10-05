@@ -37,12 +37,11 @@ Page({
   onPullDownRefresh() {
     wx.showNavigationBarLoading()
 
-    this.loadAct()
-    
-    setTimeout(function () {
-      wx.hideNavigationBarLoading() 
+    let promise = this.loadAct()
+    promise.then(res => {
+      wx.hideNavigationBarLoading()
       wx.stopPullDownRefresh()
-    }, 1500);
+    })
   },
 
   // 更改 tab 选项
@@ -121,17 +120,20 @@ Page({
   },
 
   loadAct () {
-    let { loadTime } = this.data
-    let date = util.formatDate(new Date())
-    let time = util.formatTime(new Date())
+    return new Promise((resolve, reject) => {
+      let { loadTime } = this.data
+      let date = util.formatDate(new Date())
+      let time = util.formatTime(new Date())
 
-    this.setData({ nowTime: date + ' ' + time })
+      this.setData({ nowTime: date + ' ' + time })
 
-    const db = wx.cloud.database()
-    db.collection('activities').get({
-      success: res => {
-        this.formatData(res.data)
-      }
+      const db = wx.cloud.database()
+      db.collection('activities').get({
+        success: res => {
+          this.formatData(res.data)
+          resolve()
+        }
+      })
     })
   }
 })

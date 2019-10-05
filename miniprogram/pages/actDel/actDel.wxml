@@ -41,7 +41,7 @@
           <view class="contentRow">
             <view class="iconfont icon-zhuangtai contentIcon"></view>
             <view>状态：</view>
-            <view>{{isOver ? '已结束':'招募中'}}</view>
+            <view>{{isOver ? '报名结束':'招募中'}}</view>
           </view>
           <view class="contentRow">
             <view class="iconfont icon-riqi2 contentIcon"></view>
