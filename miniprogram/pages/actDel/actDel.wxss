@@ -88,6 +88,49 @@ page {
   background-color: #6bb9fe;
 }
 
+/* 认证页面表头样式 */
+.tilCon {
+  position: relative;
+  padding: 10rpx 25rpx;
+}
+
+.dropList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #808695;
+  padding: 10rpx 25rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+  box-shadow: 0 0 10rpx #b4b4b4;
+}
+
+.dropList view {
+  padding: 10rpx 0;
+  border-bottom: 2rpx solid rgba(210, 120, 220, .3);
+}
+
+.title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #6bb9fe;
+}
+
+.tilBtn {
+  display: inline-block;
+  transform: translate(10rpx, 49%);
+  border: 16rpx solid transparent;
+  border-top-color: #495060;
+}
+
+.showDrop {
+  border-top-color: transparent;
+  border-bottom-color: #495060;
+  transform: translate(10rpx, -20%);
+}
+
 /* 删除/认证按钮 style */
 .editShowCon {
   float: right;

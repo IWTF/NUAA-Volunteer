@@ -72,6 +72,86 @@ Page({
     }
   },
 
+  // 请求数据库，获得该活动参与人员情况
+  getParterList() {
+    let { actInfo } = this.data
+
+    let actId = actInfo.num ? actInfo._id : actInfo.actId
+
+    const db = wx.cloud.database()
+    const $ = db.command.aggregate
+
+    wx.cloud.callFunction({
+      name: 'parterFunc',
+      data: {
+        action: 'getParterList',
+        actId,
+      },
+      success: res => {
+        let users = res.result.data
+        let timeSet = new Set();
+        for (let i = 0; i < users.length; i++) {
+          timeSet.add(users[i].category)
+        }
+        timeSet = Array.from(timeSet)
+
+        this.setData({ users, timeSet, selected: timeSet[0] })
+        this.dataSort(timeSet[0])
+      }
+    })
+  },
+
+  delParterList(data) {
+    console.log("delParterList", data)
+    wx.cloud.callFunction({
+      name: 'parterFunc',
+      data: {
+        action: 'delParterList',
+        delArr: data
+      },
+      success: res => {
+        // console.log('delParterList', res)
+      }
+    })
+  },
+
+  updateParterList(data) {
+    let currentDate = util.formatDate(new Date()) + " " + util.formatTime(new Date())
+
+    wx.cloud.callFunction({
+      name: 'parterFunc',
+      data: {
+        action: 'updateParterList',
+        addArr: data,
+        currentDate,
+      },
+      success: res => {
+        console.log('updateParterList', res)
+      }
+    })
+  },
+
+  // 改变展示的集合
+  changeSet() {
+    this.setData({ dropDown: !this.data.dropDown })
+  },
+
+  // 下拉菜单选项变化
+  dropChange (e) {
+    let { index } = e.currentTarget.dataset
+    let { timeSet } = this.data
+
+    let selected = timeSet[index]
+    this.dataSort(selected)
+    this.setData({ selected, dropDown: false })
+  },
+
+  dataSort(sort) {
+    let { users, showData } = this.data
+    showData = users.filter((item) => sort === item.category )
+    this.setData({ showData })
+  },
+
   // 管理员 编辑页面
   edit () {
     switch (this.data.currentItemId) {
@@ -256,55 +336,5 @@ Page({
   // 提示活动已结束
   bindEnd () {
     wx.showToast({ title: '活动已结束', icon: 'none', })
-  },
-
-  // 请求数据库，获得该活动参与人员情况
-  getParterList() {
-    let { actInfo } = this.data
-
-    let actId = actInfo.num ? actInfo._id : actInfo.actId
-
-    wx.cloud.callFunction({
-      name: 'parterFunc',
-      data: {
-        action: 'getParterList',
-        actId,
-      },
-      success: res => {
-        let users = res.result.data
-        console.log("cloud function: ", users)
-        this.setData({ users })
-      }
-    })
-  },
-
-  delParterList (data) {
-    console.log("delParterList", data)
-    wx.cloud.callFunction({
-      name: 'parterFunc',
-      data: {
-        action: 'delParterList',
-        delArr: data
-      },
-      success: res => {
-        // console.log('delParterList', res)
-      }
-    })
-  },
-
-  updateParterList (data) {
-    let currentDate = util.formatDate(new Date()) + " " + util.formatTime(new Date())
-
-    wx.cloud.callFunction({
-      name: 'parterFunc',
-      data: {
-        action: 'updateParterList',
-        addArr: data,
-        currentDate,
-      },
-      success: res => {
-        console.log('updateParterList', res)
-      }
-    })
   },
 })

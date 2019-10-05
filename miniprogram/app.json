@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/actList/actList",
+    "pages/actDel/actDel",
     "pages/actPublish/actPublish",
     "pages/user/user",
     "pages/adminSet/adminSet",
@@ -8,7 +9,6 @@
     "pages/userInfo/userInfo",
     "pages/myVerify/myVerify",
     "pages/actSign/actSign",
-    "pages/actDel/actDel",
     "pages/joinList/joinList",
     "pages/openapi/serverapi/serverapi",
     "pages/openapi/callback/callback",

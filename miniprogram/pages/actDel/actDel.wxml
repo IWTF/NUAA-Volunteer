@@ -1,4 +1,6 @@
 <!--miniprogram/pages/actDel/actDel.wxml-->
+<wxs src="./substring.wxs" module="tools" />
+
 <view class="{{isOver?'over':''}} {{(!isOver&&join) ? 'joinStatus':''}}">
   <navBar my-class="navClass" barTil="" backIcon/>
 
@@ -65,7 +67,16 @@
 
       <!-- 参与成员列表 -->
       <swiper-item wx:if="{{userInfo.authority === 'admin'}}">
-        <view wx:for="{{users}}" wx:key="{{index}}" class="members">
+        <view class="tilCon">
+          <span class="title">{{tools.sub(selected)}}</span>
+          <view class="dropList" wx:if="{{dropDown}}">
+            <view wx:for="{{timeSet}}" wx:key="{{index}}"
+              data-index="{{index}}" catchtap="dropChange">{{tools.sub(item)}}</view>
+          </view>
+          <span class="tilBtn {{dropDown?'showDrop':''}}" catchtap="changeSet"></span>
+        </view>
+
+        <view wx:for="{{showData}}" wx:key="{{index}}" class="members">
           <view class="avatar"><image src="../../images/code-cloud-callback-config.png"></image></view>
           <view>{{item.stuId}}</view>
           
