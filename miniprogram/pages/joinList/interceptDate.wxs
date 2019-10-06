@@ -1,0 +1,8 @@
+var intr = function (val) {
+  if (val == undefined || val.length == 0 ) {
+    return;
+  }
+  result = val.split("-")
+  return result[1] + "-" + result[2]
+}
+module.exports.intr = intr;

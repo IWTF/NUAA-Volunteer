@@ -7,7 +7,7 @@ const formatDate = date => {
 }
 
 const formatTime = data => {
-  const hour = data.getHours()
+  const hour = (data.getHours() + 8)%24
   const minute = data.getMinutes()
 
   return [hour, minute].map(formatNumber).join(':')

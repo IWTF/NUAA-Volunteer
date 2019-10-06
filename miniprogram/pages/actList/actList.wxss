@@ -39,6 +39,7 @@ page {
 
 .listCon {
   background-color: #f8f8f9;
+  padding: 0 0 60rpx 0;
 }
 
 .actItem {

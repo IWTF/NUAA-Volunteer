@@ -76,6 +76,7 @@
           <span class="tilBtn {{dropDown?'showDrop':''}}" catchtap="changeSet"></span>
         </view>
 
+        <nullPage wx:if="{{showData.length == 0}}"/>
         <view wx:for="{{showData}}" wx:key="{{index}}" class="members">
           <view class="avatar"><image src="../../images/code-cloud-callback-config.png"></image></view>
           <view>{{item.stuId}}</view>

@@ -76,7 +76,8 @@ Page({
   getParterList() {
     let { actInfo } = this.data
 
-    let actId = actInfo.num ? actInfo._id : actInfo.actId
+    let actId = actInfo.tolNum ? actInfo._id : actInfo.actId
+    console.log("+++++++++++actId", actId)
 
     const db = wx.cloud.database()
     const $ = db.command.aggregate
@@ -88,6 +89,7 @@ Page({
         actId,
       },
       success: res => {
+        console.log("+++++++++++", res)
         let users = res.result.data
         let timeSet = new Set();
         for (let i = 0; i < users.length; i++) {

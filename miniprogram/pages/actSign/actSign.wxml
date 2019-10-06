@@ -1,3 +1,5 @@
+<wxs src="../joinList/interceptDate.wxs" module="tools" />
+
 <view class="{{ showTimeBar ? 'noScroll':''}}">
   <navBar barTil="活动报名" backIcon/>
 
@@ -24,7 +26,7 @@
         data-index="{{index}}" catchtap="chooseItem">
         {{item.location}}
         <span style="float: right; margin-right: 20rpx;">
-          {{item.begT}} <span style="font-weight: bold;">To</span> {{item.endT}}
+          {{tools.intr(item.begT)}} <span style="font-weight: bold;">To</span> {{tools.intr(item.endT)}}
         </span>
         <span style="float: right; margin-right: 30rpx;">剩{{item.num - item.joinNum}}人</span>
       </view>

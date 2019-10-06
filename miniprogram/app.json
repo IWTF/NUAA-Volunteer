@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/joinList/joinList",
     "pages/actList/actList",
+    "pages/joinList/joinList",
     "pages/actDel/actDel",
     "pages/actPublish/actPublish",
     "pages/user/user",

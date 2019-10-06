@@ -1,3 +1,5 @@
+<wxs src="./interceptDate.wxs" module="tools" />
+
 <view>
   <navBar/>
   <view class="bg {{showClock?'bgOut':''}}" wx:if="{{showClock}}" catchtap="hideClock"></view>
@@ -5,7 +7,9 @@
     <!-- 功能栏 确定/取消 -->
     <view class="funcBar">
       <view style="color: #515a6e;" catchtap="hideClock">取消</view>
-      <view style="color: #ff3a3a;" catchtap="setClock">添加</view>
+      <form name='pushMsgFm' report-submit='true' bindsubmit='setClock'>
+        <button form-type="submit" class="addBtn">添加</button>
+      </form>
     </view>
     <view class="title">开始前提醒</view>
     <view class="remindItems">
@@ -45,7 +49,7 @@
           <view>
             <view class="acTitle">{{item.name}}</view>
             <view>活动地点：{{item.actInfo.location}}</view>
-            <view>活动时间：{{item.actInfo.begT}}</view>
+            <view>活动时间：{{tools.intr(item.actInfo.begT)}}</view>
           </view>
           <view class="num" data-index="{{index}}" catchtap="showClock">
             <span class="iconfont icon-tixing1" style="font-size: 32rpx;"></span>
@@ -78,7 +82,7 @@
           <view>
             <view class="acTitle">{{item.name}}</view>
             <view>活动地点：{{item.actInfo.location}}</view>
-            <view>活动时间：{{item.actInfo.endT}}</view>
+            <view>活动时间：{{tools.intr(item.actInfo.endT)}}</view>
           </view>
           <view class="num">
             {{index%2==0 ? '2019-8-12':''}}

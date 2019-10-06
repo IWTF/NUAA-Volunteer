@@ -8,7 +8,7 @@ Page({
     currentItemId: 0,
     publishBtnClass: 'publishBtnShow', // 发表按钮的显示样式类
     currentScrollTop: 0,
-    showClock: true,     // 默认不显示设置闹钟页面
+    showClock: false,     // 默认不显示设置闹钟页面
     reminders: [
       '提前一小时',
       '提前两小时',
@@ -54,8 +54,6 @@ Page({
     return new Promise((resolve, reject) => {
       const db = wx.cloud.database()
       let now = util.formatDate(new Date()) + " " + util.formatTime(new Date())
-      let nowArr = now.split('-')
-      now = nowArr[1] + "-" + nowArr[2]
 
       db.collection('registerInfo').where({
         _openid: openid
@@ -132,51 +130,75 @@ Page({
 
   // 设置闹钟提醒
   showClock(e) {
-    let index = e.currentTarget.dataset
+    return
+    let { index } = e.currentTarget.dataset
     this.setData({ showClock: true, selectedAct: index })
   },
 
   hideClock() {
+    return
     this.setData({ showClock: false })
   },
 
   selectR (e) {
+    return
     let { index } = e.currentTarget.dataset
     this.setData({ selectedR: index })
   },
 
-  setClock() {
+  setClock(e) {
+    return
+    let formId = e.detail.formId
+    console.log("formid", e)
     let { selectedAct, doingArr, selectedR, reminders } = this.data
-    selectedAct = 0
+    // 获取用户的openid
+    let openid = wx.getStorageSync('openid')
+    // 选中的活动
     let act = doingArr[selectedAct]
+    console.log("++++++++++++", doingArr, selectedAct, act)
+    // 选择的提醒时间
     let remind = reminders[selectedR]
-    console.log("===========", act, remind)
-    let execTime, begT = act.actInfo.begT
+    // 定义执行时间，获取活动开始时间，方面后续操作
+    let execTime
+    let begT = act.actInfo.begT
+
+    if (!remind)
+      return
+    this.setData({ showClock: false })
 
     let before = 1
     switch (remind) {
       case "提前两小时":
         before = 2
       case "提前一小时":
-        let begTime = begT.split(" ")[1].split(":")[0]
+        let t = begT.split(" ")[1].split(":")
+        let begTime = t[0]
         let numTime = begTime[0]*10 + begTime[1]*1 - before
         numTime = util.formatNumber(numTime)
-        execTime = begT.replace(begTime, numTime)
+        execTime = begT.split(" ")[0] + " " + numTime + ":" + t[1]
         break
       case "提前一天":
-        // let begDate = 
+        let d = begT.split(" ")[0].split("-")
+        let begDate = d[2]
+        let numDate = begDate[0] * 10 + begDate[1] * 1 - before
+        numDate = util.formatNumber(numDate)
+        execTime = d[0] + "-" + d[1] + "-" + numDate + " " + begT.split(" ")[1]
     }
 
+    const db = wx.cloud.database()
 
-    // wx.cloud.collection('timeingTask').add({
-    //   data: {
-    //     openid: act.actId,
-    //     stuId: act.stuId,
-    //     name: act.name,
-    //     location: act.location,
-    //     begT: act.actInfo.begT,
-    //     execTime,
-    //   }
-    // })
+    db.collection('timeingTask').add({
+      data: {
+        formId,
+        stuId: act.stuId,
+        name: act.name,
+        location: act.actInfo.location,
+        begT: act.actInfo.begT,
+        execTime,
+      }
+    }).then(res => {
+      wx.showToast({ title: '设置提醒成功' })
+      }).catch(err => wx.showToast({ icon: 'none', title: 'Err 稍后重试' }))
+
   }
 })

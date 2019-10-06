@@ -157,8 +157,8 @@ Page({
   // 添加一个新的 时间段
   addTimeDot() {
     let { begYear, endYear, begTime, endTime, timeBarNum, timeDots, timeBarLoction, tolNum, timeBarDuration } = this.data
-    let begT = begYear.split('-')[1] + '-' + begYear.split('-')[2] + ' ' + begTime
-    let endT = endYear.split('-')[1] + '-' + endYear.split('-')[2] + ' ' + endTime
+    let begT = begYear + begTime
+    let endT = endYear + endTime
     let num = timeBarNum
     let location = timeBarLoction
     let duration = timeBarDuration

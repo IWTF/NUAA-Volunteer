@@ -141,6 +141,14 @@ page {
   border-bottom: 2rpx solid #e2e2e2;
 }
 
+.funcBar .addBtn {
+  color: #ff3a3a;
+  margin: 0;
+  line-height: 34rpx;
+  font-size: 34rpx;
+  padding: 10rpx;
+}
+
 .bg {
   position: fixed;
   left: 0;
