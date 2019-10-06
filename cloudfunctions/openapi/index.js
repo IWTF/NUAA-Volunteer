@@ -3,90 +3,58 @@ const cloud = require('wx-server-sdk')
 
 cloud.init()
 
+// 模板消息ID
+const templateId = "ryAhs9vAc5DXRk3QcmVje1H6A6qqESw3FX02LfliUBY"
+
 // 云函数入口函数
 exports.main = async (event, context) => {
-  console.log(event)
-  switch (event.action) {
-    case 'sendTemplateMessage': {
-      return sendTemplateMessage(event)
+  const execTasks = []; // 待执行任务栈
+  // 1.查询是否有定时任务。（timeingTask)集合是否有数据。
+  let taskRes = await db.collection('timeingTask').limit(100).get()
+  let tasks = taskRes.data;
+  // 2.定时任务是否到达触发时间。只触发一次。
+  let now = new Date();
+  try {
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].execTime <= now) { // 时间到
+        execTasks.push(tasks[i]); // 存入待执行任务栈
+        // 定时任务数据库中删除该任务
+        await db.collection('timeingTask').doc(tasks[i]._id).remove()
+      }
     }
-    case 'getWXACode': {
-      return getWXACode(event)
-    }
-    case 'getOpenData': {
-      return getOpenData(event)
-    }
-    default: {
-      return
+  } catch (e) {
+    console.error(e)
+  }
+
+  for (let i = 0; i < execTasks.length; i++) {
+    try {
+      await sendTemplate(execTasks[i])
+    } catch (e) {
+      console.error(e)
     }
   }
 }
 
-async function sendTemplateMessage(event) {
-  const { OPENID } = cloud.getWXContext()
 
-  // 接下来将新增模板、发送模板消息、然后删除模板
-  // 注意：新增模板然后再删除并不是建议的做法，此处只是为了演示，模板 ID 应在添加后保存起来后续使用
-  const addResult = await cloud.openapi.templateMessage.addTemplate({
-    id: 'AT0002',
-    keywordIdList: [3, 4, 5]
-  })
-
-  const templateId = addResult.templateId
-
-  const sendResult = await cloud.openapi.templateMessage.send({
-    touser: OPENID,
+async function sendTemplate(params) {
+  cloud.openapi.templateMessage.send({
+    touser: params.openid,
     templateId,
-    formId: event.formId,
+    formId: params.formId,
     page: 'pages/openapi/openapi',
     data: {
       keyword1: {
-        value: '未名咖啡屋',
+        value: parmas.username,
       },
       keyword2: {
-        value: '2019 年 1 月 1 日',
+        value: parmas.name,
       },
       keyword3: {
-        value: '拿铁',
+        value: parmas.begT,
+      },
+      keyword4: {
+        value: params.location,
       },
     }
-  })
-
-  await cloud.openapi.templateMessage.deleteTemplate({
-    templateId,
-  })
-
-  return sendResult
-}
-
-async function getWXACode(event) {
-
-  // 此处将获取永久有效的小程序码，并将其保存在云文件存储中，最后返回云文件 ID 给前端使用
-
-  const wxacodeResult = await cloud.openapi.wxacode.get({
-    path: 'pages/openapi/openapi',
-  })
-
-  const fileExtensionMatches = wxacodeResult.contentType.match(/\/([^\/]+)/)
-  const fileExtension = (fileExtensionMatches && fileExtensionMatches[1]) || 'jpg'
-
-  const uploadResult = await cloud.uploadFile({
-    // 云文件路径，此处为演示采用一个固定名称
-    cloudPath: `wxacode_default_openapi_page.${fileExtension}`,
-    // 要上传的文件内容可直接传入图片 Buffer
-    fileContent: wxacodeResult.buffer,
-  })
-
-  if (!uploadResult.fileID) {
-    throw new Error(`upload failed with empty fileID and storage server status code ${uploadResult.statusCode}`)
-  }
-
-  return uploadResult.fileID
-}
-
-async function getOpenData(event) {
-  // 需 wx-server-sdk >= 0.5.0
-  return cloud.getOpenData({
-    list: event.openData.list,
   })
 }

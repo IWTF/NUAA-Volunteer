@@ -1,5 +1,20 @@
 <view>
   <navBar/>
+  <view class="bg {{showClock?'bgOut':''}}" wx:if="{{showClock}}" catchtap="hideClock"></view>
+  <view class="remindBar {{showClock?'remindBarShow':'remindBarHide'}}">
+    <!-- 功能栏 确定/取消 -->
+    <view class="funcBar">
+      <view style="color: #515a6e;" catchtap="hideClock">取消</view>
+      <view style="color: #ff3a3a;" catchtap="setClock">添加</view>
+    </view>
+    <view class="title">开始前提醒</view>
+    <view class="remindItems">
+      <view wx:for="{{reminders}}" wx:key="{{index}}"
+        data-index="{{index}}" catchtap="selectR"
+        class="item {{selectedR == index?'selectedR':''}}">{{item}}</view>
+    </view>
+    
+  </view>
 
   <view class="header" style="top: {{barHeight-1}}px;">
     <view catchtap="changeTab" data-index="0" class="{{currentItemId == 0?'selected':''}}">待参与</view>
@@ -32,13 +47,14 @@
             <view>活动地点：{{item.actInfo.location}}</view>
             <view>活动时间：{{item.actInfo.begT}}</view>
           </view>
-          <view class="num">
+          <view class="num" data-index="{{index}}" catchtap="showClock">
             <span class="iconfont icon-tixing1" style="font-size: 32rpx;"></span>
             设置提醒
           </view>
         </view>
       </view>
     </swiper-item>
+
     <swiper-item>
       <view class="listCon hosted" wx:if="{{currentItemId == 1}}">
         <nullPage wx:if="{{doneArr.length == 0}}"/>
@@ -70,6 +86,8 @@
         </view>
       </view>
     </swiper-item>
+
   </swiper>
 
 </view>
+

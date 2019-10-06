@@ -37,5 +37,6 @@ const formatNumber = n => {
 module.exports = {
   formatDate,
   formatTime,
-  getBETime
+  getBETime,
+  formatNumber
 }

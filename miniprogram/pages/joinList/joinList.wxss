@@ -2,6 +2,8 @@
 page {
   font-size: 26rpx;
   color: #80848f;
+  width: 100%;
+  height: 100vh;
 }
 
 /* 顶部活动状态tab */
@@ -82,3 +84,75 @@ page {
   line-height: 105rpx;
 }
 
+
+/*********** 增加提醒闹钟Bar Style ************/
+.remindBar{
+  position: fixed;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 20rpx;
+  z-index: 3;
+  transition: all .3s ease-out;
+}
+
+.remindBarHide {
+  opacity: .3;
+  bottom: -100%;
+}
+
+.remindBarShow {
+  bottom: -20rpx;
+  opacity: 1;
+}
+
+.remindBar .title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #6bb9fe;
+  margin: 30rpx 30rpx;
+}
+
+.remindBar .remindItems {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 40rpx 30rpx 70rpx;
+}
+
+.remindBar .remindItems .item{
+  padding: 30rpx 23rpx;
+  border: 2rpx solid #e6e6e6;
+}
+
+.remindBar .remindItems .selectedR {
+  background-color: rgba(135, 189, 252, 0.2);
+  border: #6bb9fe;
+  box-shadow: 0 0 10rpx #6bb9fe;
+}
+
+.funcBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 34rpx;
+  margin: 20rpx 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 2rpx solid #e2e2e2;
+}
+
+.bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .3);
+  transition: all .6s ease-out;
+  opacity: 0;
+  z-index: 2;
+}
+
+.bgOut {
+  opacity: 1;
+}

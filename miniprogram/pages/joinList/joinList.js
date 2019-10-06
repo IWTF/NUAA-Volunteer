@@ -8,6 +8,12 @@ Page({
     currentItemId: 0,
     publishBtnClass: 'publishBtnShow', // 发表按钮的显示样式类
     currentScrollTop: 0,
+    showClock: true,     // 默认不显示设置闹钟页面
+    reminders: [
+      '提前一小时',
+      '提前两小时',
+      '提前一天'
+    ],
   },
 
   onLoad: function (options) {
@@ -122,5 +128,55 @@ Page({
         currentScrollTop: top
       })
     }
+  },
+
+  // 设置闹钟提醒
+  showClock(e) {
+    let index = e.currentTarget.dataset
+    this.setData({ showClock: true, selectedAct: index })
+  },
+
+  hideClock() {
+    this.setData({ showClock: false })
+  },
+
+  selectR (e) {
+    let { index } = e.currentTarget.dataset
+    this.setData({ selectedR: index })
+  },
+
+  setClock() {
+    let { selectedAct, doingArr, selectedR, reminders } = this.data
+    selectedAct = 0
+    let act = doingArr[selectedAct]
+    let remind = reminders[selectedR]
+    console.log("===========", act, remind)
+    let execTime, begT = act.actInfo.begT
+
+    let before = 1
+    switch (remind) {
+      case "提前两小时":
+        before = 2
+      case "提前一小时":
+        let begTime = begT.split(" ")[1].split(":")[0]
+        let numTime = begTime[0]*10 + begTime[1]*1 - before
+        numTime = util.formatNumber(numTime)
+        execTime = begT.replace(begTime, numTime)
+        break
+      case "提前一天":
+        // let begDate = 
+    }
+
+
+    // wx.cloud.collection('timeingTask').add({
+    //   data: {
+    //     openid: act.actId,
+    //     stuId: act.stuId,
+    //     name: act.name,
+    //     location: act.location,
+    //     begT: act.actInfo.begT,
+    //     execTime,
+    //   }
+    // })
   }
 })

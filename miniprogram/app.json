@@ -1,15 +1,15 @@
 {
   "pages": [
+    "pages/joinList/joinList",
     "pages/actList/actList",
     "pages/actDel/actDel",
     "pages/actPublish/actPublish",
     "pages/user/user",
     "pages/adminSet/adminSet",
-    "pages/openapi/openapi",
     "pages/userInfo/userInfo",
     "pages/myVerify/myVerify",
     "pages/actSign/actSign",
-    "pages/joinList/joinList",
+    "pages/openapi/openapi",
     "pages/openapi/serverapi/serverapi",
     "pages/openapi/callback/callback",
     "pages/openapi/cloudid/cloudid"
