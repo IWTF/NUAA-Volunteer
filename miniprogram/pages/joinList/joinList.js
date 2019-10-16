@@ -25,6 +25,7 @@ Page({
     
     let userInfo = wx.getStorageSync('userInfo')
     if (userInfo == '') { // 未设置缓存
+      wx.showToast({ title: '请先绑定个人信息', icon: 'none' })
       this.setData({ login: false, userInfo })
       this.setData({ doingArr: [], doneArr: [] })
       return
@@ -130,6 +131,7 @@ Page({
 
   // 设置闹钟提醒
   showClock(e) {
+    wx.showToast({ title: '待开发', icon: 'none' })
     return
     let { index } = e.currentTarget.dataset
     this.setData({ showClock: true, selectedAct: index })

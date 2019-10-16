@@ -36,14 +36,14 @@
     class="rowCon" style="margin-top: 40rpx;">
     <span class="rowIcon iconfont icon-feiji"></span>管理员设置
   </view>
-  <view wx:if="{{login}}"
+  <view wx:if="{{login}}" data-url="plane" catchtap="navFunc"
     class="rowCon" style="margin-top: 40rpx;">
     <span class="rowIcon iconfont icon-feiji"></span>纸飞机志愿时长认证
   </view>
-  <view class="rowCon">
+  <view class="rowCon" data-url="about" catchtap="navFunc">
     <span class="rowIcon iconfont icon-xiangmu"></span>项目信息
   </view>
-  <view class="rowCon">
+  <view class="rowCon" data-url="creater" catchtap="navFunc">
     <span class="rowIcon iconfont icon-kaifazhe"></span>开发者
   </view>
 </view>
