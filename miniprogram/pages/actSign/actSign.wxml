@@ -28,7 +28,7 @@
         <span style="float: right; margin-right: 20rpx;">
           {{tools.intr(item.begT)}} <span style="font-weight: bold;">To</span> {{tools.intr(item.endT)}}
         </span>
-        <span style="float: right; margin-right: 30rpx;">剩{{item.num - item.joinNum}}人</span>
+        <!-- <span style="float: right; margin-right: 30rpx;">剩{{item.num - item.joinNum}}人</span> -->
       </view>
     </view>
 

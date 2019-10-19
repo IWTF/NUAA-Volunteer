@@ -1,11 +1,31 @@
 // miniprogram/pages/user/user.js
 Page({
   data: {
-
+    tolTime: ''
   },
 
   onLoad() {
-    
+    // 判断是否绑定信息，是：显示时长，否：显示--
+    let userInfo = wx.getStorageSync('userInfo')
+    if (userInfo == '') { // 未设置缓存
+      this.setData({ tolTime: '--'})
+    } else {
+      const db = wx.cloud.database()
+      const $ = db.command.aggregate
+
+      db
+        .collection('registerInfo')
+        .aggregate()
+        .group({
+          _id: null,
+          totalPrice: $.sum('$duration')
+        })
+        .end()
+        .then((e) => {
+          console.log("+++++++++++++++", e)
+        })
+      
+    }
   },
 
   onShow () {

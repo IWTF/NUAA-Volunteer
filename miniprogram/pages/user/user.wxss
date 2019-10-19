@@ -38,13 +38,9 @@ page {
   border: 5rpx solid rgba(240, 240, 240, .6);
   box-shadow: 0 0 5rpx #afafaf;
   z-index: 1;
+  overflow: hidden;
 }
 
-.avatar>image {
-  width: 160rpx;
-  height: 160rpx;
-  border-radius: 50%;
-}
 
 .avatarBg {
   position: absolute;

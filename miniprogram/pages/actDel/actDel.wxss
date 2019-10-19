@@ -78,8 +78,8 @@ page {
 /* 悬浮报名按钮 样式 */
 .join {
   position: absolute;
-  right: 40rpx;
-  bottom: 40rpx;
+  right: 50rpx;
+  bottom: 50rpx;
   padding: 30rpx;
   border-radius: 50%;
   color: #fff;

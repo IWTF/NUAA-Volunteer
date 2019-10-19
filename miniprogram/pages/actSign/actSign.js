@@ -62,9 +62,12 @@ Page({
       wx.showToast({ title: '报名成功', duration: 2500 })
     }).catch(err => {
       let tmp = err.split(" ")
-      let info = tmp[1] + " " + tmp[2] + " TO " + tmp[3] + " " + tmp[4]
-      this.updateData()
-      wx.showToast({ icon: 'none', title: info+' 已报满', duration: 2 })
+      let info = tmp[1] + " " + tmp[2] + " TO " + tmp[3] + " " + tmp[4] + " 已报满"
+      // this.updateData()
+      wx.showModal({
+        title: '提示',
+        content: info,
+      })
     })
   },
 
@@ -92,7 +95,8 @@ Page({
           deadline: params.deadline,
           // 是否认证标识
           certified: false,
-          verifyTime: ''
+          verifyTime: '',
+          duration: timeDot.duration
         }
         
         db.collection('registerInfo').where({
@@ -113,6 +117,7 @@ Page({
     })
   },
 
+  // 对 剩余 人数进行更新
   updateData () {
     let { params } = this.data
     this.getActData(params._id)

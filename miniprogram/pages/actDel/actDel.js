@@ -195,12 +195,12 @@ Page({
       return 
     }
    
-    let { addArr, delArr, users } = this.data
+    let { addArr, delArr, showData } = this.data
 
     // 更改报名人员列表，若有删除，则执行下面代码
     if (delArr.length > 0) {
       let newDel = []
-      users.map((item, index) => {
+      showData.map((item, index) => {
         if (delArr.indexOf(index) >= 0) {
           newDel.push(item._id)
         }
@@ -211,7 +211,7 @@ Page({
     // 更改报名人员列表，若有认证，则执行下面代码
     if (addArr.length > 0) {
       let newAdd = []
-      users.map((item, index) => {
+      showData.map((item, index) => {
         if (addArr.indexOf(index) >= 0) {
           newAdd.push(item._id)
         }
@@ -220,56 +220,59 @@ Page({
     }
 
     let arr = addArr.concat(delArr)
-    users = users.filter((item, index) => arr.indexOf(index)<0);
+    showData = showData.filter((item, index) => arr.indexOf(index)<0);
 
     this.setData({
       showEdit: false,
-      users
+      showData
     })
   },
 
   // 添加/删除 参与成员
   addItem (e) {
     let { index } = e.currentTarget.dataset
-    let { addArr, delArr, users } = this.data
+    let { addArr, delArr, showData } = this.data
+
+    
 
     if (addArr.indexOf(index) >= 0) {
       addArr.splice(addArr.indexOf(index), 1)
-      users[index].addSelect = false
+      showData[index].addSelect = false
     } else {
       if (delArr.indexOf(index) >= 0) {
         delArr.splice(delArr.indexOf(index), 1)
-        users[index].delSelect = false
+        showData[index].delSelect = false
       }
       addArr.push(index)
-      users[index].addSelect = true
+      showData[index].addSelect = true
+      console.log("====", index)
     }
     this.setData({
       addArr,
       delArr,
-      users
+      showData
     })
   },
   delItem (e) {
     console.log("Del Item")
     let { index } = e.currentTarget.dataset
-    let { addArr, delArr, users } = this.data
+    let { addArr, delArr, showData } = this.data
 
     if (delArr.indexOf(index) >= 0) {
       delArr.splice(delArr.indexOf(index), 1)
-      users[index].delSelect = false
+      showData[index].delSelect = false
     } else {
       if (addArr.indexOf(index) >= 0) {
         addArr.splice(addArr.indexOf(index), 1)
-        users[index].addSelect = false
+        showData[index].addSelect = false
       }
       delArr.push(index)
-      users[index].delSelect = true
+      showData[index].delSelect = true
     }
     this.setData({
       addArr,
       delArr,
-      users
+      showData
     })
   },
 

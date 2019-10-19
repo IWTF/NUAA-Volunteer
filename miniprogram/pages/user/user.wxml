@@ -4,14 +4,14 @@
 
   <view class="bg"></view>
   <view class="UserInfo">
-    <view class="userName">仙人球</view>
+    <open-data type="userNickName" lang="zh_CN"></open-data>
     <view>
-      <span style="font-size: 70rpx;">20</span> H
+      <span style="font-size: 70rpx;">{{tolTime}}</span> H
       <span style="margin-left: 20rpx;font-size: 24rpx;color: #2b85e4;" catchtap="navToVerify"> 详情 > </span>
     </view>
   </view>
   <view class="avatar">
-    <image src="../../images/code-cloud-callback-config.png"></image>
+    <open-data type="userAvatarUrl"></open-data>
   </view>
   <view class="avatarBg"></view>
   <view class="avatarBg" style="animation-delay: 1.5s;"></view>
