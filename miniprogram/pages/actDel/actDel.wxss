@@ -15,17 +15,17 @@ page {
   margin-top: 117rpx;
   background-color: #6bb9fe;
   /* background-color: #bbbec4; */
-  padding: 25rpx 0rpx;
+  padding: 50rpx 0rpx 25rpx;
 }
 
 .acTitle {
   font-size: 60rpx;
   text-align: center;
-  letter-spacing: 5rpx;
+  letter-spacing: 8rpx;
 }
 
 .actNum {
-  margin: 10rpx 0 50rpx;
+  margin: 14rpx 0 50rpx;
   text-align: center;
 }
 
@@ -42,7 +42,7 @@ page {
 .tabItem {
   flex: 1;
   text-align: center;
-  padding: 3rpx 25rpx;
+  padding: 6rpx 25rpx;
   border-radius: 25rpx;
   background-color: rgba(255, 255, 255, .2);
 }

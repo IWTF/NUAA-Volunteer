@@ -24,7 +24,8 @@ Component({
   externalClasses: ['my-class'],
   data: {
     scale: wx.getStorageSync("scale"),
-    barHight: wx.getStorageSync("barHight")
+    barHight: wx.getStorageSync("barHight"),
+    toolBar: wx.getStorageSync("toolBar")
   },
   lifetimes: {
     ready() {

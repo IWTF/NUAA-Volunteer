@@ -5,11 +5,18 @@ App({
     const vm = this
     wx.getSystemInfo({
       success: function (res) {
+        // 获取时间，闹钟等工具栏高度
+        wx.setStorageSync('toolBar', res.statusBarHeight)
+
         let totalTopHeight = 68
         if (res.model.indexOf('iPhone X') !== -1) {
           totalTopHeight = 88
         } else if (res.model.indexOf('iPhone') !== -1) {
           totalTopHeight = 64
+        } else if (res.model.indexOf('Android') !== -1) {
+          totalTopHeight = 68
+        } else if (res.model.indexOf('samsung') !== -1) {
+          totalTopHeight = 72
         }
         wx.setStorageSync("barHight", totalTopHeight)
       },

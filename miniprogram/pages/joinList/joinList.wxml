@@ -2,6 +2,8 @@
 
 <view>
   <navBar/>
+
+  <!-- 提醒设置 功能 -->
   <view class="bg {{showClock?'bgOut':''}}" wx:if="{{showClock}}" catchtap="hideClock"></view>
   <view class="remindBar {{showClock?'remindBarShow':'remindBarHide'}}">
     <!-- 功能栏 确定/取消 -->
@@ -26,7 +28,7 @@
   </view>
   <swiper 
     class="actList"
-    style="margin-top: {{38 + barHeight}}px;"
+    style="margin-top: {{42 + barHeight}}px;"
     current='{{currentItemId}}'
     bindchange='scrollChange'>
     <swiper-item>

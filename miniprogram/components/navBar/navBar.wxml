@@ -1,5 +1,8 @@
 <!--components/navBar/navBar.wxml-->
-<view class="navBar my-class" style="height: {{barHight}}px;padding: {{barHight-33}}px 0 0;">
-  {{barTil}}
-  <span class="backIcon iconfont icon-fanhui" wx:if="{{backIcon}}" catchtap="navBack"></span>
+<view class="navBar my-class" style="height: {{barHight}}px;padding: {{toolBar}}px 0 0 15rpx;">
+  <view>
+    {{barTil}}
+  
+    <span class="backIcon iconfont icon-fanhui" wx:if="{{backIcon}}" catchtap="navBack"></span>
+  </view>
 </view>
