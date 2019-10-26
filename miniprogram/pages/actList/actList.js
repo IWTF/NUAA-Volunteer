@@ -15,7 +15,6 @@ Page({
   },
 
   onLoad: function (options) {
-    
     this.loadAct()
     // 均存入缓存，避免造成卡顿
     // onload加载限定数量数据
