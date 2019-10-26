@@ -6,7 +6,7 @@
   <view class="UserInfo">
     <open-data type="userNickName" lang="zh_CN"></open-data>
     <view>
-      <span style="font-size: 70rpx;">-</span> H
+      <span style="font-size: 70rpx;">{{tolTime}}</span> H
       <span style="margin-left: 20rpx;font-size: 24rpx;color: #2b85e4;" catchtap="navToVerify"> 详情 > </span>
     </view>
   </view>

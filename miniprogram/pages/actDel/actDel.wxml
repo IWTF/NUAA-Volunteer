@@ -27,6 +27,7 @@
         wx:if="{{!showEdit || currentItemId == 0}}"></span>
       <span class="edit" wx:else catchtap="eidtDone">完成</span>
     </view>
+    
   </view>
   
   <!-- 中间主要内容 -->

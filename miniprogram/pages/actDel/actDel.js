@@ -27,6 +27,8 @@ Page({
 
   // 传参是一个对象，actInfo，和join字段
   onLoad: function (options) {
+   
+
     let userInfo = wx.getStorageSync('userInfo')
     if (userInfo == '') { // 未设置缓存
       this.setData({ login: false, userInfo })

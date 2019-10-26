@@ -173,7 +173,7 @@ Page({
     }
 
     // 记录活动可以报名的总人数，方便ActList页面展示
-    tolNum = tolNum + num
+    tolNum = (tolNum-'0') + (num-'0')
 
     let timeDot = { begT, endT, num, location, joinNum: 0, duration }
 

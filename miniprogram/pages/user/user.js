@@ -7,24 +7,24 @@ Page({
   onLoad() {
     // 判断是否绑定信息，是：显示时长，否：显示--
     let userInfo = wx.getStorageSync('userInfo')
+
     if (userInfo == '') { // 未设置缓存
-      this.setData({ tolTime: '--'})
+      this.setData({ tolTime: '0'})
     } else {
       const db = wx.cloud.database()
-      const $ = db.command.aggregate
 
-      db
-        .collection('registerInfo')
-        .aggregate()
-        .group({
-          _id: null,
-          totalPrice: $.sum('$duration')
-        })
-        .end()
-        .then((e) => {
-          console.log("+++++++++++++++", e)
-        })
-      
+      db.collection('registerInfo').where({
+        _openid: userInfo._openid
+      }).get({
+        success: res => {
+          let data = res.data
+          let sum = 0
+          for (let i=0; i<data.length; i++) {
+            sum += (data[i].duration-'0')
+          }
+          this.setData({ tolTime: sum })
+        }
+      })
     }
   },
 
