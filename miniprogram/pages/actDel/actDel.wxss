@@ -60,7 +60,7 @@ page {
 /* 成员列表样式 */
 .members {
   padding: 20rpx 40rpx;
-  border-bottom: 3rpx solid #e2e2e2ee;
+  border-bottom: 2rpx solid rgba(56, 56, 56, 0.2);
 }
 
 .members>view{
@@ -177,7 +177,7 @@ page {
   display: flex;
   flex-direction: row;
   padding: 20rpx 0 30rpx;
-  border-bottom: 3rpx solid #e2e2e2ee;
+  border-bottom: 2rpx solid rgba(56, 56, 56, 0.2);
 }
 
 .contentIcon {
@@ -188,10 +188,11 @@ page {
 
 .actContent {
   padding: 20rpx 60rpx 30rpx;
-  border-bottom: 3rpx solid #e2e2e2ee;
+  border-bottom: 2rpx solid rgba(56, 56, 56, 0.2);
 }
 
 .actContent>view {
+  min-height: 160rpx;
   padding: 15rpx 25rpx;
   background-color: #f8f8f8;
 }

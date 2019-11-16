@@ -59,6 +59,8 @@ Page({
 
           // 未绑定，则绑定新用户，连系openid与学号
           if (res.data.length === 0) {
+            // 绑定新用户前，先判断该手机号有没有绑定
+
             let authoirty = 'user'
             if (username == '石榴团委' && stuId == '2019100116') {
               authoirty = 'superAdmin'

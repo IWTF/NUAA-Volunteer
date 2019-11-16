@@ -28,6 +28,11 @@ Page({
     let userInfo = wx.getStorageSync('userInfo')
     if (userInfo == '') { // 未设置缓存
       wx.showToast({ title: '请先绑定个人信息', icon: 'none' })
+      setTimeout(() => {
+        wx.navigateTo({
+          url: '../userInfo/userInfo',
+        })
+      }, 1000)
       this.setData({ login: false, userInfo })
     } else {
       this.setData({ login: true, userInfo })
@@ -130,6 +135,7 @@ Page({
       const db = wx.cloud.database()
       db.collection('activities').get({
         success: res => {
+          cons.log("======", res)
           this.formatData(res.data)
           resolve()
         }

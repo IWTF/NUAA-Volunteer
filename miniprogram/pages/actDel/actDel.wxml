@@ -54,7 +54,7 @@
             <view>截止时间：</view>
             <view>{{acTime.end}}</view>
           </view>
-          <view class="contentRow" style="border-bottom: 3rpx dashed #e2e2e2ee;">
+          <view class="contentRow" style="border-bottom: 3rpx dashed rgba(56, 56, 56, 0.3);">
             <view class="iconfont icon-neirong contentIcon"></view>
             <view>描述</view>
           </view>
