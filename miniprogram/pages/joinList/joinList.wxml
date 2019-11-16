@@ -43,7 +43,10 @@
           style="animation-delay: {{index*0.1}}s;"
           >
           <!-- 标号修饰 -->
-          <view class="number" style="font-weight: bold;"><span style="margin-left: 10rpx;">{{index}}</span></view>
+          <view class="number" style="font-weight: bold;">
+            <span wx:if="{{item.certified}}" style="font-weight: 100;font-size: 20rpx;margin-left: -5rpx;">已认证</span>
+            <span wx:else style="margin-left: 10rpx;">{{index+1}}</span>
+          </view>
 
           <view class="actImg">
             <image src="../../images/code-cloud-callback-config.png"></image>

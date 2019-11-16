@@ -1,7 +1,7 @@
 // miniprogram/pages/user/user.js
 Page({
   data: {
-    tolTime: ''
+    tolTime: '0'
   },
 
   onLoad() {
@@ -9,7 +9,7 @@ Page({
     let userInfo = wx.getStorageSync('userInfo')
 
     if (userInfo == '') { // 未设置缓存
-      this.setData({ tolTime: '0'})
+      // this.setData({ tolTime: '0'})
     } else {
       const db = wx.cloud.database()
 
@@ -20,7 +20,8 @@ Page({
           let data = res.data
           let sum = 0
           for (let i=0; i<data.length; i++) {
-            sum += (data[i].duration-'0')
+            if (data[i].certified)
+              sum += (data[i].duration-'0')
           }
           this.setData({ tolTime: sum })
         }

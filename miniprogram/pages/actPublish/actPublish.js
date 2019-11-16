@@ -1,4 +1,9 @@
 // pages/launch/launch.js
+
+/*
+* 该页面对数据的更新在 云端 进行
+*/
+
 const util = require('../../utils/utils.js');
 var app = getApp();
 

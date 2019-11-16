@@ -2,9 +2,7 @@
 const util = require('../../utils/utils.js');
 
 /*
-* 活动内容通过跳转 传值
-* 
-* 成员信息需要请求数据库
+*  该页面  所有对数据库的操作  都在cloud进行
 */
 
 Page({
@@ -79,7 +77,7 @@ Page({
     let { actInfo } = this.data
 
     let actId = actInfo.tolNum ? actInfo._id : actInfo.actId
-    console.log("+++++++++++actId", actId)
+    // console.log("+++++++++++actId", actId)
 
     const db = wx.cloud.database()
     const $ = db.command.aggregate
@@ -91,7 +89,7 @@ Page({
         actId,
       },
       success: res => {
-        console.log("+++++++++++", res)
+        // console.log("+++++++++++", res)
         let users = res.result.data
         let timeSet = new Set();
         for (let i = 0; i < users.length; i++) {
@@ -156,7 +154,7 @@ Page({
     this.setData({ showData })
   },
 
-  // 管理员 编辑页面
+  // 管理员 编辑页面； 控制跳转到对应的编辑页面【活动更改/人员认证】
   edit () {
     switch (this.data.currentItemId) {
       case 0:
@@ -173,6 +171,7 @@ Page({
       default: break
     }
   },
+  // 更改“完成”，向数据库提交
   async eidtDone () {
     let cancel = false
 
@@ -298,6 +297,7 @@ Page({
         content: '是否要取消报名',
         success(res) {
           if (res.confirm) {
+            wx.setStorageSync('updateJoinList', true)
             resolve()
           } else if (res.cancel) {
             cancel = true

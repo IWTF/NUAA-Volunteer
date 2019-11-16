@@ -7,11 +7,11 @@ Page({
     barHeight: wx.getStorageSync("barHight"),
     currentItemId: 0,
     publishBtnClass: 'publishBtnShow', // 发表按钮的显示样式类
-    currentScrollTop: 0,
     loadTime: 0,
     aitivities: [],
     doingAct: [],
-    doneAct: []
+    doneAct: [],
+    scrollTop: 0
   },
 
   onLoad: function (options) {
@@ -94,17 +94,19 @@ Page({
   /**
    * 监听页面滑动
    */
-  onPageScroll(res) {
-    var top = res.scrollTop
-    if (top >= this.data.currentScrollTop + 5) {
+  PageScroll(res) {
+    let preTop = this.data.scrollTop
+    let { scrollTop } = res.detail
+    
+    if ((preTop-scrollTop) < 0) {
       this.setData({
         publishBtnClass: 'publishBtnHide',
-        currentScrollTop: top
+        scrollTop
       })
-    } else if (top <= this.data.currentScrollTop - 5) {
+    } else {
       this.setData({
         publishBtnClass: 'publishBtnShow',
-        currentScrollTop: top
+        scrollTop
       })
     }
   },
@@ -135,7 +137,7 @@ Page({
       const db = wx.cloud.database()
       db.collection('activities').get({
         success: res => {
-          cons.log("======", res)
+          console.log("actList data is:", res)
           this.formatData(res.data)
           resolve()
         }

@@ -23,27 +23,40 @@ Page({
   onShow () {
     let openid = wx.getStorageSync('openid')
     
-    let userInfo = wx.getStorageSync('userInfo')
-    if (userInfo == '') { // 未设置缓存
-      wx.showToast({ title: '请先绑定个人信息', icon: 'none' })
-      this.setData({ login: false, userInfo })
-      this.setData({ doingArr: [], doneArr: [] })
-      return
-    } else {
-      this.setData({ login: true, userInfo })
-    }
+    // 这一部分也不需要了，不认证不能到达该页面
+    // let userInfo = wx.getStorageSync('userInfo')
+    // if (userInfo == '') { // 未设置缓存
+    //   wx.showToast({ title: '请先绑定个人信息', icon: 'none' })
+    //   this.setData({ login: false, userInfo })
+    //   this.setData({ doingArr: [], doneArr: [] })
+    //   return
+    // } else {
+    //   this.setData({ login: true, userInfo })
+    // }
 
     let update = wx.getStorageSync('updateJoinList')
     if (update) {
       wx.setStorageSync('updateJoinList', false)
       this.initData(openid)
     }
+    /*
+    * 应该导致update值发生改变的操作：
+    * 1. 报名参与
+    * 2. 管理员活动认证
+    * 3. 退出活动
+    *
+    * 该方法1，3可以控制刷新； 2没办法获悉
+    * （不过没有影响，因为用户不知道管理员什么时候认证，不会影响体验）
+    */
   },
 
+  // 当页面刷新时，重修请求数据会出现错误。。。
+  // 错误原因： openid没有存如data，但在update时直接使用了this.data.openid; 导致限制条件为null
+  // 已修复
   onPullDownRefresh() {
     wx.showNavigationBarLoading()
 
-    let { openid } = this.data
+    let openid = wx.getStorageSync('openid')
     let promise = this.initData(openid)
     promise.then(res => {
       wx.hideNavigationBarLoading()
@@ -60,6 +73,7 @@ Page({
         _openid: openid
       }).get({
         success: res => {
+          console.log("joinList data is:", res)
           let ret = res.data
           let doingArr = []
           let doneArr = []
