@@ -114,7 +114,8 @@ Page({
 
     var that = this;
     let { timeDots, tolNum, actId } = this.data
-    let { name, typ, deadline, deadlineTime, content } = e.detail.value;
+    let { name, typ, deadline, deadlineTime, content } = e.detail.value
+    let openid = wx.getStorageSync('openid')
 
     if (name == "" || content == "" || timeDots.length === 0) {
       wx.showToast({ title: '请把表单填写完整', icon: 'none' })
@@ -128,7 +129,7 @@ Page({
       }
 
       // 还需要再加两个字段： 报名人数，活动状态
-      let act = { name, typ, deadline, timeDots, content, tolNum }
+      let act = { name, typ, deadline, timeDots, content, tolNum, openid }
       wx.cloud.callFunction({
         name: 'publishAct',
         data: {
@@ -162,8 +163,8 @@ Page({
   // 添加一个新的 时间段
   addTimeDot() {
     let { begYear, endYear, begTime, endTime, timeBarNum, timeDots, timeBarLoction, tolNum, timeBarDuration } = this.data
-    let begT = begYear + begTime
-    let endT = endYear + endTime
+    let begT = begYear + " " + begTime
+    let endT = endYear + " " + endTime
     let num = timeBarNum
     let location = timeBarLoction
     let duration = timeBarDuration

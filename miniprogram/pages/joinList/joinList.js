@@ -73,7 +73,7 @@ Page({
         _openid: openid
       }).get({
         success: res => {
-          console.log("joinList data is:", res)
+          // console.log("joinList data is:", res)
           let ret = res.data
           let doingArr = []
           let doneArr = []
@@ -145,33 +145,33 @@ Page({
 
   // 设置闹钟提醒
   showClock(e) {
-    wx.showToast({ title: '待开发', icon: 'none' })
-    return
+    // wx.showToast({ title: '待开发', icon: 'none' })
+    // return
     let { index } = e.currentTarget.dataset
     this.setData({ showClock: true, selectedAct: index })
   },
 
   hideClock() {
-    return
+    // return
     this.setData({ showClock: false })
   },
 
   selectR (e) {
-    return
+    // return
     let { index } = e.currentTarget.dataset
     this.setData({ selectedR: index })
   },
 
   setClock(e) {
-    return
+    // return
     let formId = e.detail.formId
-    console.log("formid", e)
+    
+    wx.setStorageSync('formId', formId)
     let { selectedAct, doingArr, selectedR, reminders } = this.data
     // 获取用户的openid
     let openid = wx.getStorageSync('openid')
     // 选中的活动
     let act = doingArr[selectedAct]
-    console.log("++++++++++++", doingArr, selectedAct, act)
     // 选择的提醒时间
     let remind = reminders[selectedR]
     // 定义执行时间，获取活动开始时间，方面后续操作
@@ -187,6 +187,7 @@ Page({
       case "提前两小时":
         before = 2
       case "提前一小时":
+        console.log("=============", begT)
         let t = begT.split(" ")[1].split(":")
         let begTime = t[0]
         let numTime = begTime[0]*10 + begTime[1]*1 - before
@@ -203,18 +204,18 @@ Page({
 
     const db = wx.cloud.database()
 
-    db.collection('timeingTask').add({
-      data: {
-        formId,
-        stuId: act.stuId,
-        name: act.name,
-        location: act.actInfo.location,
-        begT: act.actInfo.begT,
-        execTime,
-      }
-    }).then(res => {
-      wx.showToast({ title: '设置提醒成功' })
-      }).catch(err => wx.showToast({ icon: 'none', title: 'Err 稍后重试' }))
+    // db.collection('timeingTask').add({
+    //   data: {
+    //     formId,
+    //     stuId: act.stuId,
+    //     name: act.name,
+    //     location: act.actInfo.location,
+    //     begT: act.actInfo.begT,
+    //     execTime,
+    //   }
+    // }).then(res => {
+    //   wx.showToast({ title: '设置提醒成功' })
+    //   }).catch(err => wx.showToast({ icon: 'none', title: 'Err 稍后重试' }))
 
   }
 })

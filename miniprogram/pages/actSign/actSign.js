@@ -17,8 +17,10 @@ Page({
     let userInfo = wx.getStorageSync('userInfo')
 
     let params = JSON.parse(options.params)
-    // console.log("params is: ", params)
-    this.setData({ params, userInfo })
+    console.log("params is: ", params)
+    this.setData({ params, userInfo,
+      publisherId: params.openid
+    })
 
     this.getActData(params._id)
   },
@@ -42,7 +44,7 @@ Page({
     var that = this;
     // console.log('form发生了submit事件，携带数据为：', e.detail.value)
     let { selectTimes, params } = this.data
-    let { content } = e.detail.value;
+    let { content } = e.detail.value
 
     if (selectTimes.length === 0) {
       wx.showToast({ title: '请选择要参加的时间段', icon: 'none' })
@@ -72,7 +74,7 @@ Page({
   },
 
   signFunc (e) {
-    let { timeDots, params, userInfo } = this.data
+    let { timeDots, params, userInfo, publisherId } = this.data
     const db = wx.cloud.database()
     let isFull = false
 
@@ -96,7 +98,8 @@ Page({
           // 是否认证标识
           certified: false,
           verifyTime: '',
-          duration: timeDot.duration
+          duration: timeDot.duration,
+          publisherId,
         }
         
         db.collection('registerInfo').where({

@@ -288,8 +288,34 @@ Page({
     wx.navigateTo({ url: '../actSign/actSign?params=' + JSON.stringify(actInfo) })
   },
 
-  async signOut () {
+  async signOut (e) {
     let cancel = false
+    let formId = e.detail.formId
+
+    let { actInfo } = this.data
+    let { publisherId, category } = actInfo
+    let place = actInfo.category.split(" ")[0]
+    let time = actInfo.category.split(" ")[1] + " " + actInfo.category.split(" ")[2] + "到" + actInfo.category.split(" ")[3] + " " + actInfo.category.split(" ")[4]
+    
+    // 整合 活动取消 的相关信息，用于模板发送
+    let msgInfo = {
+      username: actInfo.username,
+      actname: actInfo.name,
+      place,
+      time,
+    }
+    // 给管理员发送 活动取消 通知
+    wx.cloud.callFunction({
+      name: 'sendMsg',
+      data: {
+        msgInfo,
+        publisherId,
+        action: 'signOutMsg',
+        formId: formId,
+      },
+      success: res => {},
+      fail: err => {}
+    })
 
     await new Promise((resolve, reject) => {
       wx.showModal({
@@ -311,7 +337,7 @@ Page({
       return
     }
 
-    let { actInfo } = this.data
+    // let { actInfo } = this.data
     if (!actInfo.actInfo) {
       wx.showToast({ icon: 'none', title: '请到“我参与的”页面取消报名' })
       return

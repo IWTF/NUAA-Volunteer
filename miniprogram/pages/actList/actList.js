@@ -137,7 +137,7 @@ Page({
       const db = wx.cloud.database()
       db.collection('activities').get({
         success: res => {
-          console.log("actList data is:", res)
+          // console.log("actList data is:", res)
           this.formatData(res.data)
           resolve()
         }
