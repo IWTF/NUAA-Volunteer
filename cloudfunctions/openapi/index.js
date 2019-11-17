@@ -16,64 +16,29 @@ exports.main = async (event, context) => {
   // 获取当前时间
   let util = require('./utils.js')
   let now = util.formatDate(new Date()) + " " + util.formatTime(new Date())
-  
+
   // 2.定时任务是否到达触发时间。只触发一次。
   try {
     for (let i = 0; i < tasks.length; i++) {
       if (tasks[i].execTime <= now) { // 时间到
-        execTasks.push(tasks[i]); // 存入待执行任务栈
+        // 存入待执行任务栈
+        execTasks.push(tasks[i]);
         // 定时任务数据库中删除该任务
         await db.collection('timeingTask').doc(tasks[i]._id).remove()
       }
     }
   } catch (e) {
-    console.error(e)
+    console.error("for循环err", e)
   }
 
-  console.log("execTasks is: ", execTasks)
-
-  
   for (let i = 0; i < execTasks.length; i++) {
+    let task = JSON.stringify(execTasks[i])
+    const setClock = require('setClock.js')
     try {
-      const result = await sendTemplate(execTasks[i])
+      await setClock.kai(task)
     } catch (e) {
       console.error(e)
     }
   }
 }
 
-
-async function sendTemplate(params) {
-  console.log("params is:", params)
-  // 模板消息ID
-  const templateId = "ryAhs9vAc5DXRk3QcmVje1H6A6qqESw3FX02LfliUBY"
-
-  try {
-    const result = cloud.openapi.templateMessage.send({
-      touser: params._openid,
-      templateId: templateId,
-      formId: params.formId,
-      page: 'pages/joinList/joinList',
-      data: {
-        keyword1: {
-          value: params.stuId
-        },
-        keyword2: {
-          value: params.name
-        },
-        keyword3: {
-          value: params.begT
-        },
-        keyword4: {
-          value: "西操"
-        }
-      }
-    })
-    console.log("result", result)
-    return result
-  } catch (err) {
-    console.log(err)
-    return err
-  }
-  
-}

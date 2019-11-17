@@ -304,18 +304,7 @@ Page({
       place,
       time,
     }
-    // 给管理员发送 活动取消 通知
-    wx.cloud.callFunction({
-      name: 'sendMsg',
-      data: {
-        msgInfo,
-        publisherId,
-        action: 'signOutMsg',
-        formId: formId,
-      },
-      success: res => {},
-      fail: err => {}
-    })
+    
 
     await new Promise((resolve, reject) => {
       wx.showModal({
@@ -323,6 +312,18 @@ Page({
         content: '是否要取消报名',
         success(res) {
           if (res.confirm) {
+            // 给管理员发送 活动取消 通知
+            wx.cloud.callFunction({
+              name: 'sendMsg',
+              data: {
+                msgInfo,
+                publisherId,
+                action: 'signOutMsg',
+                formId: formId,
+              },
+              success: res => { },
+              fail: err => { }
+            })
             wx.setStorageSync('updateJoinList', true)
             resolve()
           } else if (res.cancel) {

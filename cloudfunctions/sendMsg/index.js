@@ -41,10 +41,10 @@ async function sendSignOutMsg(event) {
         value: msgInfo.actname,
       },
       keyword3: {
-        value: msgInfo.place,
+        value: msgInfo.time,
       },
       keyword4: {
-        value: msgInfo.time,
+        value: msgInfo.place,
       }
     }
   })

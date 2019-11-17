@@ -163,10 +163,8 @@ Page({
   },
 
   setClock(e) {
-    // return
     let formId = e.detail.formId
     
-    wx.setStorageSync('formId', formId)
     let { selectedAct, doingArr, selectedR, reminders } = this.data
     // 获取用户的openid
     let openid = wx.getStorageSync('openid')
@@ -204,18 +202,18 @@ Page({
 
     const db = wx.cloud.database()
 
-    // db.collection('timeingTask').add({
-    //   data: {
-    //     formId,
-    //     stuId: act.stuId,
-    //     name: act.name,
-    //     location: act.actInfo.location,
-    //     begT: act.actInfo.begT,
-    //     execTime,
-    //   }
-    // }).then(res => {
-    //   wx.showToast({ title: '设置提醒成功' })
-    //   }).catch(err => wx.showToast({ icon: 'none', title: 'Err 稍后重试' }))
+    db.collection('timeingTask').add({
+      data: {
+        formId,
+        stuId: act.stuId,
+        name: act.name,
+        location: act.actInfo.location,
+        begT: act.actInfo.begT,
+        execTime,
+      }
+    }).then(res => {
+      wx.showToast({ title: '设置提醒成功' })
+      }).catch(err => wx.showToast({ icon: 'none', title: 'Err 稍后重试' }))
 
   }
 })
