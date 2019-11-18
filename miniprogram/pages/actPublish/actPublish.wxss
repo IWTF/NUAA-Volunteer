@@ -73,17 +73,15 @@ page {
 
 /* 时间段 样式 */
 .add {
-  width: 40rpx;
-  height: 40rpx;
-  font-weight: bold;
   margin-right: 25rpx;
-  padding: 5rpx;
-  text-align: center;
-  font-size: 36rpx;
-  line-height: 40rpx;
-  border-radius: 50%;
-  color: #fff;
-  background-color: #48aaff;
+  font-size: 50rpx;
+  color: #6bb9fe;
+}
+
+.del {
+  margin-right: 25rpx;
+  font-size: 50rpx;
+  color: #ed5a65;
 }
 
 .timeDotCon {

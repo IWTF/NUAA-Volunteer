@@ -35,40 +35,55 @@ Page({
   },
   // 编辑完成，将更新数据提交至服务器
   eidtDone() {
-    let { delArr, adminList } = this.data
+    let that = this
 
-    // 获取要删除的管理员的 用户id
-    let delItemId = []
-    adminList.map((item, index) => {
-      if (delArr.indexOf(index) >= 0) {
-        delItemId.push(item._id)
-      }
-    })
-    // console.log("del item is: ", delItemId)
+    wx.showModal({
+      title: '提示',
+      content: '请确定信息无误！',
+      success(res) {
+        if (res.confirm) {
+          console.log("+++++++确定")
+          let { delArr, adminList } = that.data
 
-    if (delItemId.length === 0) {
-      return
-    }
-    wx.cloud.callFunction({
-      name: 'updateAdmin',
-      data: {
-        action: 'delAdmin',
-        delItemId
-      },
-      success: res => {
-        if (res.result.stats.updated === 0) {
-          wx.showToast({ icon: 'none', title: 'Error 请稍后重试' })
+          // 获取要删除的管理员的 用户id
+          let delItemId = []
+          adminList.map((item, index) => {
+            if (delArr.indexOf(index) >= 0) {
+              console.log("============", index)
+              delItemId.push(item._id)
+            }
+          })
+
+          if (delItemId.length === 0) {
+            return
+          }
+          wx.cloud.callFunction({
+            name: 'updateAdmin',
+            data: {
+              action: 'delAdmin',
+              delItemId
+            },
+            success: res => {
+              if (res.result.stats.updated === 0) {
+                wx.showToast({ icon: 'none', title: 'Error 请稍后重试' })
+              }
+            }
+          })
+
+          adminList = adminList.filter((item, index) => delArr.indexOf(index) < 0)
+
+          // 更新本地数据
+          that.setData({
+            adminList
+          })
+        } else if (res.cancel) {
+          console.log("+++++++取消")
         }
       }
-    })
+    })  // showModel结束
 
-    adminList = adminList.filter((item, index) => delArr.indexOf(index) < 0)
+    that.setData({ showEdit: false })
 
-    // 更新本地数据
-    this.setData({
-      showEdit: false,
-      adminList
-    })
   },
   // 删除 管理员
   delItem(e) {

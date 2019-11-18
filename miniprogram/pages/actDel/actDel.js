@@ -288,6 +288,7 @@ Page({
     wx.navigateTo({ url: '../actSign/actSign?params=' + JSON.stringify(actInfo) })
   },
 
+
   async signOut (e) {
     let cancel = false
     let formId = e.detail.formId

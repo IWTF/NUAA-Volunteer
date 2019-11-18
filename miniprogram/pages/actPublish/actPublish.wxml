@@ -42,14 +42,15 @@
       <view class="container">
         <view class="name">活动时间</view>
         <view style="flex-grow: 1;"></view>
-        <view class='add' catchtap="showTimeBar">+</view>
+        <span class="add iconfont icon-jia" catchtap="showTimeBar"></span>
       </view>
 
       <view class="timeDotCon" wx:for="{{timeDots}}" wx:key="{{index}}">
-        <view 
+        <span class="del iconfont icon-jianhaojianying" data-index="{{index}}" catchtap="delTimeDot"></span>
+        <!-- <view 
           class="add" 
           style="background-color: rgba(255, 41, 41, 0.6)"
-          data-index="{{index}}" catchtap="delTimeDot">-</view>
+           catchtap="delTimeDot">-</view> -->
         <view class="dotContent">
           <view>
             活动时间：

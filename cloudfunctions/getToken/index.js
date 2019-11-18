@@ -17,6 +17,7 @@ exports.main = async (event, context) => {
       uri: "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + APPID + "&secret=" + APPSECRET,
     });
     res = JSON.parse(res)
+    console.log("Volunteer result: ", res)
 
     let resUpdate = await db.collection(COLLNAME).doc(FIELDNAME).update({
       data: {

@@ -35,6 +35,7 @@
   </view>
 
   <view wx:if="{{login && userInfo.authority == 'superAdmin'}}"
+    data-url="adminSet" catchtap="navFunc"
     class="rowCon" style="margin-top: 40rpx;">
     <span class="rowIcon iconfont icon-feiji"></span>管理员设置
   </view>

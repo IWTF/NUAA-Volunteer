@@ -119,6 +119,10 @@ Page({
     })
   },
 
+  certified () {
+    wx.showToast({ icon: 'none', title: '已认证' })
+  },
+
   navToPublishNote() {
     wx.navigateTo({
       url: '../actPublish/actPublish',

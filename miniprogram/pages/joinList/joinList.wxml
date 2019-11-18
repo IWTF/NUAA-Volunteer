@@ -38,7 +38,7 @@
           wx:for="{{doingArr}}" 
           wx:key="{{index}}"
           data-index="{{index}}"
-          catchtap="navToDel"
+          catchtap="{{item.certified ? 'certified':'navToDel'}}"
           class="actItem"
           style="animation-delay: {{index*0.1}}s;"
           >
@@ -56,7 +56,7 @@
             <view>活动地点：{{item.actInfo.location}}</view>
             <view>活动时间：{{tools.intr(item.actInfo.begT)}}</view>
           </view>
-          <view class="num" data-index="{{index}}" catchtap="showClock">
+          <view wx:if='{{!item.certified}}' class="num" data-index="{{index}}" catchtap="showClock">
             <span class="iconfont icon-tixing1" style="font-size: 32rpx;"></span>
             设置提醒
           </view>

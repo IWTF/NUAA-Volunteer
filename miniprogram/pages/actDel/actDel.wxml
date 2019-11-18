@@ -67,7 +67,7 @@
 
 
       <!-- 参与成员列表 -->
-      <swiper-item wx:if="{{userInfo.authority === 'admin'}}">
+      <swiper-item wx:if="{{userInfo.authority == 'superAdmin' || userInfo.authority === 'admin'}}">
         <view class="tilCon">
           <span class="title">{{tools.sub(selected)}}</span>
           <view class="dropList" wx:if="{{dropDown}}">
@@ -111,10 +111,9 @@
     class="join animated 1 fadeIn" wx:if="{{login && isOver && join}}" style="background-color: #bbbec4;">退</span>
   <!-- 未结束，已报名 -->
   <form wx:if="{{login && !isOver && join}}" 
-    name='pushMsgFm' report-submit='true' bindsubmit='signOut'>
+    name='pushMsgFm' report-submit='true' bindsubmit="signOut">
     <button form-type="submit" class="join">退</button>
   </form>
-  <!-- <span class="join animated 1 fadeIn" wx:if="{{login && !isOver && join}}" catchtap="signOut">退</span> -->
   <!-- 未结束，未报名 -->
   <span class="join animated 1 fadeIn" wx:if="{{login && !showEdit && !isOver && !join}}" catchtap="signUp">报</span>
 </view>
