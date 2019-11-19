@@ -21,7 +21,6 @@ async function getParterList(event) {
   try {
     return await db.collection('registerInfo').where({
       actId: event.actId,
-      certified: false
     }).get()
   } catch (e) {
     console.error(e)

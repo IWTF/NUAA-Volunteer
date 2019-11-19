@@ -149,7 +149,7 @@ Page({
 
   // 设置闹钟提醒
   showClock(e) {
-    // wx.showToast({ title: '待开发', icon: 'none' })
+    wx.showToast({ title: '待开发', icon: 'none' })
     // return
     let { index } = e.currentTarget.dataset
     this.setData({ showClock: true, selectedAct: index })

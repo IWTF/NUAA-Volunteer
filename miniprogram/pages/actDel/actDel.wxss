@@ -16,7 +16,7 @@ page {
   /* margin-top: 117rpx; */
   background-color: #6bb9fe;
   /* background-color: #bbbec4; */
-  padding: 50rpx 0rpx 25rpx;
+  padding: 80rpx 0rpx 40rpx;
 }
 
 .acTitle {
@@ -26,7 +26,7 @@ page {
 }
 
 .actNum {
-  margin: 14rpx 0 50rpx;
+  margin: 20rpx 0 50rpx;
   text-align: center;
 }
 
@@ -74,6 +74,13 @@ page {
   height: 70rpx;
   border-radius: 50%;
   margin-right: 20rpx;
+}
+
+.certified {
+  float: right;
+  margin-top: 20rpx;
+  font-weight: bold;
+  color: #19be6b;
 }
 
 /* 悬浮报名按钮 样式 */

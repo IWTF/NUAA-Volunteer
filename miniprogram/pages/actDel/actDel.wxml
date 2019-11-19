@@ -82,8 +82,10 @@
           <view class="avatar"><image src="../../images/code-cloud-callback-config.png"></image></view>
           <view>{{item.stuId}}</view>
           
+          <view wx:if="{{item.certified}}" class="certified">已认证</view>
+
           <!-- 编辑状态下 删除/认证按钮 -->
-          <view class="editShowCon animated 1 fadeIn" wx:if="{{showEdit}}">
+          <view class="editShowCon animated 1 fadeIn" wx:if="{{showEdit && !item.certified}}">
             <view class="memBtnCon" data-index="{{index}}" catchtap="addItem">
               <view class="memCheck addBtn {{item.addSelect?'addChecked':''}}"></view>
               <view class="btnDesc">认证</view>

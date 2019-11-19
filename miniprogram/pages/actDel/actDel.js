@@ -117,6 +117,7 @@ Page({
     })
   },
 
+  // 更新数据库记录，讲certified改为true
   updateParterList(data) {
     let currentDate = util.formatDate(new Date()) + " " + util.formatTime(new Date())
 
@@ -220,8 +221,24 @@ Page({
       this.updateParterList(newAdd)
     }
 
-    let arr = addArr.concat(delArr)
-    showData = showData.filter((item, index) => arr.indexOf(index)<0);
+    // 原逻辑，更改后，认证和删除的均不在列表中显示
+    // 仍有用，需要删除delete的成员
+    // let arr = addArr.concat(delArr)
+    // showData = showData.filter((item, index) => arr.indexOf(index) < 0);
+
+    showData = showData.filter((item, index) => delArr.indexOf(index) < 0);
+
+    console.log("before ============")
+    console.log("addArr", addArr)
+    console.log("showData:", showData)
+
+    // 更改后，仍显示，只是状态发生了改变
+    showData.map((item, index) => {
+      if (addArr.indexOf(index) >= 0) {
+        item.certified = true
+      }
+    })
+    console.log("showData after: ", showData)
 
     this.setData({
       showEdit: false,
