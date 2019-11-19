@@ -1,10 +1,10 @@
 <!--miniprogram/pages/actPublish/actPublish.wxml-->
 <view class="{{ showTimeBar ? 'noScroll':''}}">
-  <navBar barTil="活动发布" backIcon/>
+  <!-- <navBar barTil="活动发布" backIcon/> -->
 
   <form bindsubmit="formSubmit">
     <!-- 名称 -->
-    <view class='container' style='margin: {{barHeight-1}}px 0 0;border-top: 1rpx solid #e9e9e9;'>
+    <view class='container' style='margin: 20rpx 0 0;border-top: 1rpx solid #e9e9e9;'>
       <view class='name' style='margin-left: 20rpx;'>活动名称</view>
       <input class='form' name="name" placeholder='请填写活动名称' placeholder-style='text-align:right;font-size: 30rpx;' value='{{name}}'></input>
       <view class='tri'></view>
@@ -65,7 +65,12 @@
 
     <!-- 详情 -->
     <view style='border-top: 1rpx solid #e9e9e9;border-bottom: 1rpx solid #e9e9e9;margin:20rpx 0 0 0;'>
-      <textarea name="content" placeholder='请输入活动内容' class='content' value='{{content}}'></textarea>
+      <!-- 解决焦距位于顶层 -->
+      <view wx:if="{{!showTextView}}" class="content" style="color: #afb1b6;" catchtap="showTextView">
+        请输入内容
+      </view>
+      <textarea wx:else name="content" bindblur="hideTextView" auto-focus
+        placeholder='请输入活动内容' class='content' value='{{content}}'></textarea>
     </view>
 
     <view class='btn_container'>
@@ -87,19 +92,31 @@
     <view class="timeBarCon">
       <view class="timeBarTil" style="color: #6cbaff;">起</view>
       <picker mode="date" value="{{begYear}}" data-sort="begYear" bindchange='time_change'>
-        <view class="timeInput" style="margin-right: 20rpx;">{{begYear}} 日</view>
+        <view class="timeInput" style="margin-right: 20rpx;">
+          {{begYear}}
+          <span class="iconfont icon-riqi2 contentIcon"></span>
+        </view>
       </picker>
       <picker mode="time" value="{{begTime}}" data-sort="begTime" bindchange='time_change'>
-        <view class="timeInput">{{begTime}} 日</view>
+        <view class="timeInput">
+          {{begTime}}
+          <span class="iconfont icon-riqi2 contentIcon"></span>
+        </view>
       </picker>
     </view>
     <view class="timeBarCon">
       <view class="timeBarTil" style="color: #6cbaff;">止</view>
       <picker mode="date" value="{{endYear}}" data-sort="endYear" bindchange='time_change'>
-        <view class="timeInput" style="margin-right: 20rpx;">{{endYear}} 日</view>
+        <view class="timeInput" style="margin-right: 20rpx;">
+          {{endYear}}
+          <span class="iconfont icon-riqi2 contentIcon"></span>
+        </view>
       </picker>
       <picker mode="time" value="{{endTime}}" data-sort="endTime" bindchange='time_change'>
-        <view class="timeInput">{{endTime}} 日</view>
+        <view class="timeInput">
+          {{endTime}}
+          <span class="iconfont icon-riqi2 contentIcon"></span>
+        </view>
       </picker>
     </view>
     <!-- 起始时间段选择 end -->

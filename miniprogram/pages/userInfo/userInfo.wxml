@@ -1,8 +1,9 @@
 <!--miniprogram/pages/userInfo/userInfo.wxml-->
 <view>
-  <navBar backIcon/>
+  <!-- <navBar backIcon/> -->
 
-  <view style="margin-top: {{barHeight-1}}px">
+  <!-- <view style="margin-top: {{barHeight-1}}px"> -->
+  <view>
     <view class="headerCon">
        <view class="avatar">
         <image src="../../images/code-cloud-callback-config.png"></image>

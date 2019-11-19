@@ -1,33 +1,40 @@
 //app.js
 App({
   onLaunch: function () {
-    /*************************  导航栏 高度适配  *************************/
-    const vm = this
-    wx.getSystemInfo({
-      success: function (res) {
-        // 获取时间，闹钟等工具栏高度
-        wx.setStorageSync('toolBar', res.statusBarHeight)
-
-        let totalTopHeight = 68
-        if (res.model.indexOf('iPhone X') !== -1) {
-          totalTopHeight = 88
-        } else if (res.model.indexOf('iPhone') !== -1) {
-          totalTopHeight = 64
-        } else if (res.model.indexOf('Android') !== -1) {
-          totalTopHeight = 68
-        } else if (res.model.indexOf('samsung') !== -1) {
-          totalTopHeight = 72
-        }
-        wx.setStorageSync("barHight", totalTopHeight)
-      },
-      failure() {
-        wx.setStorageSync("barHight", 68)
-      }
+    // 开启转发功能
+    wx.showShareMenu({
+      withShareTicket: true
     })
 
-    const designWidth = 375
-    const { windowWidth, statusBarHeight, safeArea  } = wx.getSystemInfoSync()
-    console.log("statusBarHeight", statusBarHeight, safeArea )
+    /*************************  导航栏 高度适配  *************************/
+    const vm = this
+    // wx.getSystemInfo({
+    //   success: function (res) {
+    //     // 获取时间，闹钟等工具栏高度
+    //     // iPhone 11 适配有问题，应该是真机获取机型信息有错误...
+    //     wx.setStorageSync('toolBar', res.statusBarHeight)
+    //     console.log("height:", res.statusBarHeight)
+
+    //     let totalTopHeight = 68
+    //     if (res.model.search('iPhone X') !== -1) {
+    //       totalTopHeight = 88
+    //     } else if (res.model.indexOf('iPhone') !== -1) {
+    //       totalTopHeight = 64
+    //     } else if (res.model.indexOf('Android') !== -1) {
+    //       totalTopHeight = 68
+    //     } else if (res.model.indexOf('samsung') !== -1) {
+    //       totalTopHeight = 72
+    //     }
+    //     wx.setStorageSync("barHight", totalTopHeight)
+    //   },
+    //   failure() {
+    //     wx.setStorageSync("barHight", 68)
+    //   }
+    // })
+
+    // const designWidth = 375
+    // const { windowWidth, statusBarHeight, safeArea  } = wx.getSystemInfoSync()
+    // console.log("statusBarHeight", statusBarHeight, safeArea )
 
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
@@ -38,8 +45,8 @@ App({
     }
 
     /*************************  获取用户的 openID  ************************/
-    let scale = windowWidth / designWidth
-    wx.setStorageSync("scale", scale)
+    // let scale = windowWidth / designWidth
+    // wx.setStorageSync("scale", scale)
 
     wx.cloud.callFunction({
       name: 'login',

@@ -10,6 +10,7 @@ Page({
     stuId: "",
     content: "",
     selectTimes: [],
+    showTextView: false,
   },
 
   onLoad: function (options) {
@@ -50,10 +51,10 @@ Page({
       wx.showToast({ title: '请选择要参加的时间段', icon: 'none' })
       return
     }
-    if (content == "") {
-      wx.showToast({ title: '请把表单填写完整', icon: 'none', })
-      return 
-    }
+    // if (content == "") {
+    //   wx.showToast({ title: '请把表单填写完整', icon: 'none', })
+    //   return 
+    // }
 
     let formData = { content, selectTimes }
     let promise = this.signFunc(formData)
@@ -137,5 +138,15 @@ Page({
         this.setData({ timeDots: res.result.data[0].timeDots })
       }
     })
+  },
+
+  // 输入框聚焦问题
+  showTextView() {
+    this.setData({ showTextView: true })
+  },
+
+  // 失焦时，隐藏textview
+  hideTextView() {
+    this.setData({ showTextView: false })
   }
 })

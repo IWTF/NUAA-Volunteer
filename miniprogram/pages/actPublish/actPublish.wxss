@@ -171,3 +171,7 @@ page {
   padding: 6rpx 30rpx;
   border-radius: 10rpx;
 }
+
+.timeInput .contentIcon {
+  color: #329fff;
+}

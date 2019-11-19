@@ -1,8 +1,8 @@
 <!--miniprogram/pages/myVerify/myVerify.wxml-->
 <view>
-  <navBar backIcon/>
+  <!-- <navBar backIcon/> -->
 
-  <view class="tilCon" style="margin-top: {{barHeight}}px">
+  <view class="tilCon">
     <span class="title">我的认证</span>
     <span class="tilBtn" catchtap="changeOrder">认证时间</span>
   </view>

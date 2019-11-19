@@ -29,7 +29,8 @@ Page({
     endTime: "10:00",
     timeBarNum: "",
     timeBarLoction: "",
-    tolNum: 0
+    tolNum: 0,
+    showTextView: false
   },
 
   onLoad: function (options) {
@@ -221,4 +222,14 @@ Page({
   timeBarLoctionChange(e) {
     this.setData({ timeBarLoction: e.detail.value })
   },
+
+  // 输入框聚焦问题
+  showTextView () {
+    this.setData({ showTextView:true })
+  },
+
+  // 失焦时，隐藏textview
+  hideTextView () {
+    this.setData({ showTextView: false })
+  }
 })

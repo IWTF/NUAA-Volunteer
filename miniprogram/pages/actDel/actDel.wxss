@@ -12,7 +12,8 @@ page {
 /* 顶部 概述栏 样式 */
 .header {
   color: #fff;
-  margin-top: 117rpx;
+  margin-top: 0;
+  /* margin-top: 117rpx; */
   background-color: #6bb9fe;
   /* background-color: #bbbec4; */
   padding: 50rpx 0rpx 25rpx;

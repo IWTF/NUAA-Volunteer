@@ -1,15 +1,15 @@
 <view>
-  <navBar/>
+  <!-- <navBar/> -->
   
   
-  <view class="header" style="top: {{barHeight-1}}px;">
+  <view class="header">
     <view catchtap="changeTab" data-index="0" class="{{currentItemId == 0?'selected':''}}">进行中</view>
     <view catchtap="changeTab" data-index="1" class="{{currentItemId == 1?'selected':''}}">已结束</view>
   </view>
 
   <swiper 
     class="actList"
-    style="margin-top: {{42 + barHeight}}px;"
+    style="margin-top: {{42}}px;"
     current='{{currentItemId}}'
     bindchange='scrollChange'>
     <swiper-item>

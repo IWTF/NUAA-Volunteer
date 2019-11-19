@@ -7,7 +7,7 @@ page {
 
 .bg {
   position: absolute;
-  top: -30rpx;
+  top: -70rpx;
   left: -50rpx;
   width: 120%;
   height: 370rpx;
@@ -17,7 +17,7 @@ page {
 
 .UserInfo {
   position: absolute;
-  top: 170rpx;
+  top: 150rpx;
   left: 75rpx;
   color: #fff;
   font-size: 34rpx;
@@ -30,7 +30,7 @@ page {
 
 .avatar {
   position: absolute;
-  top: 220rpx;
+  top: 200rpx;
   right: 70rpx;
   width: 160rpx;
   height: 160rpx;
@@ -44,8 +44,8 @@ page {
 
 .avatarBg {
   position: absolute;
-  top: 38rpx;
-  right: -118rpx;
+  top: 27rpx;
+  right: -115rpx;
   width: 540rpx;
   height: 540rpx;
   border-radius: 50%;

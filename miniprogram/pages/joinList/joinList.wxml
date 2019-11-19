@@ -1,7 +1,7 @@
 <wxs src="./interceptDate.wxs" module="tools" />
 
 <view>
-  <navBar/>
+  <!-- <navBar/> -->
 
   <!-- 提醒设置 功能 -->
   <view class="bg {{showClock?'bgOut':''}}" wx:if="{{showClock}}" catchtap="hideClock"></view>
@@ -22,13 +22,13 @@
     
   </view>
 
-  <view class="header" style="top: {{barHeight-1}}px;">
+  <view class="header">
     <view catchtap="changeTab" data-index="0" class="{{currentItemId == 0?'selected':''}}">待参与</view>
     <view catchtap="changeTab" data-index="1" class="{{currentItemId == 1?'selected':''}}">已参与</view>
   </view>
   <swiper 
     class="actList"
-    style="margin-top: {{42 + barHeight}}px;"
+    style="margin-top: {{42}}px;"
     current='{{currentItemId}}'
     bindchange='scrollChange'>
     <swiper-item>

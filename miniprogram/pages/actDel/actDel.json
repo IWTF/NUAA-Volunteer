@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "navBar": "../../components/navBar/navBar",
     "nullPage": "../../components/nullPage/nullPage"
   }
 }

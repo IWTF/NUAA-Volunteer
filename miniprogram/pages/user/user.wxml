@@ -1,6 +1,6 @@
 <!--miniprogram/pages/user/user.wxml-->
 <view>
-  <navBar barTil="个人中心"/>
+  <!-- <navBar barTil="个人中心"/> -->
 
   <view class="bg"></view>
   <view class="UserInfo">

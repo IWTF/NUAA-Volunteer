@@ -9,7 +9,7 @@ page {
 /* 顶部活动状态tab */
 .header {
   position: fixed;
-  top: 117rpx;
+  top: 0;
   left: 0;
   width: 100%;
   display: flex;

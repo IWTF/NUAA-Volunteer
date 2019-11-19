@@ -2,9 +2,9 @@
 <wxs src="./substring.wxs" module="tools" />
 
 <view class="{{isOver?'over':''}} {{(!isOver&&join) ? 'joinStatus':''}}">
-  <navBar my-class="navClass" barTil="" backIcon/>
+  <!-- <navBar my-class="navClass" barTil="" backIcon/> -->
 
-  <view class="header" style="margin-top: {{barHeight-1}}px">
+  <view class="header">
     <view class="acTitle">{{actInfo.name}}</view>
     <view class="actNum">{{actInfo.tolNum | actInfo.actInfo.num}} 人</view>
 
