@@ -19,7 +19,7 @@
           data-state="doing"
           data-index="{{index}}"
           wx:for="{{doingAct}}" 
-          wx:key="{{index}}"
+          wx:key="index"
           catchtap="navToDel"
           class="actItem"
           style="animation-delay: {{index*0.1}}s;"

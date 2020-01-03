@@ -30,7 +30,8 @@ Page({
     timeBarNum: "",
     timeBarLoction: "",
     tolNum: 0,
-    showTextView: false
+    showTextView: false,
+    tempValue: "请输入活动内容"
   },
 
   onLoad: function (options) {
@@ -111,7 +112,7 @@ Page({
 
   // 表单提交函数
   formSubmit: function (e) {
-    // console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
 
     var that = this;
     let { timeDots, tolNum, actId } = this.data
@@ -229,7 +230,14 @@ Page({
   },
 
   // 失焦时，隐藏textview
-  hideTextView () {
-    this.setData({ showTextView: false })
+  hideTextView (e) {
+    let content = e.detail.value
+    if (content == "") {
+      content: "请输入活动内容"
+    }
+    this.setData({
+      showTextView: false,
+      tempValue: content,
+     })
   }
 })

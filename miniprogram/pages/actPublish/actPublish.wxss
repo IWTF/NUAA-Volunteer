@@ -54,6 +54,11 @@ page {
   height: 200rpx;
 }
 
+.hideClass {
+  position: absolute;
+  left: -999px;
+}
+
 /* 发布按钮 stype */
 .btn_container{
   padding: 30rpx 0;
