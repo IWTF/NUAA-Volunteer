@@ -149,8 +149,6 @@ Page({
 
   // 设置闹钟提醒
   showClock(e) {
-    wx.showToast({ title: '待开发', icon: 'none' })
-    // return
     let { index } = e.currentTarget.dataset
     this.setData({ showClock: true, selectedAct: index })
   },
@@ -166,9 +164,7 @@ Page({
     this.setData({ selectedR: index })
   },
 
-  setClock(e) {
-    let formId = e.detail.formId
-    
+  setClock() {
     let { selectedAct, doingArr, selectedR, reminders } = this.data
     // 获取用户的openid
     let openid = wx.getStorageSync('openid')
@@ -204,20 +200,57 @@ Page({
         execTime = d[0] + "-" + d[1] + "-" + numDate + " " + begT.split(" ")[1]
     }
 
-    const db = wx.cloud.database()
-
-    db.collection('timeingTask').add({
-      data: {
-        formId,
-        stuId: act.stuId,
-        name: act.name,
-        location: act.actInfo.location,
-        begT: act.actInfo.begT,
-        execTime,
+    let item = {
+      thing2: {
+        value: '您报名的志愿活动即将开始',
+      },
+      thing4: {
+        value: act.name,
+      },
+      date5: {
+        value: act.actInfo.begT,
+      },
+      thing6: {
+        value: act.actInfo.location,
       }
-    }).then(res => {
-      wx.showToast({ title: '设置提醒成功' })
-      }).catch(err => wx.showToast({ icon: 'none', title: 'Err 稍后重试' }))
-
+    }
+    let actTmplId = "sJOzSV_I74jzrhqdUMBEa0s8vRleEgX0DhjX8eFDz9Y"
+    wx.requestSubscribeMessage({
+      tmplIds: [actTmplId],
+      success (res) {
+        // 申请订阅成功
+        if (res.errMsg === 'requestSubscribeMessage:ok') {
+          // 这里将订阅的课程信息调用云函数存入云开发数据
+          wx.cloud
+            .callFunction({
+              name: 'subscribe',
+              data: {
+                data: item,
+                templateId: actTmplId,
+                execTime,
+              },
+            })
+            .then(() => {
+              wx.showToast({
+                title: '订阅成功',
+                icon: 'success',
+                duration: 2000,
+              });
+            })
+            .catch(() => {
+              wx.showToast({
+                title: '订阅失败',
+                icon: 'success',
+                duration: 2000,
+              });
+            });
+        }
+      },
+      fail (e) {
+        console.log("error is: ", e)
+        wx.showToast({ title: '请稍后重试', icon: 'none' })
+      }
+    })
+    
   }
 })

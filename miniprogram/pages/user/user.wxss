@@ -44,7 +44,7 @@ page {
 
 .avatarBg {
   position: absolute;
-  top: 27rpx;
+  top: 22rpx;
   right: -115rpx;
   width: 540rpx;
   height: 540rpx;

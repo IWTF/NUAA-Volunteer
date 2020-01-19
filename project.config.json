@@ -28,7 +28,7 @@
 	"projectname": "Volunteer",
 	"miniprogramRoot": "miniprogram/",
 	"cloudfunctionRoot": "cloudfunctions/",
-	"cloudfunctionTemplateRoot": "",
+	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

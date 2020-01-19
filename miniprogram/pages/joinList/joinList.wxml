@@ -3,19 +3,17 @@
 <view>
   <!-- <navBar/> -->
 
-  <!-- 提醒设置 功能 -->
+  <!-- 【提醒设置】 Tab -->
   <view class="bg {{showClock?'bgOut':''}}" wx:if="{{showClock}}" catchtap="hideClock"></view>
   <view class="remindBar {{showClock?'remindBarShow':'remindBarHide'}}">
     <!-- 功能栏 确定/取消 -->
     <view class="funcBar">
       <view style="color: #515a6e;" catchtap="hideClock">取消</view>
-      <form name='pushMsgFm' report-submit='true' bindsubmit='setClock'>
-        <button form-type="submit" class="addBtn">添加</button>
-      </form>
+      <button form-type="submit" class="addBtn" catchtap='setClock'>添加</button>
     </view>
     <view class="title">开始前提醒</view>
     <view class="remindItems">
-      <view wx:for="{{reminders}}" wx:key="{{index}}"
+      <view wx:for="{{reminders}}" wx:key="index"
         data-index="{{index}}" catchtap="selectR"
         class="item {{selectedR == index?'selectedR':''}}">{{item}}</view>
     </view>
@@ -39,7 +37,7 @@
           <nullPage wx:if="{{doingArr.length == 0}}"/>
           <view
             wx:for="{{doingArr}}" 
-            wx:key="{{index}}"
+            wx:key="index"
             data-index="{{index}}"
             catchtap="{{item.certified ? 'certified':'navToDel'}}"
             class="actItem"
@@ -75,7 +73,7 @@
           <nullPage wx:if="{{doneArr.length == 0}}"/>
           <view
             wx:for="{{doneArr}}" 
-            wx:key="{{index}}"
+            wx:key="index"
             class="actItem animated 1 fadeInRight"
             style="animation-delay: {{index*0.1}}s;"
             >
