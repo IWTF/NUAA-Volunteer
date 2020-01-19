@@ -27,7 +27,11 @@ Page({
   onShow() {
     let userInfo = wx.getStorageSync('userInfo')
     if (userInfo == '') { // 未设置缓存
-      wx.showToast({ title: '请先绑定个人信息', icon: 'none' })
+      wx.showModal({
+        title: '信息绑定',
+        content: '请先绑定个人信息',
+        showCancel:false
+      })
       setTimeout(() => {
         wx.navigateTo({
           url: '../userInfo/userInfo',
@@ -49,7 +53,9 @@ Page({
     })
   },
 
-  // 更改 tab 选项
+  /**
+   * 更改 tab 选项
+   */ 
   changeTab(e) {
     // 这里不是 data- 传参，所以用target
     let tab = e.target.dataset.index
@@ -60,7 +66,9 @@ Page({
     this.setData({ currentItemId: e.detail.current })
   },
 
-  // 跳转传参，进入相应del
+  /**
+   * 跳转传参，进入相应del
+   */ 
   navToDel (e) {
     let { doingAct, doneAct } = this.data
 

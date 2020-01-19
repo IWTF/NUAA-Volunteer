@@ -8,8 +8,11 @@
     <view>
       <span style="font-size: 70rpx;">{{tolTime}}</span> H
       <span wx:if="{{login}}"
-       catchtap="navFunc" data-url="myVerify"
-       style="margin-left: 20rpx;font-size: 24rpx;color: #2b85e4;"> 详情 > </span>
+       catchtap="updateT" data-url="myVerify"
+       style="margin-left: 20rpx;font-size: 24rpx;color: #2b85e4;">
+        刷新 
+        <span class="iconfont icon-shuaxin"></span>
+      </span>
     </view>
   </view>
   <view class="avatar">
@@ -37,7 +40,7 @@
   <view wx:if="{{login && userInfo.authority == 'superAdmin'}}"
     data-url="adminSet" catchtap="navFunc"
     class="rowCon" style="margin-top: 40rpx;">
-    <span class="rowIcon iconfont icon-feiji"></span>管理员设置
+    <span class="rowIcon iconfont icon-shezhi"></span>管理员设置
   </view>
   <view wx:if="{{login}}" data-url="plane" catchtap="navFunc"
     class="rowCon" style="margin-top: 40rpx;">

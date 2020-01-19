@@ -22,7 +22,7 @@
     <view class="timeDotCon">
       <view
         class="timeDotItem {{item.addSelect?'selected':''}}"
-        wx:for="{{timeDots}}" wx:key="{{index}}"
+        wx:for="{{timeDots}}" wx:key="index"
         data-index="{{index}}" catchtap="chooseItem">
         {{item.location}}
         <span style="float: right; margin-right: 20rpx;">

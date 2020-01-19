@@ -19,7 +19,7 @@ Page({
   onShow () {
     let userInfo = wx.getStorageSync('userInfo')
     if (userInfo == '') { // 未设置缓存
-      let info = "一经绑定，不能修改；身份绑定是志愿时长认证唯一依据，请如实填写！"
+      let info = "一经绑定，不能修改！\n身份绑定是志愿时长认证唯一依据\n请如实填写！"
       wx.showModal({
         title: '注意事项',
         content: info,

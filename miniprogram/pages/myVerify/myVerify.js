@@ -8,14 +8,21 @@ Page({
 
   onLoad: function (options) {
     let that = this
-    let openid = wx.getStorageSync('openid')
+    let {stuId} = wx.getStorageSync('userInfo')
 
     const db = wx.cloud.database()
-
-    db.collection('registerInfo').where({
-      _openid: openid,
-      certified: true
-    }).orderBy('verifyTime', 'asc').get({
+    const _ = db.command
+    
+    db.collection('registerInfo').where(_.or([
+      {
+        stuId: stuId,
+        certified: true
+      },
+      {
+        stuId: parseInt(stuId),
+        certified: "true"
+      }
+    ])).orderBy('verifyTime', 'asc').get({
       success: res => {
         that.setData({ datalist: res.data })
       }

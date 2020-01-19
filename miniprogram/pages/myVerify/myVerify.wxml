@@ -1,19 +1,26 @@
 <!--miniprogram/pages/myVerify/myVerify.wxml-->
+<wxs src="./substring.wxs" module="tools" />
+
 <view>
   <!-- <navBar backIcon/> -->
 
   <view class="tilCon">
     <span class="title">我的认证</span>
-    <span class="tilBtn" catchtap="changeOrder">认证时间</span>
+    <span class="tilBtn" catchtap="changeOrder">
+      认证时间
+      <span class="deIcon iconfont icon-jiangxux"></span>
+    </span>
   </view>
 
   <view class="listCon">
     <nullPage wx:if="{{datalist.length == 0}}"/>
-    <view wx:for="{{datalist}}" wx:key="{{index}}" class="listItem">
+    <view wx:for="{{datalist}}" wx:key="index" class="listItem">
       <span class="number">{{index+1}}. </span>
-      <span>{{item.name}}</span>
+      <span >{{tools.sub(item.name)}}</span>
       <span class="floatItem">{{item.verifyTime}}</span>
-      <span class="floatItem" style="margin-right: 60rpx;">{{item.actInfo.duration}}h</span>
+      <span class="floatItem" style="margin-right: 60rpx;">
+        {{item.actInfo ? item.actInfo.duration:item.duration}}h
+      </span>
     </view>
   </view>
 </view>

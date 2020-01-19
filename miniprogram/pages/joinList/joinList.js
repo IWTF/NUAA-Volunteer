@@ -16,7 +16,12 @@ Page({
     ],
   },
 
+
   onLoad: function (options) {
+    // 开启页面的转发功能
+    wx.showShareMenu({
+      withShareTicket: true
+    })
     wx.setStorageSync('updateJoinList', true)
   },
 

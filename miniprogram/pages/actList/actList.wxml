@@ -55,7 +55,7 @@
             data-state="done"
             data-index="{{index}}"
             wx:for="{{doneAct}}" 
-            wx:key="{{index}}"
+            wx:key="index"
             catchtap="navToDel"
             class="actItem animated 1 fadeInRight"
             style="animation-delay: {{index*0.1}}s;"

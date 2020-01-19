@@ -23,9 +23,15 @@ Page({
     first: true
   },
 
-  // 传参是一个对象，actInfo，和join字段
+  /**
+   * onload
+   * @param {actInfo，join} options 
+   */
   onLoad: function (options) {
-   
+    // 开启页面转发
+    wx.showShareMenu({
+      withShareTicket: true
+    })
 
     let userInfo = wx.getStorageSync('userInfo')
     if (userInfo == '') { // 未设置缓存
@@ -52,7 +58,9 @@ Page({
     this.setData({ isOver, join, actInfo })
   },
 
-  // 更改 tab 选项
+  /**
+   * 更改 【顶部tab】 选项 
+   */ 
   changeTab(e) {
     let tab = e.target.dataset.index
     this.setData({ currentItemId: tab })
@@ -62,7 +70,10 @@ Page({
       this.setData({ first: false })
     }
   },
-  // 滚动swiper触发事件，改变tab样式
+
+  /**
+   * 滚动swiper触发事件，改变tab样式
+   */
   scrollChange(e) {
     this.setData({ currentItemId: e.detail.current })
 
@@ -72,7 +83,9 @@ Page({
     }
   },
 
-  // 请求数据库，获得该活动参与人员情况
+  /**
+   * 请求数据库，获得该活动参与人员情况
+   */
   getParterList() {
     let { actInfo } = this.data
 
@@ -103,6 +116,10 @@ Page({
     })
   },
 
+  /**
+   * 删除参与人员；辅助函数
+   * @param data 
+   */
   delParterList(data) {
     console.log("delParterList", data)
     wx.cloud.callFunction({
@@ -117,7 +134,9 @@ Page({
     })
   },
 
-  // 更新数据库记录，讲certified改为true
+  /**
+   * 更新数据库记录，讲certified改为true
+   */ 
   updateParterList(data) {
     let currentDate = util.formatDate(new Date()) + " " + util.formatTime(new Date())
 
