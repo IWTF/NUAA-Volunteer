@@ -238,6 +238,6 @@ Page({
     this.setData({
       showTextView: false,
       tempValue: content,
-     })
+    })
   }
 })

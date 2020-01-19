@@ -31,69 +31,76 @@
     style="margin-top: {{42}}px;"
     current='{{currentItemId}}'
     bindchange='scrollChange'>
-    <swiper-item>
-      <view class="listCon hosting" wx:if="{{currentItemId == 0}}">
-        <nullPage wx:if="{{doingArr.length == 0}}"/>
-        <view
-          wx:for="{{doingArr}}" 
-          wx:key="{{index}}"
-          data-index="{{index}}"
-          catchtap="{{item.certified ? 'certified':'navToDel'}}"
-          class="actItem"
-          style="animation-delay: {{index*0.1}}s;"
-          >
-          <!-- 标号修饰 -->
-          <view class="number" style="font-weight: bold;">
-            <span wx:if="{{item.certified}}" style="font-weight: 100;font-size: 20rpx;margin-left: -5rpx;">已认证</span>
-            <span wx:else style="margin-left: 10rpx;">{{index+1}}</span>
-          </view>
 
-          <view class="actImg">
-            <image src="../../images/code-cloud-callback-config.png"></image>
-          </view>
-          <view>
-            <view class="acTitle">{{item.name}}</view>
-            <view>活动地点：{{item.actInfo.location}}</view>
-            <view>活动时间：{{tools.intr(item.actInfo.begT)}}</view>
-          </view>
-          <view wx:if='{{!item.certified}}' class="num" data-index="{{index}}" catchtap="showClock">
-            <span class="iconfont icon-tixing1" style="font-size: 32rpx;"></span>
-            设置提醒
+    <!-- 【待参加】的活动 -->
+    <swiper-item>
+      <scroll-view  scroll-y="true" style="height: 92vh;" bindscroll="PageScroll">
+        <view class="listCon hosting" wx:if="{{currentItemId == 0}}">
+          <nullPage wx:if="{{doingArr.length == 0}}"/>
+          <view
+            wx:for="{{doingArr}}" 
+            wx:key="{{index}}"
+            data-index="{{index}}"
+            catchtap="{{item.certified ? 'certified':'navToDel'}}"
+            class="actItem"
+            style="animation-delay: {{index*0.1}}s;"
+            >
+            <!-- 标号修饰 -->
+            <view class="number" style="font-weight: bold;">
+              <span wx:if="{{item.certified}}" style="font-weight: 100;font-size: 20rpx;margin-left: -5rpx;">已认证</span>
+              <span wx:else style="margin-left: 10rpx;">{{index+1}}</span>
+            </view>
+
+            <view class="actImg">
+              <image src="../../images/code-cloud-callback-config.png"></image>
+            </view>
+            <view>
+              <view class="acTitle">{{item.name}}</view>
+              <view>活动地点：{{item.actInfo.location}}</view>
+              <view>活动时间：{{tools.intr(item.actInfo.begT)}}</view>
+            </view>
+            <view wx:if='{{!item.certified}}' class="num" data-index="{{index}}" catchtap="showClock">
+              <span class="iconfont icon-tixing1" style="font-size: 32rpx;"></span>
+              设置提醒
+            </view>
           </view>
         </view>
-      </view>
+      </scroll-view>
     </swiper-item>
 
+    <!-- 【已参与/结束】的活动 -->
     <swiper-item>
-      <view class="listCon hosted" wx:if="{{currentItemId == 1}}">
-        <nullPage wx:if="{{doneArr.length == 0}}"/>
-        <view
-          wx:for="{{doneArr}}" 
-          wx:key="{{index}}"
-          class="actItem animated 1 fadeInRight"
-          style="animation-delay: {{index*0.1}}s;"
-          >
-          <!-- 标号修饰 -->
-          <view wx:if="{{item.certified}}" class="number" style="background-color: #19be6b;">
-            <span style="margin-left: -10rpx;font-size: 20rpx;">已认证</span>
-          </view>
-          <view wx:else class="number" style="background-color: #ff9900;">
-            <span style="margin-left: -10rpx;font-size: 20rpx;">未认证</span>
-          </view>
+      <scroll-view  scroll-y="true" style="height: 92vh;" bindscroll="PageScroll">
+        <view class="listCon hosted" wx:if="{{currentItemId == 1}}">
+          <nullPage wx:if="{{doneArr.length == 0}}"/>
+          <view
+            wx:for="{{doneArr}}" 
+            wx:key="{{index}}"
+            class="actItem animated 1 fadeInRight"
+            style="animation-delay: {{index*0.1}}s;"
+            >
+            <!-- 状态修饰Badge -->
+            <view wx:if="{{item.certified}}" class="number" style="background-color: #19be6b;">
+              <span style="margin-left: -10rpx;font-size: 20rpx;">已认证</span>
+            </view>
+            <view wx:else class="number" style="background-color: #ff9900;">
+              <span style="margin-left: -10rpx;font-size: 20rpx;">未认证</span>
+            </view>
 
-          <view class="actImg">
-            <image src="../../images/code-cloud-callback-config.png"></image>
-          </view>
-          <view>
-            <view class="acTitle">{{item.name}}</view>
-            <view>活动地点：{{item.actInfo.location}}</view>
-            <view>活动时间：{{tools.intr(item.actInfo.endT)}}</view>
-          </view>
-          <view class="num">
-            {{index%2==0 ? '2019-8-12':''}}
+            <view class="actImg">
+              <image src="../../images/code-cloud-callback-config.png"></image>
+            </view>
+            <view>
+              <view class="acTitle">{{item.name}}</view>
+              <view>活动地点：{{item.actInfo.location}}</view>
+              <view>活动时间：{{tools.intr(item.actInfo.endT)}}</view>
+            </view>
+            <view class="num">
+              {{index%2==0 ? '2019-8-12':''}}
+            </view>
           </view>
         </view>
-      </view>
+      </scroll-view>
     </swiper-item>
 
   </swiper>

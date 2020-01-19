@@ -11,6 +11,7 @@ Page({
     content: "",
     selectTimes: [],
     showTextView: false,
+    tempValue: "备注"
   },
 
   onLoad: function (options) {
@@ -146,7 +147,20 @@ Page({
   },
 
   // 失焦时，隐藏textview
-  hideTextView() {
-    this.setData({ showTextView: false })
-  }
+  // 失焦时，隐藏textview
+  hideTextView (e) {
+    let content = e.detail.value
+    if (content == "") {
+      content: "备注"
+    }
+    this.setData({
+      showTextView: false,
+      tempValue: content,
+     })
+  },
+
+  // 输入框聚焦问题
+  showTextView () {
+    this.setData({ showTextView:true })
+  },
 })

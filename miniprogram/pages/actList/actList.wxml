@@ -1,7 +1,8 @@
 <view>
+  <!-- 自定义navBar -->
   <!-- <navBar/> -->
   
-  
+  <!-- tabBar -->
   <view class="header">
     <view catchtap="changeTab" data-index="0" class="{{currentItemId == 0?'selected':''}}">进行中</view>
     <view catchtap="changeTab" data-index="1" class="{{currentItemId == 1?'selected':''}}">已结束</view>
@@ -12,33 +13,42 @@
     style="margin-top: {{42}}px;"
     current='{{currentItemId}}'
     bindchange='scrollChange'>
+
+    <!-- wx:for循环显示【正在进行】的志愿活动内容 -->
     <swiper-item>
-      <view class="listCon hosting" wx:if="{{currentItemId == 0}}">
-        <nullPage wx:if="{{doingAct.length == 0}}"/>
-        <view
-          data-state="doing"
-          data-index="{{index}}"
-          wx:for="{{doingAct}}" 
-          wx:key="index"
-          catchtap="navToDel"
-          class="actItem"
-          style="animation-delay: {{index*0.1}}s;"
-          >
-          <view class="actImg">
-            <image src="../../images/code-cloud-callback-config.png"></image>
+      <scroll-view  scroll-y="true" style="height: 92vh;" bindscroll="PageScroll">
+        <!-- currentItemId用于指定swiper显示的tab -->
+        <view class="listCon hosting" wx:if="{{currentItemId == 0}}">
+          <!-- 如果没有数据，则显示空页 -->
+          <nullPage wx:if="{{doingAct.length == 0}}"/>
+          
+          <view
+            data-state="doing"
+            data-index="{{index}}"
+            wx:for="{{doingAct}}" 
+            wx:key="index"
+            catchtap="navToDel"
+            class="actItem"
+            style="animation-delay: {{index*0.1}}s;"
+            >
+            <view class="actImg">
+              <image src="../../images/code-cloud-callback-config.png"></image>
+            </view>
+            <view>
+              <view class="acTitle">{{item.name}}</view>
+              <!-- <view>{{item.timeDots.length == 1 ? item.timeDots[0].location:'见详情' }}</view>
+              <view>{{item.timeDots.length == 1 ? item.timeDots[0].begT:'见详情' }}</view> -->
+              <view>报名截止：{{item.deadline}}</view>
+            </view>
+            <view class="num">{{item.tolNum}}人</view>
           </view>
-          <view>
-            <view class="acTitle">{{item.name}}</view>
-            <!-- <view>{{item.timeDots.length == 1 ? item.timeDots[0].location:'见详情' }}</view>
-            <view>{{item.timeDots.length == 1 ? item.timeDots[0].begT:'见详情' }}</view> -->
-            <view>报名截止：{{item.deadline}}</view>
-          </view>
-          <view class="num">{{item.tolNum}}人</view>
         </view>
-      </view>
+      </scroll-view>
     </swiper-item>
+
+    <!-- wx:for循环显示【已结束】的志愿活动内容 -->
     <swiper-item>
-      <scroll-view  scroll-y="true" style="height: 84vh;" bindscroll="PageScroll">
+      <scroll-view  scroll-y="true" style="height: 92vh;" bindscroll="PageScroll">
         <view class="listCon hosted" wx:if="{{currentItemId == 1}}">
           <nullPage wx:if="{{doneAct.length == 0}}"/>
           <view
