@@ -3,30 +3,19 @@ Page({
 
   data: {
     barHeight: wx.getStorageSync("barHight"),
-    datalist: []
+    datalist: [],
+    userInfo: {}
   },
 
   onLoad: function (options) {
-    let that = this
-    let {stuId} = wx.getStorageSync('userInfo')
-
+    let userInfo = wx.getStorageSync('userInfo')
+    this.setData({ userInfo })
+    
     const db = wx.cloud.database()
     const _ = db.command
     
-    db.collection('registerInfo').where(_.or([
-      {
-        stuId: stuId,
-        certified: true
-      },
-      {
-        stuId: parseInt(stuId),
-        certified: "true"
-      }
-    ])).orderBy('verifyTime', 'asc').get({
-      success: res => {
-        that.setData({ datalist: res.data })
-      }
-    })
+    const datalist = wx.getStorageSync('allActs')
+    this.setData({ datalist })
   },
 
   changeOrder () {

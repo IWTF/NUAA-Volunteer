@@ -5,11 +5,20 @@
   <!-- <navBar backIcon/> -->
 
   <view class="tilCon">
-    <span class="title">我的认证</span>
-    <span class="tilBtn" catchtap="changeOrder">
-      认证时间
-      <span class="deIcon iconfont icon-jiangxux"></span>
-    </span>
+    <view class="vertifyCon">
+      <span class="avatar"><open-data type="userAvatarUrl"></open-data></span>
+      <span>
+        <view class="username">{{userInfo.username}}</view>
+        <view style="font-size: 30rpx;">学号：{{userInfo.stuId}}</view>
+      </span>
+    </view>
+    <view style="margin-top: 15rpx;">
+      <span class="title">我的认证</span>
+      <span class="tilBtn" catchtap="changeOrder">
+        认证时间
+        <span class="deIcon iconfont icon-jiangxux"></span>
+      </span>
+    </view>
   </view>
 
   <view class="listCon">
