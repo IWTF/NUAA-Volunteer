@@ -35,6 +35,7 @@ Page({
   },
 
   onLoad: function (options) {
+    // 用于对原项目进行变更
     if (options.actId) {
       wx.cloud.callFunction({
         name: 'publishAct',
@@ -76,6 +77,8 @@ Page({
     })
   },
 
+  /******************************    表单监听函数    ******************************/
+
   // 改变活动类型的 func
   kind_change: function (e) {
     this.setData({
@@ -110,9 +113,29 @@ Page({
     }
   },
 
-  // 表单提交函数
+    // 输入框聚焦问题
+    showTextView () {
+      this.setData({ showTextView:true })
+    },
+  
+    // 失焦时，隐藏textview
+    hideTextView (e) {
+      let content = e.detail.value
+      if (content == "") {
+        content: "请输入活动内容"
+      }
+      this.setData({
+        showTextView: false,
+        tempValue: content,
+      })
+    },
+
+  /******************************    表单提交函数    ******************************/
   formSubmit: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    // console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    wx.showLoading({
+      title: '发布中',
+    })
 
     var that = this;
     let { timeDots, tolNum, actId } = this.data
@@ -149,6 +172,7 @@ Page({
             timeDots: [],
             index: 0,
           })
+          wx.hideLoading()
         },
         fail: err => {
           wx.showToast({ icon: 'none', title: '加载数据失败' })
@@ -157,6 +181,7 @@ Page({
     }
   },
 
+  /******************************    时间段设置辅助函数    ******************************/
   // 时间段 设置 对应的一系列函数
   showTimeBar() {
     this.setData({ showTimeBar: true })
@@ -222,22 +247,5 @@ Page({
   // 活动地点 输入框 监听函数
   timeBarLoctionChange(e) {
     this.setData({ timeBarLoction: e.detail.value })
-  },
-
-  // 输入框聚焦问题
-  showTextView () {
-    this.setData({ showTextView:true })
-  },
-
-  // 失焦时，隐藏textview
-  hideTextView (e) {
-    let content = e.detail.value
-    if (content == "") {
-      content: "请输入活动内容"
-    }
-    this.setData({
-      showTextView: false,
-      tempValue: content,
-    })
   }
 })

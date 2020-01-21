@@ -1,4 +1,10 @@
 // 云函数入口文件
+/**
+ * parterFunc
+ * 参与人员管理函数
+ * 1. 查询    2. 删除    3. 更新参与状态
+ */
+
 const cloud = require('wx-server-sdk')
 
 cloud.init({

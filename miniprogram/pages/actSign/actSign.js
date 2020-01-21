@@ -41,7 +41,12 @@ Page({
     this.setData({ selectTimes, timeDots })
   },
 
-  // 表单提交函数
+  /**
+   * 【表单提交函数】
+   * 1. 获取表单数据，并进行验证
+   * 2. 之后调用signFunc报名函数，进行报名
+   * @param {object} e 
+   */
   formSubmit: function (e) {
     var that = this;
     // console.log('form发生了submit事件，携带数据为：', e.detail.value)
@@ -52,16 +57,20 @@ Page({
       wx.showToast({ title: '请选择要参加的时间段', icon: 'none' })
       return
     }
-    // if (content == "") {
-    //   wx.showToast({ title: '请把表单填写完整', icon: 'none', })
-    //   return 
-    // }
+    
+    wx.showLoading({
+      title: '报名中...',
+    })
 
     let formData = { content, selectTimes }
     let promise = this.signFunc(formData)
     promise.then(res => {
       wx.setStorageSync('updateJoinList', true)
       
+      // 关闭加载提示
+      wx.hideLoading()
+
+      // 自动跳回首页
       wx.navigateBack({ delta: 2 })
       wx.showToast({ title: '报名成功', duration: 2500 })
     }).catch(err => {

@@ -11,17 +11,42 @@ Page({
     aitivities: [],
     doingAct: [],
     doneAct: [],
-    scrollTop: 0
+    scrollTop: 0,
   },
 
-  onLoad: function (options) {
-    this.loadAct()
-    // 均存入缓存，避免造成卡顿
-    // onload加载限定数量数据
-    // 下拉刷新加载更新
-    // 上滑加载更多
+  onLoad: function () {
+    wx.showLoading({ title: '加载中...' })
 
-    // 实现一个全局函数，用于活动参与人数的 增加
+    let dateObj = new Date()
+    let year = dateObj.getFullYear()
+    let month = util.formatNumber(dateObj.getMonth()+1)
+    let date = year + '-' + month
+    this.setData({ date })
+
+    // 获取正在进行的活动
+    wx.cloud.callFunction({
+      name: 'getHomeData',
+      data: {
+        action: 'getDoingAct'
+      }
+    }).then(res => {
+      let doingAct = res.result.data
+      this.setData({ doingAct })
+      wx.hideLoading()
+    })
+
+    // 获取正在进行的活动
+    wx.cloud.callFunction({
+      name: 'getHomeData',
+      data: {
+        action: 'getDoneAct',
+        year: year,
+        month: month,
+      }
+    }).then(res => {
+      let doneAct = res.result.data
+      this.setData({ doneAct })
+    })
   },
 
   onShow() {
@@ -46,10 +71,17 @@ Page({
   onPullDownRefresh() {
     wx.showNavigationBarLoading()
 
-    let promise = this.loadAct()
-    promise.then(res => {
+    // 获取正在进行的活动
+    wx.cloud.callFunction({
+      name: 'getHomeData',
+      data: {
+        action: 'getDoingAct'
+      }
+    }).then(res => {
       wx.hideNavigationBarLoading()
       wx.stopPullDownRefresh()
+      let doingAct = res.result.data
+      this.setData({ doingAct })
     })
   },
 
@@ -119,37 +151,27 @@ Page({
     }
   },
 
-  formatData (res) {
-    let { nowTime } = this.data
-    let doingAct = []
-    let doneAct = []
+  bindDateChange: function(e) {
+    wx.showLoading({ title: '加载中...' })
+    // 跟新picker
+    let date = e.detail.value
+    this.setData({ date })
 
-    for (let i=0; i<res.length; i++) {
-      if (res[i].deadline > nowTime) {
-        doingAct.push(res[i])
-      } else {
-        doneAct.push(res[i])
+    // 获取正在进行的活动
+    let year = date.split('-')[0]
+    let month = date.split('-')[1]
+
+    wx.cloud.callFunction({
+      name: 'getHomeData',
+      data: {
+        action: 'getDoneAct',
+        year: year,
+        month: month,
       }
-    }
-    this.setData({ doingAct, doneAct })
-  },
-
-  loadAct () {
-    return new Promise((resolve, reject) => {
-      let { loadTime } = this.data
-      let date = util.formatDate(new Date())
-      let time = util.formatTime(new Date())
-
-      this.setData({ nowTime: date + ' ' + time })
-
-      const db = wx.cloud.database()
-      db.collection('activities').get({
-        success: res => {
-          // console.log("actList data is:", res)
-          this.formatData(res.data)
-          resolve()
-        }
-      })
+    }).then(res => {
+      let doneAct = res.result.data
+      this.setData({ doneAct })
+      wx.hideLoading()
     })
-  }
+  },
 })

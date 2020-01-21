@@ -1,4 +1,8 @@
+/**
+ * 订阅消息收集函数
+ */
 const cloud = require('wx-server-sdk');
+
 cloud.init();
 const db = cloud.database();
 

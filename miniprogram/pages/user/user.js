@@ -62,7 +62,7 @@ Page({
     wx.cloud.callFunction({
       name: 'userData',
       data: {
-        action: 'getAllAct',
+        action: 'getCertifiedAct',
         stuId: stuId,
       },
       success: res => {

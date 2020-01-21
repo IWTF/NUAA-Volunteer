@@ -1,4 +1,8 @@
 const cloud = require('wx-server-sdk');
+/**
+ * 订阅消息的发送
+ * 1. 活动开始通知定时发送
+ */
 
 exports.main = async (event, context) => {
   cloud.init();

@@ -87,6 +87,10 @@ Page({
    * 请求数据库，获得该活动参与人员情况
    */
   getParterList() {
+    wx.showLoading({
+      title: '加载中...'
+    })
+    
     let { actInfo } = this.data
 
     let actId = actInfo.tolNum ? actInfo._id : actInfo.actId
@@ -112,6 +116,7 @@ Page({
 
         this.setData({ users, timeSet, selected: timeSet[0] })
         this.dataSort(timeSet[0])
+        wx.hideLoading()
       }
     })
   },
@@ -121,7 +126,6 @@ Page({
    * @param data 
    */
   delParterList(data) {
-    console.log("delParterList", data)
     wx.cloud.callFunction({
       name: 'parterFunc',
       data: {
@@ -129,7 +133,7 @@ Page({
         delArr: data
       },
       success: res => {
-        // console.log('delParterList', res)
+        wx.hideLoading()
       }
     })
   },
@@ -148,7 +152,8 @@ Page({
         currentDate,
       },
       success: res => {
-        console.log('updateParterList', res)
+        // console.log('updateParterList', res)
+        wx.hideLoading()
       }
     })
   },
@@ -202,6 +207,9 @@ Page({
         success(res) {
           if (res.confirm) {
             wx.setStorageSync('updateJoinList', true)
+            wx.showLoading({
+              title: '更新中...'
+            })
             resolve()
           } else if (res.cancel) {
             cancel = true
@@ -247,9 +255,9 @@ Page({
 
     showData = showData.filter((item, index) => delArr.indexOf(index) < 0);
 
-    console.log("before ============")
-    console.log("addArr", addArr)
-    console.log("showData:", showData)
+    // console.log("before ============")
+    // console.log("addArr", addArr)
+    // console.log("showData:", showData)
 
     // 更改后，仍显示，只是状态发生了改变
     showData.map((item, index) => {

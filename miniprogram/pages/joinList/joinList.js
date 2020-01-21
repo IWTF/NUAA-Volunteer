@@ -41,8 +41,11 @@ Page({
 
     let update = wx.getStorageSync('updateJoinList')
     if (update) {
+      wx.showLoading({ title: '加载中...' })
       wx.setStorageSync('updateJoinList', false)
-      this.initData(openid)
+      this.initData(openid).then(res => {
+        wx.hideLoading()
+      })
     }
     /*
     * 应该导致update值发生改变的操作：
@@ -71,20 +74,24 @@ Page({
 
   initData (openid) {
     return new Promise((resolve, reject) => {
-      const db = wx.cloud.database()
+      // const db = wx.cloud.database()
       let now = util.formatDate(new Date()) + " " + util.formatTime(new Date())
+      console.log('now time is: ', now)
 
-      db.collection('registerInfo').where({
-        _openid: openid
-      }).get({
+      wx.cloud.callFunction({
+        name: 'userData',
+        data: {
+          action: 'getParticipateAct',
+          openid: openid,
+        },
         success: res => {
-          // console.log("joinList data is:", res)
-          let ret = res.data
+          console.log("joinList data is:", res)
+          let ret = res.result.data
           let doingArr = []
           let doneArr = []
           for (let i = 0; i < ret.length; i++) {
             let { beg, end } = util.getBETime([ret[i].actInfo,])
-            if (now < end) {
+            if (now < beg) {
               doingArr.push(ret[i])
             } else {
               doneArr.push(ret[i])

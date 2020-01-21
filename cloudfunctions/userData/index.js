@@ -1,4 +1,10 @@
 // 云函数入口文件
+/**
+ * 特定用户活动信息获取
+ * 1. getAllAct 获取该用户所有已认证活动
+ * 2. 未开发，未使用
+ * 3.
+ */
 const cloud = require('wx-server-sdk')
 
 cloud.init({
@@ -11,16 +17,17 @@ const _ = db.command
 // 云函数入口函数
 exports.main = async (event, context) => {
   switch (event.action) {
-    case 'getAllAct': return getAllAct(event)
-    case 'getAct': return getAct(event)
+    case 'getCertifiedAct': return getCertifiedAct(event)
+    case 'getParticipateAct': return getParticipateAct(event)
     case 'updateAct': return updateAct(event)
   }
 }
 
-async function getAllAct(event) {
-  let { stuId } = event
+async function getCertifiedAct(event) {
+  const stuId = event.stuId
+
   try {
-    return await db.collection('registerInfo').limit(150)
+    return await db.collection('registerInfo').limit(200)
     .where(_.or([
       {
         stuId: stuId,
@@ -36,10 +43,10 @@ async function getAllAct(event) {
   }
 }
 
-async function getAct(event) {
+async function getParticipateAct(event) {
   try {
-    return await db.collection('activities').where({
-      _id: event._id
+    return await db.collection('registerInfo').where({
+      _openid: event.openid
     }).get()
   } catch (e) {
     console.log(e)

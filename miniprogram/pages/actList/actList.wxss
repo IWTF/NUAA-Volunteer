@@ -108,4 +108,24 @@ page {
   opacity: 0;
 }
 
+/* 日期选择器 */
+.pickerCon {
+  padding: 20rpx 0 10rpx 0;
+  margin-bottom: 20rpx;
+  border-bottom: #6bb9fe dashed 2rpx;
+}
 
+.pickerCon>view {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.pickerCon .date {
+  font-size: 44rpx;
+  font-weight: bold;
+}
+
+.dateIcon {
+  color: #6bb9fe;
+  margin-left: 15rpx;
+}

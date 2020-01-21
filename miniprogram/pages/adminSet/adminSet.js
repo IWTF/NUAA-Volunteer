@@ -6,7 +6,7 @@ Page({
     currentItemId: 0,
     adminList: [],
     delArr: [],
-    updateData: false   // 切换至管理页面时，是否请求数据
+    updateData: false   // 切换至管理页面时，是否请求数据, false表示不用更新数据
   },
 
   onLoad: function (options) {
@@ -54,6 +54,7 @@ Page({
             }
           })
 
+          wx.showLoading({ title: '提交中' })
           if (delItemId.length === 0) {
             return
           }
@@ -64,6 +65,7 @@ Page({
               delItemId
             },
             success: res => {
+              wx.hideLoading()
               if (res.result.stats.updated === 0) {
                 wx.showToast({ icon: 'none', title: 'Error 请稍后重试' })
               }

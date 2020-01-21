@@ -11,9 +11,6 @@ Page({
     let userInfo = wx.getStorageSync('userInfo')
     this.setData({ userInfo })
     
-    const db = wx.cloud.database()
-    const _ = db.command
-    
     const datalist = wx.getStorageSync('allActs')
     this.setData({ datalist })
   },

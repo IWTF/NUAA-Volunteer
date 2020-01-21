@@ -1,4 +1,10 @@
 // 云函数入口文件
+/**
+ * 用户权限更新相关函数
+ * 1. 管理员的添加
+ * 2. 管理员的删除
+ */
+
 const cloud = require('wx-server-sdk')
 
 cloud.init({
