@@ -5,4 +5,19 @@ var intr = function (val) {
   result = val.split("-")
   return result[1] + "-" + result[2]
 }
-module.exports.intr = intr;
+
+var sub = function (val) {
+  if (val == undefined || val.length == 0 ) {
+    return;
+  }
+  if (val.length > 6) {
+    return val.substring(0, 6) + "...";
+  } else {
+    return val;
+  }
+}
+
+module.exports = {
+  intr: intr,
+  sub: sub
+}

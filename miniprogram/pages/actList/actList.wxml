@@ -48,18 +48,20 @@
 
     <!-- wx:for循环显示【已结束】的志愿活动内容 -->
     <swiper-item>
-      <scroll-view  scroll-y="true" style="height: 92vh;" bindscroll="PageScroll">
-        <view class="pickerCon" wx:if="{{currentItemId == 1}}">
-          <view class="date">
-            <picker mode="date" value="{{date}}" fields="month"
-              start="2017-09" bindchange="bindDateChange">
-              <view class="picker">
-                {{date}}
-              </view>
-            </picker>
-          </view>
-          <view class="iconfont icon-riqi2 dateIcon"></view>
+      <!-- 时间picker筛选 -->
+      <view class="pickerCon" wx:if="{{currentItemId == 1}}">
+        <view class="date">
+          <picker mode="date" value="{{date}}" fields="month"
+            start="2017-09" bindchange="bindDateChange">
+            <view class="picker">
+              {{date}}
+            </view>
+          </picker>
         </view>
+        <view class="iconfont icon-riqi2 dateIcon"></view>
+      </view>
+      <!-- 已完成活动的列表 -->
+      <scroll-view  scroll-y="true" style="height: 83vh;" bindscroll="PageScroll">
         <view class="listCon hosted" wx:if="{{currentItemId == 1}}">
           <nullPage wx:if="{{doneAct.length == 0}}"/>
           <view

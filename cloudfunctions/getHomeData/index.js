@@ -48,7 +48,7 @@ async function getDoneAct(event) {
   console.log("getDone: ", begDate, endDate)
 
   try {
-    return await db.collection('registerInfo').where(_.and([
+    return await db.collection('activities').where(_.and([
       {
         deadline: _.gt(begDate)
       },

@@ -54,7 +54,7 @@
             </view>
             <view>
               <view class="acTitle">{{item.name}}</view>
-              <view>活动地点：{{item.actInfo.location}}</view>
+              <view>活动地点：{{tools.sub(item.actInfo.location)}}</view>
               <view>活动时间：{{tools.intr(item.actInfo.begT)}}</view>
             </view>
             <view wx:if='{{!item.certified}}' class="num" data-index="{{index}}" catchtap="showClock">
@@ -90,7 +90,7 @@
             </view>
             <view>
               <view class="acTitle">{{item.name}}</view>
-              <view>活动地点：{{item.actInfo.location}}</view>
+              <view>活动地点：{{tools.sub(item.actInfo.location)}}</view>
               <view>活动时间：{{tools.intr(item.actInfo.endT)}}</view>
             </view>
             <view class="num">
