@@ -37,7 +37,7 @@ async function getCertifiedAct(event) {
         stuId: parseInt(stuId),
         certified: "true"
       }
-    ])).get()
+    ])).orderBy('verifyTime','desc').get()
   } catch (e) {
     console.error(e)
   }

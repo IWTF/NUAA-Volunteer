@@ -54,7 +54,7 @@ Page({
       acTime = util.getBETime(actInfo.timeDots)
     }
     this.setData({ acTime })
-
+    util.changeSkin(isOver, join);
     this.setData({ isOver, join, actInfo })
   },
 

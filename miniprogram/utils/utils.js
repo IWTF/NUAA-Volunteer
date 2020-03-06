@@ -34,9 +34,22 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const changeSkin = (isOver, join) => {
+  let color = "#6bb9fe";
+  if (isOver)
+    color = "#e4f2f0";
+  else if (join)
+    color = "#fdef96";
+  wx.setNavigationBarColor({
+    frontColor: '#ffffff', backgroundColor: color,
+    animation: { duration: 400, timingFunc: 'easeIn' }
+  })
+}
+
 module.exports = {
   formatDate,
   formatTime,
   getBETime,
   formatNumber,
+  changeSkin,
 }

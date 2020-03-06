@@ -40,7 +40,7 @@ Page({
   navFunc (e) {
     console.log(e)
     let { url } = e.currentTarget.dataset
-    if (url == 'plane' || url == 'about' || url == 'creater') {
+    if (url == 'about' || url == 'creater') {
       wx.showToast({ title: '待开发', icon: 'none' })
       return 
     }

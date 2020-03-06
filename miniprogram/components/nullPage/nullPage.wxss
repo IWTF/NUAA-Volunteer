@@ -6,7 +6,7 @@
   padding: 120rpx 0 0;
 }
 
-.nullPage image{
+.nullPage>.img{
   width: 240rpx;
   height: 150rpx;
 }

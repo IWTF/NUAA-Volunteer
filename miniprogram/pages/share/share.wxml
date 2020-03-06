@@ -1,0 +1,109 @@
+<view class='envelopeGrid'>
+
+  <!-- envelopeBox -->
+  <view class='envelopeBox border' style='background: linear-gradient(45deg, {{ envelopeBg }} 0, {{ envelopeBg }} 25%, transparent 25%, transparent 50%, {{ envelopeBg }} 50%, {{ envelopeBg }} 75%, transparent 75%, transparent); background-size: 40rpx 40rpx;'>
+    <view class='envelopeBody'>
+
+      <!-- 邮票 -->
+      <view class='stampGroup'>
+        <image class='stampWater' src='{{ stampWater }}' mode='widthFix'></image>
+        <image class='stampImg' src='{{ stampImg }}' mode='widthFix'></image>
+      </view>
+
+      <!-- 海报图 -->
+      <view class='mailToWrap' style='background:{{ envelopeBg }}'>
+      <view class='focusImgWrap'>
+        <image class='focusImg' src='{{ focusImg }}' mode='widthFix'></image>
+      </view>
+      </view>
+
+      <!-- 底部信息 -->
+      <view class='mailBtmWrap'>
+        <view class='labelInfo'>
+          <view class='lineRadius'></view>
+          <view class='text'>来自:<text class='strong'>{{ nickName }}</text>的邀请</view>
+          <view class='copyrightGrid'>
+            <image class='logo' src='{{ logo }}' mode='widthFix'></image>
+            <text class='span'>{{ copyrightText }}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- / envelopeBox 信封 -->
+
+  <!-- 明信片颜色选择区域 -->
+  <view class='otherInfoGrid mt30'>
+    <view class='title'>更换明信片颜色<text class='span'>(可选)</text>:</view>
+    <view class='swiperFlag' hidden='{{ flagGroupStatus }}'>
+        <view class='envelopeBgGrid'>
+          <scroll-view scroll-x style="height: 140rpx;">
+              <view wx:for="{{ envelopeBgData }}" wx:key="index" data-bg="{{ item.bg }}" data-index="{{ index }}" class='item' bindtap='chooseEnvelopeBg'>
+                <view class='envelopeBg' style='background:{{ item.bg }}'></view>
+                <view class="iconCheckBtn {{ isEnvelopeChecked == index ? 'on':'' }}"><text class='iconfont icon-right'></text></view>
+              </view>
+          </scroll-view>
+        </view>
+    </view>
+  </view>
+
+  <!-- 明信片图案选择区域 -->
+  <view class='otherInfoGrid'>
+    <view class='title'>更换明信片图案<text class='span'>(可选)</text>:</view>
+    <view class='swiperFlag' hidden='{{ flagGroupStatus }}'>
+        <view class='focusItem'>
+          <scroll-view scroll-x style="height: 180rpx;">
+              <view wx:for="{{ focusImgData }}" wx:key="index" data-img="{{ item.bg }}" data-index="{{ index }}" class='item' bindtap='chooseFocusImg'>
+                <view class='focus'>
+                  <image src='{{ item.bg }}' mode='aspectFit'></image>
+                </view>
+                <view class="iconCheckBtn {{ isFocusChecked == index ? 'on':'' }}"><text class='iconfont icon-right'></text></view>
+              </view>
+          </scroll-view>
+        </view>
+    </view>
+  </view>
+
+  <!-- 邮票图案选择区域 -->
+  <!-- <view class='otherInfoGrid'>
+    <view class='title'>更换邮票<text class='span'>(可选)</text>:</view> -->
+    <!-- 滑动标签组 -->
+    <!-- <view class='swiperFlag' hidden='{{ flagGroupStatus }}'>
+        <view class='stampItem'>
+          <scroll-view scroll-x style="height: 260rpx;" >
+              <view wx:for="{{ stampImgData }}" wx:key="index" data-stamp="{{ item.bg }}" data-index="{{ index }}" class='item' bindtap='chooseStampImg'>
+                <image class='stamp' src='{{ item.bg }}' mode='aspectFit'></image>
+                <view class="iconCheckBtn {{ isStampChecked == index ? 'on':'' }}"><text class='iconfont icon-right'></text></view>
+              </view>
+          </scroll-view>
+        </view>
+    </view> -->
+  <!-- </view> -->
+
+</view>
+<!-- / 编辑内容区 -->
+
+<!-- commonFooterBtn -->
+<view class='commonFooterBtn white'>
+  <view class='btnGroup'>
+    <view class='item'>
+      <button class='btn orange' hover-class="none" bindtap='getSharePoster'>生成海报</button>
+    </view>
+  </view>
+</view>
+
+
+<!-- 海报信息 -->
+<!-- 预览区域  -->
+<view hidden='{{ posterShow }}' catchtap="changePosterShow" class='preview'>
+  <view class='posterBox' catchtap="preventMask">
+    <image class='imgBox' src='{{ prurl }}' mode='aspectFit'></image>
+    <button class='shareBtn' open-type="openSetting" bindopensetting="handleSetting" wx:if="{{isPic}}">去授权</button> 
+    <button class='shareBtn' hover-class="none" bindtap='saveImg' wx:else>保存海报</button>
+  </view>
+</view>
+
+<!-- 解决canvas隐藏时，无法绘制的文图 -->
+<view class='canvasGrid' style="width:690px;">
+  <canvas canvas-id="shareImg" class='canvasBox' style="width:690px; height:520px;"></canvas>
+</view>

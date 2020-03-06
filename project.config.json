@@ -35,6 +35,7 @@
 	"scripts": {},
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
+	"qqappid": "1108100302",
 	"condition": {
 		"search": {
 			"current": -1,
