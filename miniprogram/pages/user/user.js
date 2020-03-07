@@ -9,7 +9,12 @@ Page({
     let userInfo = wx.getStorageSync('userInfo')
     let {stuId} = userInfo
     
-    this.getTolTime(stuId)
+    if (userInfo == '') { // 未设置缓存
+      this.setData({ login: false, userInfo })
+    } else {
+      this.getTolTime(stuId)
+      this.setData({ login: true, userInfo })
+    }
   },
 
   /**

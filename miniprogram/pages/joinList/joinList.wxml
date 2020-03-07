@@ -34,7 +34,7 @@
     <swiper-item>
       <scroll-view  scroll-y="true" style="height: 92vh;" bindscroll="PageScroll">
         <view class="listCon hosting" wx:if="{{currentItemId == 0}}">
-          <nullPage wx:if="{{doingArr.length == 0}}"/>
+          <nullPage wx:if="{{doingArr.length == 0}}" reminderText="{{nullText}}"/>
           <view
             wx:for="{{doingArr}}" 
             wx:key="index"
@@ -70,7 +70,7 @@
     <swiper-item>
       <scroll-view  scroll-y="true" style="height: 92vh;" bindscroll="PageScroll">
         <view class="listCon hosted" wx:if="{{currentItemId == 1}}">
-          <nullPage wx:if="{{doneArr.length == 0}}"/>
+          <nullPage wx:if="{{doneArr.length == 0}}" reminderText="{{nullText}}"/>
           <view
             wx:for="{{doneArr}}" 
             wx:key="index"

@@ -4,9 +4,11 @@
   height: 400rpx;
   text-align: center;
   padding: 120rpx 0 0;
+  color: aqua;
 }
 
 .nullPage>.img{
   width: 240rpx;
   height: 150rpx;
+  margin-bottom: 20rpx;
 }

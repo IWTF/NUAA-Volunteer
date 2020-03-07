@@ -22,7 +22,7 @@
   </view>
 
   <view class="listCon">
-    <nullPage wx:if="{{datalist.length == 0}}"/>
+    <nullPage wx:if="{{datalist.length == 0}}" reminderText="{{nullText}}"/>
     <view wx:for="{{datalist}}" wx:key="index" class="listItem">
       <span class="number">{{index+1}}. </span>
       <span >{{tools.sub(item.name)}}</span>

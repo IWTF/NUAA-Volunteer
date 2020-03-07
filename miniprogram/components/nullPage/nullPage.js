@@ -4,7 +4,10 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    reminderText: {
+      type: String,
+      value: "还没有活动~"
+    },
   },
 
   /**

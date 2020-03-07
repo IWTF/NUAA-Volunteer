@@ -7,12 +7,13 @@
     <open-data type="userNickName" lang="zh_CN"></open-data>
     <view>
       <span style="font-size: 70rpx;">{{tolTime}}</span> H
-      <span wx:if="{{login}}"
-       catchtap="updateT" data-url="myVerify"
+      <span wx:if="{{login}}" catchtap="updateT"
        style="margin-left: 20rpx;font-size: 24rpx;color: #2b85e4;">
-        刷新 
+        校准 
         <span class="iconfont icon-shuaxin"></span>
       </span>
+      <span wx:else catchtap="navFunc" data-url="userInfo"
+        style="margin-left: 20rpx;font-size: 24rpx;color: #2b85e4;">未登录</span>
     </view>
   </view>
   <view class="avatar">

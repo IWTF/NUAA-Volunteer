@@ -59,6 +59,31 @@ Page({
   },
 
   /**
+   * 用户授权检测
+   */
+  onShow() {
+    let userInfo = wx.getStorageSync('userInfo')
+    if (userInfo == '') { // 未设置缓存
+      wx.showModal({
+        title: '信息绑定',
+        content: '绑定信息后才能进行活动报名',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../userInfo/userInfo',
+            })
+          } else if (res.cancel) {
+            wx.navigateBack()
+          }
+        }
+      })
+      this.setData({ login: false, userInfo })
+    } else {
+      this.setData({ login: true, userInfo })
+    }
+  },
+
+  /**
    * 更改 【顶部tab】 选项 
    */ 
   changeTab(e) {

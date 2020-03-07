@@ -14,6 +14,9 @@ Page({
       '提前两小时',
       '提前一天'
     ],
+    doingArr: [],
+    doneArr: [],
+    nullText: "还没有参加活动哦~", // 空白页面的提示语
   },
 
 
@@ -29,15 +32,11 @@ Page({
     let openid = wx.getStorageSync('openid')
     
     // 这一部分也不需要了，不认证不能到达该页面
-    // let userInfo = wx.getStorageSync('userInfo')
-    // if (userInfo == '') { // 未设置缓存
-    //   wx.showToast({ title: '请先绑定个人信息', icon: 'none' })
-    //   this.setData({ login: false, userInfo })
-    //   this.setData({ doingArr: [], doneArr: [] })
-    //   return
-    // } else {
-    //   this.setData({ login: true, userInfo })
-    // }
+    let userInfo = wx.getStorageSync('userInfo')
+    if (userInfo == '') { // 未设置缓存
+      this.setData({ nullText: "绑定身份后才同步个人信息哦~"})
+      return
+    }
 
     let update = wx.getStorageSync('updateJoinList')
     if (update) {
