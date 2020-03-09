@@ -49,8 +49,15 @@ Page({
       wx.showToast({ title: '待开发', icon: 'none' })
       return 
     }
+
+    let t = {};
+    if (url == 'share') {
+      t = { detail: false, };
+    }
+    let params = JSON.stringify(t)
+
     wx.navigateTo({
-      url: '../' + url + '/' + url,
+      url: '../' + url + '/' + url + '?params=' + params,
     })
   },
 

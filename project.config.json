@@ -52,14 +52,19 @@
 		"game": {
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
 			"current": -1,
 			"list": [
 				{
-					"id": -1,
-					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide",
-					"query": ""
+					"id": 1,
+					"name": "模拟更新",
+					"pathName": "pages/actList/actList",
+					"query": "",
+					"scene": 1001
 				}
 			]
 		}

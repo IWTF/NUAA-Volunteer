@@ -21,8 +21,13 @@
       <view class='mailBtmWrap'>
         <view class='labelInfo'>
           <view class='lineRadius'></view>
-          <view class='text'>来自:<text class='strong'>{{ nickName }}</text>的邀请</view>
-          <view class='copyrightGrid'>
+          <view wx:if="{{detail}}" class='text'><text class='strong'>{{ actName }} </text>期待你的参加~</view>
+          <view wx:else class='text'>来自:<text class='strong'>{{ nickName }}</text>的邀请</view>
+          <view wx:if="{{detail}}" class='copyrightGrid'>
+            <text class='span'></text>
+            <text class='span'>By: {{ nickName }}</text>
+          </view>
+          <view wx:else class='copyrightGrid'>
             <image class='logo' src='{{ logo }}' mode='widthFix'></image>
             <text class='span'>{{ copyrightText }}</text>
           </view>

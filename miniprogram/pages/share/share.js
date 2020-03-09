@@ -1,6 +1,8 @@
 const app = getApp();
 Page({
   data: {
+    detail: true,
+    actName: "ICMP志愿活动",
     isStampChecked: 0,
     isEnvelopeChecked: 0,
     isFocusChecked: 0,
@@ -43,9 +45,17 @@ Page({
     isReady: true
   },
 
-  onLoad () {
+  onLoad (options) {
     let userInfo = wx.getStorageSync('userInfo');
     this.setData({ nickName: userInfo.username });
+
+    let params = JSON.parse(options.params);
+    if (params.detail) {
+      this.setData({
+        actName: params.actName,
+        detail: params.detail,
+      })
+    }
   },
 
   // 选择邮票
@@ -219,6 +229,8 @@ Page({
     const _that = this;
     const _data = _that.data;
     const ctx = wx.createCanvasContext('shareImg');
+    const detail = _data.detail;
+    const actName = _data.actName; // 昵称
     const nickName = _data.nickName; // 昵称
     const stampWater = _data.stampWater;
     const focusImg = _data.focusImg;
@@ -423,29 +435,41 @@ Page({
     ctx.stroke()
 
     // 绘制用户昵称 - 来自: XXX 的邀请
-    ctx.setFillStyle('#969695');
-    ctx.font = 'normal bold 24px fontlk';
-    const metrics_1 = ctx.measureText('来自:');
-    const mWidth_1 = metrics_1.width;
-    ctx.fillText('来自:', 50, 410)
+    let mWidth_1 = 0;
+    if (!detail) { // 如果来自detail页面，则不绘制来自
+      ctx.setFillStyle('#969695');
+      ctx.font = 'normal bold 24px fontlk';
+      const metrics_1 = ctx.measureText('来自:');
+      mWidth_1 = metrics_1.width;
+      ctx.fillText('来自:', 50, 410)
+    }
 
+    let focusTxt = nickName;
+    if (detail) focusTxt = actName;
     ctx.setFillStyle('#66523d');
     ctx.font = 'normal bold 30px fontlk';
-    const metrics_2 = ctx.measureText(nickName);
+    const metrics_2 = ctx.measureText(focusTxt);
     const mWidth_2 = metrics_2.width;
-    ctx.fillText(nickName, 60 + mWidth_1, 410)
+    ctx.fillText(focusTxt, 60 + mWidth_1, 410)
 
+    let lastTxt = "的邀请";
+    if (detail) lastTxt = "期待你的参与~";
     ctx.setFillStyle('#969695');
     ctx.font = 'normal bold 24px fontlk';
-    ctx.fillText('的邀请', 70 + mWidth_1 + mWidth_2, 410)
+    ctx.fillText(lastTxt, 70 + mWidth_1 + mWidth_2, 410)
     ctx.save()
 
     // 绘制 水印
-    ctx.drawImage(logo, 50, 430, 25, 25)
     ctx.setFillStyle('#999');
     ctx.setFontSize('18');
-    ctx.fillText(_data.copyrightText, 85, 450)
+    if (detail) {
+      ctx.fillText('By: '+nickName, 62, 450)
+    } else {
+      ctx.drawImage(logo, 50, 430, 25, 25)
+      ctx.fillText(_data.copyrightText, 85, 450)
+    }
     ctx.restore()
+    
 
     ctx.drawImage(stampImg, 540, 50, 100, 140); // 绘制 邮票
     ctx.drawImage(stampWater, 525, 150, 105, 70); // 绘制 邮戳
