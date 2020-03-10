@@ -361,44 +361,14 @@ Page({
     这两个函数中，actInfo不需要做可以区分
     因为，活动列表页面不会触发这两个函数  
   */
-
-
-  async signOut (e) {
+  async signOut() {
     let cancel = false
-    let formId = e.detail.formId
-
-    let { actInfo } = this.data
-    let { publisherId, category } = actInfo
-    let place = actInfo.category.split(" ")[0]
-    let time = actInfo.category.split(" ")[1] + " " + actInfo.category.split(" ")[2] + "到" + actInfo.category.split(" ")[3] + " " + actInfo.category.split(" ")[4]
-    
-    // 整合 活动取消 的相关信息，用于模板发送
-    let msgInfo = {
-      username: actInfo.username,
-      actname: actInfo.name,
-      place,
-      time,
-    }
-    
-
     await new Promise((resolve, reject) => {
       wx.showModal({
         title: '提示',
         content: '是否要取消报名',
         success(res) {
           if (res.confirm) {
-            // 给管理员发送 活动取消 通知
-            wx.cloud.callFunction({
-              name: 'sendMsg',
-              data: {
-                msgInfo,
-                publisherId,
-                action: 'signOutMsg',
-                formId: formId,
-              },
-              success: res => { },
-              fail: err => { }
-            })
             wx.setStorageSync('updateJoinList', true)
             resolve()
           } else if (res.cancel) {
@@ -412,15 +382,53 @@ Page({
     if(cancel) {
       return
     }
+    this.delAct() // 从数据库里删除
 
     // let { actInfo } = this.data
-    if (!actInfo.actInfo) {
-      wx.showToast({ icon: 'none', title: '请到“我参与的”页面取消报名' })
-      return
-    }
+    // let item = {
+    //   thing1: {
+    //     value: actInfo.name,
+    //   },
+    //   time2: {
+    //     value: actInfo.deadline,
+    //   },
+    //   name3: {
+    //     value: actInfo.username,
+    //   },
+    //   thing4: {
+    //     value: '该用户取消了报名，请注意',
+    //   }
+    // }
+    // let actTmplId = "HNFvX6ZBwJbOZ3nfCAj15MXe7vS6x670ild8H_ovQJs"
+    // wx.requestSubscribeMessage({
+    //   tmplIds: [actTmplId],
+    //   success (res) {
+    //     if (res.errMsg === 'requestSubscribeMessage:ok') {
+    //       wx.cloud
+    //         .callFunction({
+    //           name: 'subscribe',
+    //           data: {
+    //             action: 'signout',
+    //             data: item,
+    //             openid: actInfo.publisherId,
+    //             templateId: actTmplId,
+    //           },
+    //         })
+          
+    //     }
+    //   },
+    //   fail (e) {
+    //     console.log("error is: ", e)
+    //     wx.showToast({ title: '请稍后重试', icon: 'none' })
+    //   }
+    // })
+  },
 
-    let id = actInfo._id
-    
+
+  // 
+  delAct() {
+    let id = this.data.actInfo._id
+
     wx.cloud.callFunction({
       name: 'parterFunc',
       data: {
@@ -430,16 +438,15 @@ Page({
       success: res => {
         wx.setStorageSync('updateJoinList', true)
 
-        wx.navigateBack({ delta: 1 })
         wx.showToast({ title: '已取消报名' })
+        setTimeout(function(){
+          wx.navigateBack({ delta: 1 })
+        }, 1000)
       },
       fail: err => {
         wx.showToast({ icon: 'none', title: 'Error 请稍后重试' })
       }
     })
-
-    // 设置缓存，提醒joinList页面跟新数据
-    wx.setStorageSync('updateJoinList', true)
   },
 
   // 跳至分享页面

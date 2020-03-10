@@ -145,7 +145,7 @@ Page({
     let date = e.detail.value
     this.setData({ date })
 
-    // 获取正在进行的活动
+    // 获取已经结束的活动
     let year = date.split('-')[0]
     let month = date.split('-')[1]
 

@@ -64,7 +64,7 @@
       <!-- 已完成活动的列表 -->
       <scroll-view  scroll-y="true" style="height: 83vh;" bindscroll="PageScroll">
         <view class="listCon hosted" wx:if="{{currentItemId == 1}}">
-          <nullPage wx:if="{{doneAct.length == 0}}"/>
+          <nullPage wx:if="{{doneAct.length == 0}}" reminderText=' '/>
           <view
             data-state="done"
             data-index="{{index}}"

@@ -40,10 +40,22 @@ async function getDoingAct() {
 async function getDoneAct(event) {
   let year = event.year
   let month = parseInt(event.month)
-  endMonth = (month == 12) ? '01':month+1
-
   let begDate = year + '-' + util.formatNumber(month)
+
+  let endMonth = month + 1;
   let endDate = year + '-' + util.formatNumber(endMonth)
+  if (month == 12) {
+    endMonth = 1
+    let intYear = parseInt(year) + 1;
+    endDate = intYear + '-' + util.formatNumber(endMonth)
+  }
+
+  let date = new Date();
+  let nowMonth = date.getMonth() + 1
+  if (month == nowMonth) { // 如果是最近一次的已结束志愿活动查询
+    let day = date.getDate()
+    endDate = year + '-' + util.formatNumber(nowMonth) + '-' + util.formatNumber(day)
+  }
 
   console.log("getDone: ", begDate, endDate)
 
