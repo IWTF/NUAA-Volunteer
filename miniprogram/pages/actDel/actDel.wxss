@@ -86,14 +86,9 @@ page {
 /* 悬浮报名按钮 样式 */
 .join {
   position: absolute;
+  display: inline-block;
   right: 50rpx;
   bottom: 50rpx;
-  padding: 30rpx;
-  border-radius: 50%;
-  color: #fff;
-  font-size: 40rpx;
-  line-height: 40rpx;
-  background-color: #6bb9fe;
 }
 
 /* 认证页面表头样式 */
@@ -226,11 +221,6 @@ page {
   background-color: #99d8d0;
 }
 
-.over .join {
-  color: #70416d;
-  background-color: #e4f2f0;
-}
-
 .over .contentIcon {
   color: #99d8d0;
 }
@@ -254,11 +244,49 @@ page {
   background-color: #f7b71d;
 }
 
-.joinStatus .join {
-  color: #f7b71d;
-  background-color: #fdef96;
-}
-
 .joinStatus .contentIcon {
   color: #f7b71d;
+}
+
+
+/* 自定义 drawerButton 的样式 */
+.mainBtn {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  color: #6bb9fe;
+  background-color: #fff;
+  text-align: center;
+  transition: all 0.3s ease-out;
+}
+
+.showState {
+  transform: rotate(225deg);
+}
+
+.btnItem {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 30rpx;
+  color: #fff;
+  background-color: #6bb9fe;
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: .3;
+  transition: all 0.3s ease-out;
+}
+
+.popAnimation1 {
+  transform: scale(.8) translateX(-50%);
+  opacity: .9;
+  left: -100%;
+  top: 0;
+}
+
+.popAnimation2 {
+  transform: scale(.8) translateY(-50%);
+  opacity: .9;
+  left: 0;
+  top: -100%;
 }

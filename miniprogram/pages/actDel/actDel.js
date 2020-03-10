@@ -20,7 +20,8 @@ Page({
     isOver: false,
     join: false,
     actInfo: {},
-    first: true
+    first: true,
+    unfold: true,
   },
 
   /**
@@ -79,7 +80,16 @@ Page({
       })
       this.setData({ login: false, userInfo })
     } else {
-      this.setData({ login: true, userInfo })
+      // 构造报名/分享按钮所需的 数据
+      let { actInfo } = this.data;
+      let params1 = JSON.stringify(actInfo);
+      let t = {
+        actName: actInfo.name,
+        detail: true,
+      }
+      let params2 = JSON.stringify(t);
+      
+      this.setData({ login: true, userInfo, params1, params2 })
     }
   },
 
@@ -351,11 +361,6 @@ Page({
     这两个函数中，actInfo不需要做可以区分
     因为，活动列表页面不会触发这两个函数  
   */
-  signUp () {
-    let { actInfo } = this.data
-
-    wx.navigateTo({ url: '../actSign/actSign?params=' + JSON.stringify(actInfo) })
-  },
 
 
   async signOut (e) {
@@ -437,9 +442,23 @@ Page({
     wx.setStorageSync('updateJoinList', true)
   },
 
-  // 提示用户绑定个人信息
-  bindInfo () {
-    wx.showToast({ icon: 'none', title: '请先绑定个人信息' })
+  // 跳至分享页面
+  navToShare () {
+    let params = {
+      actName: this.data.actInfo.name,
+      detail: true,
+    }
+    wx.navigateTo({
+      url: '../../pages/share/share?params=' + JSON.stringify(params),
+    })
+  },
+
+  // 动画效果控制
+  show () {
+    let t = this.data.unfold;
+    this.setData({
+      unfold: !t,
+    })
   },
 
   // 提示活动已结束

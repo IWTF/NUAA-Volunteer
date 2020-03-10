@@ -49,24 +49,12 @@ Page({
     })
   },
 
-  // onShow() {
-  //   let userInfo = wx.getStorageSync('userInfo')
-  //   if (userInfo == '') { // 未设置缓存
-  //     wx.showModal({
-  //       title: '信息绑定',
-  //       content: '请先绑定个人信息',
-  //       showCancel:false
-  //     })
-  //     setTimeout(() => {
-  //       wx.navigateTo({
-  //         url: '../userInfo/userInfo',
-  //       })
-  //     }, 1000)
-  //     this.setData({ login: false, userInfo })
-  //   } else {
-  //     this.setData({ login: true, userInfo })
-  //   }
-  // },
+  onShow() {
+    let userInfo = wx.getStorageSync('userInfo')
+    if (userInfo != '') {
+      this.setData({ login: true, userInfo })
+    }
+  },
 
   onPullDownRefresh() {
     wx.showNavigationBarLoading()

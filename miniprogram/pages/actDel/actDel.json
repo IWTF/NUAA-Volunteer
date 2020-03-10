@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "nullPage": "../../components/nullPage/nullPage"
+    "nullPage": "../../components/nullPage/nullPage",
+    "drawerButton": "../../components/drawerButton/drawerButton"
   }
 }

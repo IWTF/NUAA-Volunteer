@@ -2,7 +2,7 @@ const app = getApp();
 Page({
   data: {
     detail: true,
-    actName: "ICMP志愿活动",
+    actName: "志愿活动",
     isStampChecked: 0,
     isEnvelopeChecked: 0,
     isFocusChecked: 0,
@@ -50,6 +50,7 @@ Page({
     this.setData({ nickName: userInfo.username });
 
     let params = JSON.parse(options.params);
+    console.log(params)
     if (params.detail) {
       this.setData({
         actName: params.actName,

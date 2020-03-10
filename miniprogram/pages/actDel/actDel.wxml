@@ -102,20 +102,23 @@
     </swiper>
   </view>
 
-  <!-- 底部报名按钮 -->
-  <!-- 未登录 -->
-  <span class="join animated 1 fadeIn" wx:if="{{!login}}" catchtap="bindInfo" style="background-color: #bbbec4;">报</span>
-  <!-- 已结束，未报名 -->
-  <span catchtap="bindEnd"
-    class="join animated 1 fadeIn" wx:if="{{login && isOver && !join}}" style="background-color: #bbbec4;">终</span>
-  <!-- 已结束，已报名 -->
-  <span catchtap="bindEnd"
-    class="join animated 1 fadeIn" wx:if="{{login && isOver && join}}" style="background-color: #bbbec4;">退</span>
   <!-- 未结束，已报名 -->
-  <form wx:if="{{login && !isOver && join}}" 
-    name='pushMsgFm' report-submit='true' bindsubmit="signOut">
-    <button form-type="submit" class="join">退</button>
-  </form>
-  <!-- 未结束，未报名 -->
-  <span class="join animated 1 fadeIn" wx:if="{{login && !showEdit && !isOver && !join}}" catchtap="signUp">报</span>
+  <view wx:if="{{!isOver && join}}" class="join">
+    <view class="mainBtn {{unfold ? '':'showState'}}" catchtap="show" style="color: #fdef96;">
+      <text class="iconfont icon-jia" style="font-size: 116rpx;line-height: 118rpx;"></text>
+    </view>
+    <!-- 这里的点击事件要改 -->
+    <form name='pushMsgFm' report-submit='true' bindsubmit="signOut">
+      <button class="btnItem {{unfold ? '':'popAnimation1'}}" form-type="submit"
+        style="background-color: #fdef96;font-size: 60rpx;line-height: 60rpx;"> 退 
+      </button>
+    </form>
+    <view class="btnItem {{unfold ? '':'popAnimation2'}}" style="background-color: #fdef96;" catchtap="navToShare">
+      <text class="iconfont icon-feiji" style="font-size: 60rpx;line-height: 60rpx;"></text>
+    </view>
+  </view>
+  <drawerButton wx:else class="join"
+    isOver="{{isOver}}" join="{{join}}"
+    params1="{{params1}}" params2="{{params2}}">
+  </drawerButton>
 </view>

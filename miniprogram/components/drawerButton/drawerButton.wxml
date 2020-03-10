@@ -1,0 +1,41 @@
+<!--components/drawButton/drawerButton.wxml-->
+<view class="drawerButton">
+  <!-- 已结束，未报名 -->
+  <view wx:if="{{isOver && !join}}">
+    <view class="mainBtn {{unfold ? '':'showState'}}" catchtap="show" style="color: #bbbec4;">
+      <text class="iconfont {{mainBtnIcon}}" style="font-size: 116rpx;line-height: 118rpx;"></text>
+    </view>
+    <view class="btnItem {{unfold ? '':'popAnimation1'}}" style="background-color: #bbbec4;" catchtap="bindEnd">
+      <text class="iconfont" style="font-size: 60rpx;line-height: 60rpx;">终</text>
+    </view>
+    <view class="btnItem {{unfold ? '':'popAnimation2'}}" style="background-color: #bbbec4;" catchtap="bindEnd">
+      <text class="iconfont icon-feiji" style="font-size: 60rpx;line-height: 60rpx;"></text>
+    </view>
+  </view>
+
+  <!-- 已结束，已报名 -->
+  <view wx:if="{{isOver && join}}">
+    <view class="mainBtn {{unfold ? '':'showState'}}" catchtap="show" style="color: #bbbec4;">
+      <text class="iconfont {{mainBtnIcon}}" style="font-size: 116rpx;line-height: 118rpx;"></text>
+    </view>
+    <view class="btnItem {{unfold ? '':'popAnimation1'}}" style="background-color: #bbbec4;" catchtap="bindEnd"> 
+      <text class="iconfont" style="font-size: 60rpx;line-height: 60rpx;">退</text>
+    </view>
+    <view class="btnItem {{unfold ? '':'popAnimation2'}}" style="background-color: #bbbec4;" catchtap="bindEnd">
+      <text class="iconfont icon-feiji" style="font-size: 60rpx;line-height: 60rpx;"></text>
+    </view>
+  </view>
+
+  <!-- 未结束，未报名 -->
+  <view wx:if="{{!isOver && !join}}">
+    <view class="mainBtn {{unfold ? '':'showState'}}" catchtap="show">
+      <text class="iconfont {{mainBtnIcon}}" style="font-size: 116rpx;line-height: 118rpx;"></text>
+    </view>
+    <view class="btnItem {{unfold ? '':'popAnimation1'}}" catchtap="signUp">
+      <text class="iconfont" style="font-size: 60rpx;line-height: 60rpx;">报</text>
+    </view>
+    <view class="btnItem {{unfold ? '':'popAnimation2'}}" catchtap="navToShare">
+      <text class="iconfont icon-feiji" style="font-size: 60rpx;line-height: 60rpx;"></text>
+    </view>
+  </view>
+</view>

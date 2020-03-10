@@ -19,7 +19,6 @@ Page({
     let userInfo = wx.getStorageSync('userInfo')
 
     let params = JSON.parse(options.params)
-    console.log("params is: ", params)
     this.setData({ params, userInfo,
       publisherId: params.openid
     })

@@ -42,6 +42,7 @@
             </view>
             <view class="num">{{item.tolNum}}人</view>
           </view>
+          
         </view>
       </scroll-view>
     </swiper-item>
@@ -88,6 +89,7 @@
       
     </swiper-item>
   </swiper>
+
 
   <view wx:if="{{userInfo.authority == 'superAdmin' || userInfo.authority == 'admin'}}"
     class='{{publishBtnClass}} {{skin}} publish' catchtap='navToPublishNote'>
