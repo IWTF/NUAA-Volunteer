@@ -77,7 +77,7 @@
           <span class="tilBtn {{dropDown?'showDrop':''}}" catchtap="changeSet"></span>
         </view>
 
-        <nullPage wx:if="{{showData.length == 0}}"/>
+        <nullPage wx:if="{{showData.length == 0}}" reminderText="还没有人参与..."/>
         <view wx:for="{{showData}}" wx:key="index" class="members">
           <view class="avatar"><image src="../../images/code-cloud-callback-config.png"></image></view>
           <view>{{item.stuId}}</view>
@@ -102,21 +102,6 @@
     </swiper>
   </view>
 
-  <!-- 未结束，已报名 -->
-  <view wx:if="{{!isOver && join}}" class="join">
-    <view class="mainBtn {{unfold ? '':'showState'}}" catchtap="show" style="color: #fdef96;">
-      <text class="iconfont icon-jia" style="font-size: 116rpx;line-height: 118rpx;"></text>
-    </view>
-    <!-- 这里的点击事件要改 -->
-    <button class="btnItem {{unfold ? '':'popAnimation1'}}" catchtap="signOut"
-      style="background-color: #fdef96;font-size: 60rpx;line-height: 60rpx;"> 退 
-    </button>
-    <view class="btnItem {{unfold ? '':'popAnimation2'}}" style="background-color: #fdef96;" catchtap="navToShare">
-      <text class="iconfont icon-feiji" style="font-size: 60rpx;line-height: 60rpx;"></text>
-    </view>
-  </view>
-  <drawerButton wx:else class="join"
-    isOver="{{isOver}}" join="{{join}}"
-    params1="{{params1}}" params2="{{params2}}">
-  </drawerButton>
+  <!-- 自定义抽屉式按钮（逻辑事件均放入了component） -->
+  <drawerButton class="join" isOver="{{isOver}}" join="{{join}}" params1="{{params1}}" params2="{{params2}}"></drawerButton>
 </view>

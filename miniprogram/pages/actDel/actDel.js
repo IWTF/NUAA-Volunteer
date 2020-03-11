@@ -264,6 +264,7 @@ Page({
     // 更改报名人员列表，若有删除，则执行下面代码
     if (delArr.length > 0) {
       let newDel = []
+      // map函数返回一个新的Array，这里可以直接为newDel赋值 || 当然，也可以使用filter函数
       showData.map((item, index) => {
         if (delArr.indexOf(index) >= 0) {
           newDel.push(item._id)
@@ -354,122 +355,5 @@ Page({
       delArr,
       showData
     })
-  },
-
-  /* 报名/取消报名 
-
-    这两个函数中，actInfo不需要做可以区分
-    因为，活动列表页面不会触发这两个函数  
-  */
-  async signOut() {
-    let cancel = false
-    await new Promise((resolve, reject) => {
-      wx.showModal({
-        title: '提示',
-        content: '是否要取消报名',
-        success(res) {
-          if (res.confirm) {
-            wx.setStorageSync('updateJoinList', true)
-            resolve()
-          } else if (res.cancel) {
-            cancel = true
-            resolve()
-          }
-        }
-      })
-    })
-    
-    if(cancel) {
-      return
-    }
-    this.delAct() // 从数据库里删除
-
-    // let { actInfo } = this.data
-    // let item = {
-    //   thing1: {
-    //     value: actInfo.name,
-    //   },
-    //   time2: {
-    //     value: actInfo.deadline,
-    //   },
-    //   name3: {
-    //     value: actInfo.username,
-    //   },
-    //   thing4: {
-    //     value: '该用户取消了报名，请注意',
-    //   }
-    // }
-    // let actTmplId = "HNFvX6ZBwJbOZ3nfCAj15MXe7vS6x670ild8H_ovQJs"
-    // wx.requestSubscribeMessage({
-    //   tmplIds: [actTmplId],
-    //   success (res) {
-    //     if (res.errMsg === 'requestSubscribeMessage:ok') {
-    //       wx.cloud
-    //         .callFunction({
-    //           name: 'subscribe',
-    //           data: {
-    //             action: 'signout',
-    //             data: item,
-    //             openid: actInfo.publisherId,
-    //             templateId: actTmplId,
-    //           },
-    //         })
-          
-    //     }
-    //   },
-    //   fail (e) {
-    //     console.log("error is: ", e)
-    //     wx.showToast({ title: '请稍后重试', icon: 'none' })
-    //   }
-    // })
-  },
-
-
-  // 
-  delAct() {
-    let id = this.data.actInfo._id
-
-    wx.cloud.callFunction({
-      name: 'parterFunc',
-      data: {
-        action: 'delParterList',
-        delArr: [id]
-      },
-      success: res => {
-        wx.setStorageSync('updateJoinList', true)
-
-        wx.showToast({ title: '已取消报名' })
-        setTimeout(function(){
-          wx.navigateBack({ delta: 1 })
-        }, 1000)
-      },
-      fail: err => {
-        wx.showToast({ icon: 'none', title: 'Error 请稍后重试' })
-      }
-    })
-  },
-
-  // 跳至分享页面
-  navToShare () {
-    let params = {
-      actName: this.data.actInfo.name,
-      detail: true,
-    }
-    wx.navigateTo({
-      url: '../../pages/share/share?params=' + JSON.stringify(params),
-    })
-  },
-
-  // 动画效果控制
-  show () {
-    let t = this.data.unfold;
-    this.setData({
-      unfold: !t,
-    })
-  },
-
-  // 提示活动已结束
-  bindEnd () {
-    wx.showToast({ title: '活动已结束', icon: 'none', })
   },
 })

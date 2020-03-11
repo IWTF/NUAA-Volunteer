@@ -36,7 +36,7 @@ button::after{ border: none; }
 /* 信封图案 选择区域 */
 .focusItem{ white-space:nowrap; margin-bottom: 40rpx; height: 160rpx; overflow:hidden;}
 .focusItem .item{ display:inline-block; height: 120rpx; width: 190rpx; margin-right: 10rpx; overflow: hidden; position:relative;}
-.focusItem .focus{ display:inline-flex; vertical-align:middle; border-radius: 8rpx; position:relative; align-items:center; justify-content:center; height: 120rpx; width: 180rpx; overflow: hidden; padding: 20rpx; background: #fff; box-shadow: 0 2rpx 10rpx #ddd; }
+.focusItem .focus{ display:inline-flex; vertical-align:middle; border-radius: 8rpx; position:relative; align-items:center; justify-content:center; height: 120rpx; width: 180rpx; overflow: hidden; padding: 20rpx; background: #fff; box-shadow: 0 2rpx 10rpx #ddd;font-weight: bold;letter-spacing: 10rpx;color: #80848f; }
 .focusItem .focus .focusImg{ display: inline-block; width: 100%; border: 0; }
 
 /* 邮票图案 选择区域 */

@@ -57,6 +57,55 @@ Component({
       let actInfo = this.properties.params1;
       wx.navigateTo({ url: '../../pages/actSign/actSign?params=' + actInfo })
     },
+    // 退出报名函数
+    async signOut() {
+      let cancel = false
+      await new Promise((resolve, reject) => {
+        wx.showModal({
+          title: '提示',
+          content: '是否要取消报名',
+          success(res) {
+            if (res.confirm) {
+              wx.setStorageSync('updateJoinList', true)
+              resolve()
+            } else if (res.cancel) {
+              cancel = true
+              resolve()
+            }
+          }
+        })
+      })
+      
+      if(cancel) {
+        return
+      }
+      this.delAct() // 从数据库里删除
+    },
+    // signOut的辅助函数，删除数据库中的数据
+    delAct() {
+      let t = this.properties.params1;
+      let actInfo = JSON.parse(t);
+      let id = actInfo._id
+
+      wx.cloud.callFunction({
+        name: 'parterFunc',
+        data: {
+          action: 'delParterList',
+          delArr: [id]
+        },
+        success: res => {
+          wx.setStorageSync('updateJoinList', true)
+
+          wx.showToast({ title: '已取消报名' })
+          setTimeout(function(){
+            wx.navigateBack({ delta: 1 })
+          }, 1000)
+        },
+        fail: err => {
+          wx.showToast({ icon: 'none', title: 'Error 请稍后重试' })
+        }
+      })
+    },
     // 提示活动已结束
     bindEnd () {
       wx.showToast({ title: '活动已结束', icon: 'none', })

@@ -69,6 +69,23 @@
     </view>
   </view>
 
+  <view class='otherInfoGrid'>
+    <view class='title'>实名/匿名分享<text class='span'>(可选)</text>:</view>
+    <view class='swiperFlag' hidden='{{ flagGroupStatus }}'>
+        <view class='focusItem'>
+          <scroll-view scroll-x style="height: 180rpx;">
+              <view wx:for="{{ nimingData }}" wx:key="index" data-option="{{ item.option }}" data-index="{{ index }}"
+                class='item' bindtap='chooseOptions' style="height: 100rpx;">
+                <view class='focus' style="height: 100rpx;">
+                  {{ item.option }}
+                </view>
+                <view class="iconCheckBtn {{ isStampChecked == index ? 'on':'' }}"><text class='iconfont icon-right'></text></view>
+              </view>
+          </scroll-view>
+        </view>
+    </view>
+  </view>
+
   <!-- 邮票图案选择区域 -->
   <!-- <view class='otherInfoGrid'>
     <view class='title'>更换邮票<text class='span'>(可选)</text>:</view> -->

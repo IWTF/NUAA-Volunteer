@@ -26,6 +26,20 @@
     </view>
   </view>
 
+<!-- 未结束，已报名 -->
+  <view wx:if="{{!isOver && join}}" class="join">
+    <view class="mainBtn {{unfold ? '':'showState'}}" catchtap="show" style="color: #fdef96;">
+      <text class="iconfont icon-jia" style="font-size: 116rpx;line-height: 118rpx;"></text>
+    </view>
+    <!-- 这里的点击事件要改 -->
+    <button class="btnItem {{unfold ? '':'popAnimation1'}}" catchtap="signOut"
+      style="background-color: #fdef96;font-size: 60rpx;line-height: 60rpx;"> 退 
+    </button>
+    <view class="btnItem {{unfold ? '':'popAnimation2'}}" style="background-color: #fdef96;" catchtap="navToShare">
+      <text class="iconfont icon-feiji" style="font-size: 60rpx;line-height: 60rpx;"></text>
+    </view>
+  </view>
+
   <!-- 未结束，未报名 -->
   <view wx:if="{{!isOver && !join}}">
     <view class="mainBtn {{unfold ? '':'showState'}}" catchtap="show">

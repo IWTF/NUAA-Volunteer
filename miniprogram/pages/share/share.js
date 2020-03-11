@@ -1,9 +1,9 @@
 const app = getApp();
 Page({
   data: {
-    detail: true,
+    detail: false,
     actName: "志愿活动",
-    isStampChecked: 0,
+    isStampChecked: 0,  // 不想新定义变量，直接把这个用于实名/匿名选择
     isEnvelopeChecked: 0,
     isFocusChecked: 0,
     copyrightText: '一起来做志愿活动吧~',
@@ -34,6 +34,10 @@ Page({
       { bg: '/images/focusImg-07.png' },
       { bg: '/images/focusImg-08.png' }
     ],
+    nimingData: [
+      { option: '实名' },
+      { option: '匿名' },
+    ],
     stampImgData: [
       { bg: '/images/icon-stamp-01.png' },
       { bg: '/images/icon-stamp-02.png' },
@@ -60,14 +64,32 @@ Page({
   },
 
   // 选择邮票
-  chooseStampImg: function (e) {
+  // chooseStampImg: function (e) {
+  //   const _that = this;
+  //   const dataSet = e.currentTarget.dataset;
+  //   const stampImg = dataSet.stamp;
+  //   const isStampChecked = dataSet.index;
+  //   _that.setData({
+  //     stampImg,
+  //     isStampChecked
+  //   })
+  // },
+
+  // 选择是否匿名
+  chooseOptions: function (e) {
     const _that = this;
     const dataSet = e.currentTarget.dataset;
-    const stampImg = dataSet.stamp;
+    const option = dataSet.option;
     const isStampChecked = dataSet.index;
+
+    let userInfo = wx.getStorageSync('userInfo');
+    let nickName = userInfo.username;
+    if (option == '匿名')
+      nickName = '石榴青青';
+    
     _that.setData({
-      stampImg,
-      isStampChecked
+      nickName,
+      isStampChecked,
     })
   },
   // 明信片图案
