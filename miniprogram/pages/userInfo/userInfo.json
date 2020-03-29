@@ -1,4 +1,5 @@
 {
   "usingComponents": {
+    "model": "../../components/model/my_model"
   }
 }

@@ -5,7 +5,13 @@ Page({
   data: {
     barHeight: wx.getStorageSync("barHight"),
     userInfo: {},
-    login: false
+    login: false,
+    showModel: true
+  },
+  modalConfirm() {
+    this.setData({
+      showModel: false
+    })
   },
 
   onLoad () {
@@ -19,21 +25,21 @@ Page({
 
   onShow () {
     let userInfo = wx.getStorageSync('userInfo')
-    if (userInfo == '') { // 未设置缓存
-      let info = "一经绑定，不能修改！\n请如实填写！以获得先前志愿数据"
-      wx.showModal({
-        title: '注意事项',
-        content: info,
-      })
-    } else {
-      this.setData({ login: true, userInfo })
+    if (userInfo != '') {
+      this.setData({ login: true, showModel: false, userInfo })
     }
-    
   },
 
   cancelBanding () {
     wx.clearStorageSync()
     this.setData({ login: false })
+    wx.cloud.callFunction({
+      name: 'login',
+      data: {},
+      success: res => {
+        wx.setStorageSync('openid', res.result.openid)
+      }
+    })
   },
 
   formSubmit (e) {
@@ -56,9 +62,8 @@ Page({
         stuId: stuId
       }).get({ // 已绑定，报错提示，请联系管理员
         success: res => {
-
           // 未绑定，则绑定新用户，连系openid与学号
-          if (res.data.length === 0) {
+          if (res.data.length === 0) {  
             // 绑定新用户前，先判断该手机号有没有绑定
 
             let authoirty = 'user'

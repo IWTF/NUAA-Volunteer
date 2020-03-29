@@ -50,3 +50,39 @@
   margin: auto;
 }
 
+/* 用户须知 */
+.desc_con {
+  padding: 90rpx 40rpx 90rpx;
+}
+
+.desc_title {
+  font-size: 38rpx;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 4rpx;
+  margin-bottom: 60rpx;
+}
+
+
+.desc_body > view {
+  margin-top: 30rpx;
+  color: #495060;
+}
+
+.sub_content > view {
+  color: #80848f;
+  position: relative;
+  margin-left: 50rpx;
+  margin-top: 10rpx;
+}
+
+.sub_content > view::before{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -23rpx;
+  transform: translateY(-50%);
+  width: 12rpx;
+  height: 12rpx;
+  background-color: #1190fe;
+}

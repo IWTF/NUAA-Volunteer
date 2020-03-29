@@ -54,4 +54,30 @@
       </view>
     </form>
   </view>
+  
+  <model height="60%" show="{{showModel}}" showCancel="{{false}}"
+    bindconfirm='modalConfirm'>
+    <view class="desc_con">
+      <view class="desc_title">
+        <span style="border-bottom: 4rpx solid #1190fe;padding-bottom: 6rpx;">用户须知</span>
+      </view>
+      <view class="desc_body">
+        <view>
+          <view>1. 绑定不会获取除填写信息外的任何隐私</view>
+          <view class="sub_content">
+            <view>请如实填写！以获得历史数据</view>
+          </view>
+        </view>
+        <view>
+          <view>2. 信息将于微信用户唯一凭证绑定</view>
+          <view class="sub_content">
+            <view>一个手机只能绑定一个用户</view>
+            <view>绑定后，无法通过其他手机再次绑定</view>
+          </view>
+        </view>
+        <view>3. 问题反馈，请联系群管理员</view>
+      </view>
+    </view>
+    
+  </model>
 </view>

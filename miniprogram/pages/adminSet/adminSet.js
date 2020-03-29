@@ -36,7 +36,17 @@ Page({
   // 编辑完成，将更新数据提交至服务器
   eidtDone() {
     let that = this
-
+    
+    if (this.data.delArr.length == 0) {
+      wx.showModal({
+        title: '提示',
+        content: '没有做出更改',
+        showCancel: false
+      })
+      that.setData({ showEdit: false })
+      return
+    }
+    
     wx.showModal({
       title: '提示',
       content: '请确定信息无误！',

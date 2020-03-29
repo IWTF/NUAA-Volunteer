@@ -71,6 +71,8 @@ Page({
    * 请求数据库，获取总的志愿时长
    */
   getTolTime (stuId) {
+    wx.showLoading({ title: '校准中...' })
+
     wx.cloud.callFunction({
       name: 'userData',
       data: {
@@ -92,6 +94,7 @@ Page({
           }
         }
         this.setData({ tolTime: sum })
+        wx.hideLoading()
       }
     })
   }

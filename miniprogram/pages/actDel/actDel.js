@@ -216,14 +216,38 @@ Page({
 
   // 管理员 编辑页面； 控制跳转到对应的编辑页面【活动更改/人员认证】
   edit () {
+    let that = this
     switch (this.data.currentItemId) {
       case 0:
-        let actId = this.data.actInfo.actId
-        if (!actId)
-          actId = this.data.actInfo._id
-        wx.navigateTo({
-          url: '../actPublish/actPublish?actId=' + actId,
+        wx.showModal({
+          title: "提示",
+          content: "是否要删除该活动(不支持修改)",
+          success(res) {
+            if (res.confirm) {
+              let actId = that.data.actInfo.actId
+              if (!actId)
+                actId = that.data.actInfo._id
+              console.log("fadsfadsf", actId)
+              wx.showLoading({ title: '删除中....' })
+              wx.cloud.callFunction({
+                name: 'publishAct',
+                data: {
+                  action: 'delAct',
+                  _id: actId
+                },
+                success: res => {
+                  wx.hideLoading({})
+                  wx.navigateBack()
+                },
+              })
+            } else if (res.cancel) {
+              return
+            }
+          }
         })
+        // wx.navigateTo({
+        //   url: '../actPublish/actPublish?actId=' + actId,
+        // })
         break
       case 1:
         this.setData({ showEdit: true })
